@@ -18,11 +18,10 @@
     <link rel="stylesheet" href="assets/css/amazeui.datatables.min.css"/>
     <link rel="stylesheet" href="assets/css/app.css">
     <script src="assets/js/jquery.min.js"></script>
-
+    <script src="assets/js/theme.js"></script>
 </head>
 
 <body data-type="index">
-<script src="assets/js/theme.js"></script>
 <div class="am-g tpl-g">
     <!-- 头部 -->
     <header>
@@ -206,23 +205,10 @@
         </ul>
     </div>
 
-
     <!-- 内容区域 -->
     <div class="tpl-content-wrapper">
-
-        <div class="row-content am-cf">
-
-            <div class="row am-cf">
-                    <div class="widget am-cf">
-                        <div class="widget-head am-cf">
-                            <div class="widget-title am-fl">月度财务收支计划</div>
-                        </div>
-                        <div class="widget-body-md widget-body m-fr" id="tpl-echarts">
-
-                        </div>
-                    </div>
-            </div>
-        </div>
+        <iframe id="module" width="100%" height="1000px" src="sleep/sleep.html">
+        </iframe>
     </div>
 </div>
 </div>
@@ -230,6 +216,16 @@
 <script src="assets/js/amazeui.datatables.min.js"></script>
 <script src="assets/js/dataTables.responsive.min.js"></script>
 <script src="assets/js/app.js"></script>
+<script>
+    $(function(){
+        $('#module').load(
+                function() {
+                    setTheme();
+                }
+            );
+        }
+    )
+</script>
 
 </body>
 

@@ -3,16 +3,17 @@ var saveSelectColor = {
     'Color': 'theme-black'
 }
 
-
-
 // 判断用户是否已有自己选择的模板风格
-if (storageLoad('SelcetColor')) {
-    $('body').attr('class', storageLoad('SelcetColor').Color)
-} else {
-    storageSave(saveSelectColor);
-    $('body').attr('class', 'theme-black')
+function setTheme() {
+    if (storageLoad('SelcetColor')) {
+        $('body').attr('class', storageLoad('SelcetColor').Color);
+        $('#module').contents().find('body').attr('class', storageLoad('SelcetColor').Color);
+    } else {
+        storageSave(saveSelectColor);
+        $('body').attr('class', 'theme-black');
+        $('#module').contents().find('body').attr('class', 'theme-black');
+    }
 }
-
 
 // 本地缓存
 function storageSave(objectData) {
