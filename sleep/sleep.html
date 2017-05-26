@@ -23,7 +23,7 @@
     <div class="row am-cf">
         <div class="widget am-cf">
             <div class="widget-head am-cf">
-                <div class="widget-title am-fl">月度财务收支计划</div>
+                <div class="widget-title am-fl">睡眠数据可视化</div>
             </div>
             <div class="widget-body-md widget-body m-fr" id="tpl-echarts">
             </div>
@@ -32,7 +32,17 @@
 </div>
 
 <script src="sleep.js"></script>
-
+<script>
+    $(
+        function(){
+            $.post("sleep.php", {},
+                function(data){
+                    var data_r = eval("(" + data + ")");
+                    sleepData(data_r.date, data_r.gg_deep, data_r.gg_shallow, data_r.zdt_deep, data_r.zdt_shallow);
+                });
+        }
+    )
+</script>
 </body>
 
 </html>
