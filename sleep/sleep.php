@@ -20,7 +20,9 @@ if(isset($_POST["end_date"]))
     $end_date = $_POST["end_date"];
 }
 
-$db = new pgsql("192.168.1.3", "15432", "postgres", "postgres", "123456");
+//$db = new pgsql("192.168.1.3", "15432", "postgres", "postgres", "123456");
+$db = new pgsql("192.168.233.138", "15432", "postgres", "postgres", "123456");
+
 $db->connect();
 $sql = "";
 if(!is_null($start_date) && !is_null($end_date))
@@ -38,7 +40,7 @@ else if(is_null($start_date) && !is_null($end_date))
 }
 else
 {
-    $sql = "select * from status_sleep order by date";
+    $sql = "select * from status_sleep where date >= '2017-03-15' order by date";
 }
 
 $date_r = array();

@@ -15,18 +15,21 @@ header {
   text-align: center;
   position: relative;
   z-index: 1300;
+  margin-left: 10px;
 }
 .tpl-header-logo a {
   display: table-cell;
   vertical-align: middle;
+  color: #e6e6e6;
 }
 .tpl-header-logo img {
   width: 170px;
 }
 .tpl-header-fluid {
-  margin-left: 240px;
+  margin-left: 10px;
+  margin-top: 22px;
   height: 56px;
-  padding-left: 20px;
+  padding-left: 0px;
   padding-right: 20px;
 }
 .tpl-header-switch-button {
@@ -266,10 +269,10 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 .left-sidebar {
   transition: all 0.4s ease-in-out;
   width: 240px;
-  padding-top: 57px;
+  padding-top: 0px;
   position: absolute;
   z-index: 1104;
-  top: 0;
+  top: 22px;
   left: 0px;
 }
 .left-sidebar.xs-active {
@@ -1201,6 +1204,11 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
   background: #fff;
   border-bottom: 1px solid #eee;
 }
+.theme-white .tpl-header-logo a {
+  display: table-cell;
+  vertical-align: middle;
+  color: #666;
+}
 .theme-white .tpl-header-switch-button {
   background: #fff;
   border-right: 1px solid #eee;
@@ -1821,7 +1829,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
   color: #fff;
 }
 .theme-black .left-sidebar {
-  padding-top: 56px;
+  padding-top: 0px;
   background: #282d2f;
 }
 .theme-black .widget-color-green {
