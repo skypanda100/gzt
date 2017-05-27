@@ -25,12 +25,29 @@
       <file leaf-file-name="sleep.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sleep/sleep.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="30" column="16" lean-forward="true" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+            <state relative-caret-position="653">
+              <caret line="164" column="45" lean-forward="false" selection-start-line="164" selection-start-column="45" selection-end-line="164" selection-end-column="45" />
               <folding>
                 <element signature="e#900#906#0" expanded="true" />
                 <element signature="e#906#912#0" expanded="true" />
                 <element signature="e#912#918#0" expanded="true" />
+                <element signature="e#4891#4898#1" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="amazeui.min.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/css/amazeui.min.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="278">
+              <caret line="0" column="137985" lean-forward="false" selection-start-line="0" selection-start-column="137985" selection-end-line="0" selection-end-column="137985" />
+              <folding>
+                <element signature="e#41987#42310#1" expanded="true" />
+                <element signature="e#171285#172400#2" expanded="true" />
+                <element signature="e#173179#175302#2" expanded="true" />
+                <element signature="e#175449#177656#2" expanded="true" />
+                <element signature="e#177808#178199#2" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -39,8 +56,8 @@
       <file leaf-file-name="app.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/css/app.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="1209" column="13" lean-forward="false" selection-start-line="1209" selection-start-column="13" selection-end-line="1209" selection-end-column="13" />
+            <state relative-caret-position="221">
+              <caret line="1411" column="29" lean-forward="false" selection-start-line="1411" selection-start-column="14" selection-end-line="1411" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -87,8 +104,8 @@
       <file leaf-file-name="theme.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/js/theme.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="38">
+              <caret line="2" column="25" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -116,19 +133,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>theme-black .tpl-co</find>
-      <find>widget-body</find>
-      <find>widget</find>
-      <find>tpl-echarts</find>
-      <find>tpl-echarts-C</find>
-      <find>data-type</find>
-      <find>tpl-header-switch-button</find>
-      <find>example-r</find>
-      <find>index</find>
-      <find>indexData</find>
-      <find>pageData</find>
-      <find>theme-black</find>
-      <find>tpl-skiner-content-bar</find>
       <find>SelcetColor</find>
       <find>tpl-content-wrapper</find>
       <find>height</find>
@@ -141,12 +145,28 @@
       <find>tpl-header</find>
       <find>center</find>
       <find>data-am-dropdown</find>
-      <find>tpl-sidebar-user-panel</find>
       <find>page-header-description</find>
-      <find>am-text-sm</find>
       <find>tpl-header-logo a</find>
+      <find>form</find>
+      <find>tpl-login-content</find>
+      <find>am-text-sm</find>
+      <find>oc-modal-1</find>
+      <find>modal</find>
+      <find>tpl-login-contenttpl-form-line-form</find>
+      <find>am-modal-dialog</find>
+      <find>theme</find>
+      <find>tpl-form-line-form</find>
       <find>tpl-header-logo</find>
+      <find>doc-modal-1</find>
+      <find>text</find>
+      <find>theme-black</find>
+      <find>am-modal-hd</find>
+      <find>tpl-sidebar-user-panel</find>
+      <find>span</find>
     </findStrings>
+    <replaceStrings>
+      <replace>search-modal</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -163,8 +183,8 @@
         <option value="$PROJECT_DIR$/sleep/sleep.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/assets/js/app.js" />
-        <option value="$PROJECT_DIR$/assets/css/app.css" />
         <option value="$PROJECT_DIR$/sleep/sleep.php" />
+        <option value="$PROJECT_DIR$/assets/css/app.css" />
         <option value="$PROJECT_DIR$/sleep/sleep.html" />
       </list>
     </option>
@@ -337,12 +357,12 @@
       <workItem from="1495712378009" duration="8638000" />
       <workItem from="1495780421929" duration="6958000" />
       <workItem from="1495798710752" duration="7672000" />
-      <workItem from="1495848770526" duration="11156000" />
+      <workItem from="1495848770526" duration="16798000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34424000" />
+    <option name="totallyTimeSpent" value="40066000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -394,6 +414,7 @@
             <element signature="e#900#906#0" expanded="true" />
             <element signature="e#906#912#0" expanded="true" />
             <element signature="e#912#918#0" expanded="true" />
+            <element signature="e#4891#4898#1" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -572,14 +593,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/theme.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/pgsql.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="683">
@@ -604,42 +617,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/assets/js/theme.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="46" column="56" lean-forward="false" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sleep/sleep.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="24" column="46" lean-forward="false" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/css/amazeui.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="0" column="137995" lean-forward="false" selection-start-line="0" selection-start-column="137985" selection-end-line="0" selection-end-column="137995" />
-          <folding>
-            <element signature="e#41987#42310#1" expanded="true" />
-            <element signature="e#171285#172400#2" expanded="true" />
-            <element signature="e#173179#175302#2" expanded="true" />
-            <element signature="e#175449#177656#2" expanded="true" />
-            <element signature="e#177808#178199#2" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="1209" column="13" lean-forward="false" selection-start-line="1209" selection-start-column="13" selection-end-line="1209" selection-end-column="13" />
+        <state relative-caret-position="38">
+          <caret line="2" column="25" lean-forward="false" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -658,14 +639,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="1411" column="29" lean-forward="false" selection-start-line="1411" selection-start-column="14" selection-end-line="1411" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/amazeui.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="0" column="137985" lean-forward="false" selection-start-line="0" selection-start-column="137985" selection-end-line="0" selection-end-column="137985" />
+          <folding>
+            <element signature="e#41987#42310#1" expanded="true" />
+            <element signature="e#171285#172400#2" expanded="true" />
+            <element signature="e#173179#175302#2" expanded="true" />
+            <element signature="e#175449#177656#2" expanded="true" />
+            <element signature="e#177808#178199#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="46" column="56" lean-forward="false" selection-start-line="46" selection-start-column="20" selection-end-line="46" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sleep/sleep.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="24" column="46" lean-forward="false" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sleep/sleep.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="30" column="16" lean-forward="true" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+        <state relative-caret-position="653">
+          <caret line="164" column="45" lean-forward="false" selection-start-line="164" selection-start-column="45" selection-end-line="164" selection-end-column="45" />
           <folding>
             <element signature="e#900#906#0" expanded="true" />
             <element signature="e#906#912#0" expanded="true" />
             <element signature="e#912#918#0" expanded="true" />
+            <element signature="e#4891#4898#1" expanded="true" />
           </folding>
         </state>
       </provider>

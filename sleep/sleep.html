@@ -30,7 +30,7 @@
         <div class="am-fr tpl-header-navbar">
             <ul>
                 <li class="am-text-sm">
-                    <a href="javascript:;">
+                    <a href="javascript:;" data-am-modal="{target: '#search-modal', closeViaDimmer: 0, width: 400, height: 250}">
                         <span class="am-icon-search"></span> 检索
                     </a>
                 </li>
@@ -105,6 +105,28 @@
         </div>
     </div>
 </div>
+
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="search-modal">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd"><span class="tpl-login-title">睡眠检索</span>
+            <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close id="search-modal-close">&times;</a>
+        </div>
+        <div class="tpl-form-content">
+            <form class="am-form tpl-form-line-form">
+                <div class="am-form-group">
+                    <input type="text" class="tpl-form-input" id="start_date" name="start_date" data-am-datepicker="" placeholder="请输入开始日期">
+                </div>
+                <div class="am-form-group">
+                    <input type="text" class="tpl-form-input" id="end_date" name="end_date" data-am-datepicker="" placeholder="请输入结束日期">
+                </div>
+                <div class="am-form-group">
+                    <button type="button" class="am-btn am-btn-primary  am-btn-block tpl-btn-bg-color-success  tpl-login-btn" id="search">检索</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script src="../assets/js/amazeui.min.js"></script>
 <script src="sleep.js"></script>
 <script>
@@ -117,6 +139,31 @@
                 });
         }
     )
+
+    $("#search").click(
+        function(event) {
+            var start_date = $("#start_date").val();
+            var end_date = $("#end_date").val();
+            var arg;
+            if(start_date != "" && end_date != ""){
+                arg = {"start_date" : start_date, "end_date" : end_date};
+            }else if(start_date != "" && end_date == ""){
+                arg = {"start_date" : start_date};
+            }else if(start_date = "" && end_date != ""){
+                arg = {"end_date" : end_date};
+            }else{
+                arg = {};
+            }
+
+            $.post("sleep.php", arg,
+                function(data){
+                    var data_r = eval("(" + data + ")");
+                    sleepData(data_r.date, data_r.gg_deep, data_r.gg_shallow, data_r.zdt_deep, data_r.zdt_shallow);
+                }
+            );
+
+            $("#search-modal-close").click();
+        });
 </script>
 </body>
 

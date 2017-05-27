@@ -22,6 +22,7 @@ header {
   vertical-align: middle;
   color: #e6e6e6;
 }
+
 .tpl-header-logo img {
   width: 170px;
 }
@@ -195,6 +196,15 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 .am-modal {
   z-index: 1300;
 }
+
+.theme-white .am-modal-dialog {
+  background: #fff;
+}
+
+.theme-black .am-modal-dialog {
+  background: #424b4f;
+}
+
 .am-datepicker-dropdown {
   z-index: 1400;
 }
@@ -610,6 +620,13 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 .tpl-login-content {
   width: 300px;
   margin: 12% auto 0;
+}
+.tpl-form-content {
+  width: 300px;
+  margin-left: 12%;
+  margin-right: 12%;
+  margin-bottom: 5%;
+  margin-top: 1%;
 }
 .tpl-login-remember-me {
   color: #B3B3B3;
