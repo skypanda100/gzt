@@ -1,0 +1,219 @@
+/**
+ * Copyright 2015 Google Inc. All Rights Reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*html, body {
+  font-family: 'Roboto', 'Helvetica', sans-serif;
+}*/
+
+html, body {
+    font-family: "微软雅黑","黑体",serif;
+}
+.gzt-avatar {
+  width: 240px;
+  height: 240px;
+  border-radius: 2px;
+}
+.gzt-layout .mdl-layout__header .mdl-layout__drawer-button {
+  color: rgba(0, 0, 0, 0.54);
+}
+.mdl-layout__drawer .avatar {
+  margin-bottom: 16px;
+}
+.gzt-drawer {
+  border: none;
+}
+/* iOS Safari specific workaround */
+.gzt-drawer .mdl-menu__container {
+  z-index: -1;
+}
+.gzt-drawer .gzt-navigation {
+  z-index: -2;
+}
+/* END iOS Safari specific workaround */
+.gzt-drawer .mdl-menu .mdl-menu__item {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.gzt-drawer-header {
+  box-sizing: border-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 0px;
+  height: 240px;
+}
+.gzt-avatar-dropdown {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.gzt-navigation {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.gzt-layout .gzt-navigation .mdl-navigation__link {
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: rgba(255, 255, 255, 0.56);
+  font-weight: 500;
+}
+.gzt-layout .gzt-navigation .mdl-navigation__link:hover {
+  background-color: #00BCD4;
+  color: #37474F;
+}
+.gzt-navigation .mdl-navigation__link .material-icons {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.56);
+  margin-right: 32px;
+}
+
+.gzt-content {
+  max-width: 1400px;
+}
+
+.gzt-charts {
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.gzt-chart:nth-child(1) {
+  color: #ACEC00;
+}
+.gzt-chart:nth-child(2) {
+  color: #00BBD6;
+}
+.gzt-chart:nth-child(3) {
+  color: #BA65C9;
+}
+.gzt-chart:nth-child(4) {
+  color: #EF3C79;
+}
+.gzt-graphs {
+  padding: 16px 32px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+/* TODO: Find a proper solution to have the graphs
+ * not float around outside their container in IE10/11.
+ * Using a browserhacks.com solution for now.
+ */
+_:-ms-input-placeholder, :root .gzt-graphs {
+  min-height: 664px;
+}
+_:-ms-input-placeholder, :root .gzt-graph {
+  max-height: 300px;
+}
+/* TODO end */
+.gzt-graph:nth-child(1) {
+  color: #00b9d8;
+}
+.gzt-graph:nth-child(2) {
+  color: #d9006e;
+}
+
+.gzt-cards {
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-align-content: flex-start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start;
+}
+.gzt-cards .gzt-separator {
+  height: 32px;
+}
+.gzt-cards .mdl-card__title.mdl-card__title {
+  color: white;
+  font-size: 24px;
+  font-weight: 400;
+}
+.gzt-cards ul {
+  padding: 0;
+}
+.gzt-cards h3 {
+  font-size: 1em;
+}
+.gzt-updates .mdl-card__title {
+  min-height: 200px;
+  background-image: url('images/dog.png');
+  background-position: 90% 100%;
+  background-repeat: no-repeat;
+}
+.gzt-cards .mdl-card__actions a {
+  color: #00BCD4;
+  text-decoration: none;
+}
+
+.gzt-options h3 {
+  margin: 0;
+}
+.gzt-options .mdl-checkbox__box-outline {
+  border-color: rgba(255, 255, 255, 0.89);
+}
+.gzt-options ul {
+  margin: 0;
+  list-style-type: none;
+}
+.gzt-options li {
+  margin: 4px 0;
+}
+.gzt-options .material-icons {
+  color: rgba(255, 255, 255, 0.89);
+}
+.gzt-options .mdl-card__actions {
+  height: 64px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}

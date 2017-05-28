@@ -20,8 +20,8 @@ if(isset($_POST["end_date"]))
     $end_date = $_POST["end_date"];
 }
 
-//$db = new pgsql("192.168.1.3", "15432", "postgres", "postgres", "123456");
-$db = new pgsql("192.168.233.138", "15432", "postgres", "postgres", "123456");
+$db = new pgsql("192.168.1.3", "15432", "postgres", "postgres", "123456");
+//$db = new pgsql("192.168.233.138", "15432", "postgres", "postgres", "123456");
 
 $db->connect();
 $sql = "";
@@ -40,12 +40,16 @@ else if(is_null($start_date) && !is_null($end_date))
 }
 else
 {
-    $sql = "select * from status_sleep where date >= '2017-03-15' order by date";
+    $sql = "select * from status_sleep order by date";
 }
 
-$date_r = array();
+
+$s_date = null;
+$e_date = null;
+$gg_date_r = array();
 $gg_deep_r = array();
 $gg_shallow_r = array();
+$zdt_date_r = array();
 $zdt_deep_r = array();
 $zdt_shallow_r = array();
 
@@ -105,27 +109,162 @@ while(($row = $db->fetchRow()) != NULL)
 
     $shallow = $sum - $deep - $awake;
 
+    $date_s = substr($date, 0, 10);
+
     if($person == 0)
     {
+        array_push($gg_date_r, $date_s);
         array_push($gg_deep_r, $deep / 60);
         array_push($gg_shallow_r, $shallow / 60);
     }
     else
     {
+        array_push($zdt_date_r, $date_s);
         array_push($zdt_deep_r, $deep / 60);
         array_push($zdt_shallow_r, $shallow / 60);
     }
 
-    $date_s = substr($date, 0, 10);
-    if(!in_array($date_s, $date_r, true))
+    if(is_null($s_date))
     {
-        array_push($date_r, $date_s);
+        $s_date = strtotime($date);
+    }
+    else
+    {
+        $e_date = strtotime($date);
     }
 }
 
 $db->free();
 
-$data_r = array("date" => $date_r, "gg_deep" => $gg_deep_r, "gg_shallow" => $gg_shallow_r, "zdt_deep" => $zdt_deep_r, "zdt_shallow" => $zdt_shallow_r);
+//day
+$date_day_r = array();
+$gg_deep_day_r = array();
+$gg_shallow_day_r = array();
+$zdt_deep_day_r = array();
+$zdt_shallow_day_r = array();
+
+//week
+$date_week_r = array();
+$gg_deep_week = 0;
+$gg_deep_week_r = array();
+$gg_shallow_week_r = array();
+$zdt_shallow_week = 0;
+$zdt_deep_week_r = array();
+$zdt_shallow_week_r = array();
+$is_week_done = false;
+
+//month
+$date_month_r = array();
+$gg_deep_month = 0;
+$gg_deep_month_r = array();
+$gg_shallow_month_r = array();
+$zdt_shallow_month = 0;
+$zdt_deep_month_r = array();
+$zdt_shallow_month_r = array();
+$is_month_done = false;
+
+$tmp_date = $s_date;
+$day_seconds = 24 * 60 * 60;
+do{
+    $date_week = date("w", $tmp_date);
+    $date_month = date("t", $tmp_date);
+    $date_day = date("d", $tmp_date);
+    $date = strftime("%Y-%m-%d", $tmp_date);
+    $tmp_gg_deep = 0;
+    $tmp_gg_shallow = 0;
+    $tmp_zdt_deep = 0;
+    $tmp_zdt_shallow = 0;
+
+    //day
+    if(in_array($date, $gg_date_r, true))
+    {
+        $index = array_search($date, $gg_date_r, true);
+        $tmp_gg_deep = $gg_deep_r[$index];
+        $tmp_gg_shallow = $gg_shallow_r[$index];
+    }
+
+    if(in_array($date, $zdt_date_r, true))
+    {
+        $index = array_search($date, $zdt_date_r, true);
+        $tmp_zdt_deep = $zdt_deep_r[$index];
+        $tmp_zdt_shallow = $zdt_shallow_r[$index];
+    }
+
+    array_push($date_day_r, $date);
+    array_push($gg_deep_day_r, $tmp_gg_deep);
+    array_push($gg_shallow_day_r, $tmp_gg_shallow);
+    array_push($zdt_deep_day_r, $tmp_zdt_deep);
+    array_push($zdt_shallow_day_r, $tmp_zdt_shallow);
+
+    //week
+    $gg_deep_week += $tmp_gg_deep;
+    $gg_shallow_week += $tmp_gg_shallow;
+    $zdt_deep_week += $tmp_zdt_deep;
+    $zdt_shallow_week += $tmp_zdt_shallow;
+    $is_week_done = false;
+
+    if($date_week == 0)
+    {
+        array_push($date_week_r, $date);
+        array_push($gg_deep_week_r, $gg_deep_week);
+        array_push($gg_shallow_week_r, $gg_shallow_week);
+        array_push($zdt_deep_week_r, $zdt_deep_week);
+        array_push($zdt_shallow_week_r, $zdt_shallow_week);
+
+        $gg_deep_week = 0;
+        $gg_shallow_week = 0;
+        $zdt_deep_week = 0;
+        $zdt_shallow_week = 0;
+        $is_week_done = true;
+    }
+
+    //month
+    $gg_deep_month += $tmp_gg_deep;
+    $gg_shallow_month += $tmp_gg_shallow;
+    $zdt_deep_month += $tmp_zdt_deep;
+    $zdt_shallow_month += $tmp_zdt_shallow;
+    $is_month_done = false;
+
+    if($date_day == $date_month)
+    {
+        array_push($date_month_r, $date);
+        array_push($gg_deep_month_r, $gg_deep_month);
+        array_push($gg_shallow_month_r, $gg_shallow_month);
+        array_push($zdt_deep_month_r, $zdt_deep_month);
+        array_push($zdt_shallow_month_r, $zdt_shallow_month);
+
+        $gg_deep_month = 0;
+        $gg_shallow_month = 0;
+        $zdt_deep_month = 0;
+        $zdt_shallow_month = 0;
+        $is_month_done = true;
+    }
+
+    $tmp_date = $tmp_date + $day_seconds;
+}
+while(($tmp_date - $e_date) <= 0);
+
+if(!$is_week_done)
+{
+    array_push($date_week_r, $date);
+    array_push($gg_deep_week_r, $gg_deep_week);
+    array_push($gg_shallow_week_r, $gg_shallow_week);
+    array_push($zdt_deep_week_r, $zdt_deep_week);
+    array_push($zdt_shallow_week_r, $zdt_shallow_week);
+}
+
+if(!$is_month_done)
+{
+    array_push($date_month_r, $date);
+    array_push($gg_deep_month_r, $gg_deep_month);
+    array_push($gg_shallow_month_r, $gg_shallow_month);
+    array_push($zdt_deep_month_r, $zdt_deep_month);
+    array_push($zdt_shallow_month_r, $zdt_shallow_month);
+}
+
+$data_r = array("date_day" => $date_day_r, "gg_deep_day" => $gg_deep_day_r, "gg_shallow_day" => $gg_shallow_day_r, "zdt_deep_day" => $zdt_deep_day_r, "zdt_shallow_day" => $zdt_shallow_day_r
+                ,"date_week" => $date_week_r, "gg_deep_week" => $gg_deep_week_r, "gg_shallow_week" => $gg_shallow_week_r, "zdt_deep_week" => $zdt_deep_week_r, "zdt_shallow_week" => $zdt_shallow_week_r
+                ,"date_month" => $date_month_r, "gg_deep_month" => $gg_deep_month_r, "gg_shallow_month" => $gg_shallow_month_r, "zdt_deep_month" => $zdt_deep_month_r, "zdt_shallow_month" => $zdt_shallow_month_r);
 
 echo json_encode($data_r);
 ?>
