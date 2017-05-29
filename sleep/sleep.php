@@ -114,14 +114,14 @@ while(($row = $db->fetchRow()) != NULL)
     if($person == 0)
     {
         array_push($gg_date_r, $date_s);
-        array_push($gg_deep_r, $deep / 60);
-        array_push($gg_shallow_r, $shallow / 60);
+        array_push($gg_deep_r, $deep / 60 / 60.0);
+        array_push($gg_shallow_r, $shallow / 60 / 60.0);
     }
     else
     {
         array_push($zdt_date_r, $date_s);
-        array_push($zdt_deep_r, $deep / 60);
-        array_push($zdt_shallow_r, $shallow / 60);
+        array_push($zdt_deep_r, $deep / 60 / 60.0);
+        array_push($zdt_shallow_r, $shallow / 60 / 60.0);
     }
 
     if(is_null($s_date))

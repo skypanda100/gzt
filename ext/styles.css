@@ -217,3 +217,24 @@ _:-ms-input-placeholder, :root .gzt-graph {
       -ms-flex-align: center;
           align-items: center;
 }
+
+.gzt-dialog {
+    width: 1000px;
+}
+
+.gzt-textfield__input {
+    font-size: 10px;
+    padding-bottom: 10px;
+}
+
+.gzt-textfield__label {
+    font-size: 12px;
+}
+
+.gzt-textfield__error {
+    font-size: 12px;
+}
+
+.gzt-cell--2-col {
+    width: 10%;
+}

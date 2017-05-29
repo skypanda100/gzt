@@ -30,15 +30,39 @@
     </header>
     <main class="mdl-layout__content mdl-color--grey-100">
         <div class="mdl-grid gzt-content">
-            <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+            <div class="mdl-color--grey-100 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div style="width:400px;height:300px;" id="gzt_sleep_one_day_bar">
+                </div>
+            </div>
+            <div class="mdl-color--grey-100 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div style="width:400px;height:300px;" id="gzt_sleep_one_day_pie">
+                </div>
+            </div>
+            <div class="mdl-color--grey-100 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div style="width:400px;height:300px;" id="gzt_sleep_one_day_line">
+                </div>
+            </div>
+            <div class="mdl-color--grey-100 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div style="width:400px;height:300px;" id="gzt_sleep_one_week_bar">
+                </div>
+            </div>
+            <div class="mdl-color--grey-100 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div style="width:400px;height:300px;" id="gzt_sleep_one_week_pie">
+                </div>
+            </div>
+            <div class="mdl-color--grey-100 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div style="width:400px;height:300px;" id="gzt_sleep_one_week_line">
+                </div>
+            </div>
+            <div class="mdl-color--grey-100 mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                 <div style="width:1600px;height:470px;" id="gzt_sleep_day">
                 </div>
             </div>
-            <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col">
+            <div class="mdl-color--grey-100 mdl-shadow--2dp mdl-cell mdl-cell--6-col">
                 <div style="width:680px;height:300px;" id="gzt_sleep_week">
                 </div>
             </div>
-            <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col">
+            <div class="mdl-color--grey-100 mdl-shadow--2dp mdl-cell mdl-cell--6-col">
                 <div style="width:680px;height:300px;" id="gzt_sleep_month">
                 </div>
             </div>
@@ -53,9 +77,35 @@
             $.post("sleep.php", {},
                 function(data){
                     var data_r = eval("(" + data + ")");
-                    sleepDataDay(data_r.date_day, data_r.gg_deep_day, data_r.gg_shallow_day, data_r.zdt_deep_day, data_r.zdt_shallow_day);
-                    sleepDataWeek(data_r.date_week, data_r.gg_deep_week, data_r.gg_shallow_week, data_r.zdt_deep_week, data_r.zdt_shallow_week);
-                    sleepDataMonth(data_r.date_month, data_r.gg_deep_month, data_r.gg_shallow_month, data_r.zdt_deep_month, data_r.zdt_shallow_month);
+                    sleepDataOneDay(data_r.date_day[data_r.date_day.length - 1]
+                        , data_r.gg_deep_day[data_r.gg_deep_day.length - 1]
+                        , data_r.gg_shallow_day[data_r.gg_shallow_day.length - 1]
+                        , data_r.zdt_deep_day[data_r.zdt_deep_day.length - 1]
+                        , data_r.zdt_shallow_day[data_r.zdt_shallow_day.length - 1]);
+
+                    sleepDataOneWeek(data_r.date_week[data_r.date_week.length - 1]
+                        , data_r.gg_deep_week[data_r.gg_deep_week.length - 1]
+                        , data_r.gg_shallow_week[data_r.gg_shallow_week.length - 1]
+                        , data_r.zdt_deep_week[data_r.zdt_deep_week.length - 1]
+                        , data_r.zdt_shallow_week[data_r.zdt_shallow_week.length - 1]);
+
+                    sleepDataDay(data_r.date_day
+                        , data_r.gg_deep_day
+                        , data_r.gg_shallow_day
+                        , data_r.zdt_deep_day
+                        , data_r.zdt_shallow_day);
+
+                    sleepDataWeek(data_r.date_week
+                        , data_r.gg_deep_week
+                        , data_r.gg_shallow_week
+                        , data_r.zdt_deep_week
+                        , data_r.zdt_shallow_week);
+
+                    sleepDataMonth(data_r.date_month
+                        , data_r.gg_deep_month
+                        , data_r.gg_shallow_month
+                        , data_r.zdt_deep_month
+                        , data_r.zdt_shallow_month);
                 });
         }
     )
@@ -78,9 +128,35 @@
             $.post("sleep.php", arg,
                 function(data){
                     var data_r = eval("(" + data + ")");
-                    sleepDataDay(data_r.date_day, data_r.gg_deep_day, data_r.gg_shallow_day, data_r.zdt_deep_day, data_r.zdt_shallow_day);
-                    sleepDataWeek(data_r.date_week, data_r.gg_deep_week, data_r.gg_shallow_week, data_r.zdt_deep_week, data_r.zdt_shallow_week);
-                    sleepDataMonth(data_r.date_month, data_r.gg_deep_month, data_r.gg_shallow_month, data_r.zdt_deep_month, data_r.zdt_shallow_month);
+                    sleepDataOneDay(data_r.date_day[data_r.date_day.length - 1]
+                        , data_r.gg_deep_day[data_r.gg_deep_day.length - 1]
+                        , data_r.gg_shallow_day[data_r.gg_shallow_day.length - 1]
+                        , data_r.zdt_deep_day[data_r.zdt_deep_day.length - 1]
+                        , data_r.zdt_shallow_day[data_r.zdt_shallow_day.length - 1]);
+
+                    sleepDataOneWeek(data_r.date_week[data_r.date_week.length - 1]
+                        , data_r.gg_deep_week[data_r.gg_deep_week.length - 1]
+                        , data_r.gg_shallow_week[data_r.gg_shallow_week.length - 1]
+                        , data_r.zdt_deep_week[data_r.zdt_deep_week.length - 1]
+                        , data_r.zdt_shallow_week[data_r.zdt_shallow_week.length - 1]);
+
+                    sleepDataDay(data_r.date_day
+                        , data_r.gg_deep_day
+                        , data_r.gg_shallow_day
+                        , data_r.zdt_deep_day
+                        , data_r.zdt_shallow_day);
+
+                    sleepDataWeek(data_r.date_week
+                        , data_r.gg_deep_week
+                        , data_r.gg_shallow_week
+                        , data_r.zdt_deep_week
+                        , data_r.zdt_shallow_week);
+
+                    sleepDataMonth(data_r.date_month
+                        , data_r.gg_deep_month
+                        , data_r.gg_shallow_month
+                        , data_r.zdt_deep_month
+                        , data_r.zdt_shallow_month);
                 }
             );
 
