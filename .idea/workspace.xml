@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53f542f3-ef20-4747-abbe-d34c7f09e0e7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext/echarts.min.js" afterPath="$PROJECT_DIR$/ext/echarts.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ext/styles.css" afterPath="$PROJECT_DIR$/ext/styles.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gzt.html" afterPath="$PROJECT_DIR$/gzt.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sleep/sleep.html" afterPath="$PROJECT_DIR$/sleep/sleep.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sleep/sleep.js" afterPath="$PROJECT_DIR$/sleep/sleep.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sleep/sleep.php" afterPath="$PROJECT_DIR$/sleep/sleep.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sleep.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="sleep.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sleep/sleep.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="671">
-              <caret line="55" column="18" lean-forward="false" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
+            <state relative-caret-position="437">
+              <caret line="38" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -50,6 +46,16 @@
                 <element signature="n#style#0;n#div#0;n#div#7;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -107,11 +113,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gzt.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gzt.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gzt.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="34" column="56" lean-forward="true" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
+            <state relative-caret-position="253">
+              <caret line="30" column="6" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -129,7 +135,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mdl-navigation__link</find>
       <find>href</find>
       <find>tpl-echarts</find>
       <find>-header</find>
@@ -158,6 +163,7 @@
       <find>zrColor</find>
       <find>（分钟）</find>
       <find>formatter</find>
+      <find>400px</find>
       <find>_pie</find>
     </findStrings>
     <replaceStrings>
@@ -191,10 +197,10 @@
         <option value="$PROJECT_DIR$/sleep/test.html" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/ext/styles.css" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/gzt.html" />
         <option value="$PROJECT_DIR$/sleep/sleep.php" />
         <option value="$PROJECT_DIR$/sleep/sleep.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/gzt.html" />
         <option value="$PROJECT_DIR$/sleep/sleep.html" />
       </list>
     </option>
@@ -399,12 +405,12 @@
       <workItem from="1495798710752" duration="7672000" />
       <workItem from="1495848770526" duration="17398000" />
       <workItem from="1495939223436" duration="22876000" />
-      <workItem from="1496011847928" duration="8683000" />
+      <workItem from="1496011847928" duration="11313000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72225000" />
+    <option name="totallyTimeSpent" value="74855000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1684" height="1026" extended-state="0" />
@@ -663,14 +669,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ext/amazeui.min.js" />
     <entry file="file://$PROJECT_DIR$/ext/dataTables.responsive.min.js" />
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="39" column="98" lean-forward="false" selection-start-line="39" selection-start-column="98" selection-end-line="39" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ext/styles.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="728">
@@ -716,10 +714,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gzt.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="30" column="6" lean-forward="false" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sleep/sleep.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="671">
-          <caret line="55" column="18" lean-forward="false" selection-start-line="55" selection-start-column="18" selection-end-line="55" selection-end-column="18" />
+        <state relative-caret-position="437">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -731,14 +745,6 @@
             <element signature="n#style#0;n#div#0;n#div#7;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#8;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gzt.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="34" column="56" lean-forward="true" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
