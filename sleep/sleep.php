@@ -47,9 +47,13 @@ else
 $s_date = null;
 $e_date = null;
 $gg_date_r = array();
+$gg_sleep_start_r = array();
+$gg_sleep_end_r = array();
 $gg_deep_r = array();
 $gg_shallow_r = array();
 $zdt_date_r = array();
+$zdt_sleep_start_r = array();
+$zdt_sleep_end_r = array();
 $zdt_deep_r = array();
 $zdt_shallow_r = array();
 
@@ -116,12 +120,16 @@ while(($row = $db->fetchRow()) != NULL)
         array_push($gg_date_r, $date_s);
         array_push($gg_deep_r, $deep / 60 / 60.0);
         array_push($gg_shallow_r, $shallow / 60 / 60.0);
+        array_push($gg_sleep_start_r, strtotime($start));
+        array_push($gg_sleep_end_r, strtotime($end));
     }
     else
     {
         array_push($zdt_date_r, $date_s);
         array_push($zdt_deep_r, $deep / 60 / 60.0);
         array_push($zdt_shallow_r, $shallow / 60 / 60.0);
+        array_push($zdt_sleep_start_r, strtotime($start));
+        array_push($zdt_sleep_end_r, strtotime($end));
     }
 
     if(is_null($s_date))
@@ -162,6 +170,52 @@ $zdt_shallow_month = 0;
 $zdt_deep_month_r = array();
 $zdt_shallow_month_r = array();
 $is_month_done = false;
+
+//sleep time
+$gg_sleep_start_r_r = array();
+$gg_sleep_end_r_r = array();
+$zdt_sleep_start_r_r = array();
+$zdt_sleep_end_r_r = array();
+
+foreach ($gg_sleep_start_r as $date)
+{
+    $temp = array();
+    array_push($temp, strtotime(strftime("%Y-%m-%d", $date)));
+    $hour = intval(strftime("%H", $date), 10);
+    $minute = intval(strftime("%M", $date), 10);
+    array_push($temp, $hour * 60 + $minute);
+    array_push($gg_sleep_start_r_r, $temp);
+}
+
+foreach ($gg_sleep_end_r as $date)
+{
+    $temp = array();
+    array_push($temp, strtotime(strftime("%Y-%m-%d", $date)));
+    $hour = intval(strftime("%H", $date), 10);
+    $minute = intval(strftime("%M", $date), 10);
+    array_push($temp, $hour * 60 + $minute);
+    array_push($gg_sleep_end_r_r, $temp);
+}
+
+foreach ($zdt_sleep_start_r as $date)
+{
+    $temp = array();
+    array_push($temp, strtotime(strftime("%Y-%m-%d", $date)));
+    $hour = intval(strftime("%H", $date), 10);
+    $minute = intval(strftime("%M", $date), 10);
+    array_push($temp, $hour * 60 + $minute);
+    array_push($zdt_sleep_start_r_r, $temp);
+}
+
+foreach ($zdt_sleep_end_r as $date)
+{
+    $temp = array();
+    array_push($temp, strtotime(strftime("%Y-%m-%d", $date)));
+    $hour = intval(strftime("%H", $date), 10);
+    $minute = intval(strftime("%M", $date), 10);
+    array_push($temp, $hour * 60 + $minute);
+    array_push($zdt_sleep_end_r_r, $temp);
+}
 
 $tmp_date = $s_date;
 $day_seconds = 24 * 60 * 60;
@@ -264,7 +318,9 @@ if(!$is_month_done)
 
 $data_r = array("date_day" => $date_day_r, "gg_deep_day" => $gg_deep_day_r, "gg_shallow_day" => $gg_shallow_day_r, "zdt_deep_day" => $zdt_deep_day_r, "zdt_shallow_day" => $zdt_shallow_day_r
                 ,"date_week" => $date_week_r, "gg_deep_week" => $gg_deep_week_r, "gg_shallow_week" => $gg_shallow_week_r, "zdt_deep_week" => $zdt_deep_week_r, "zdt_shallow_week" => $zdt_shallow_week_r
-                ,"date_month" => $date_month_r, "gg_deep_month" => $gg_deep_month_r, "gg_shallow_month" => $gg_shallow_month_r, "zdt_deep_month" => $zdt_deep_month_r, "zdt_shallow_month" => $zdt_shallow_month_r);
+                ,"date_month" => $date_month_r, "gg_deep_month" => $gg_deep_month_r, "gg_shallow_month" => $gg_shallow_month_r, "zdt_deep_month" => $zdt_deep_month_r, "zdt_shallow_month" => $zdt_shallow_month_r
+                ,"gg_sleep_start" => $gg_sleep_start_r_r,"gg_sleep_end" => $gg_sleep_end_r_r
+                ,"zdt_sleep_start" => $zdt_sleep_start_r_r,"zdt_sleep_end" => $zdt_sleep_end_r_r);
 
 echo json_encode($data_r);
 ?>
