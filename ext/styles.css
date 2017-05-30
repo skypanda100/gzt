@@ -223,16 +223,19 @@ _:-ms-input-placeholder, :root .gzt-graph {
 }
 
 .gzt-textfield__input {
-    font-size: 10px;
-    padding-bottom: 10px;
+    font-size: 14px;
+    padding-bottom: 6px;
+    font-family: "微软雅黑","黑体",serif;
 }
 
 .gzt-textfield__label {
-    font-size: 12px;
+    font-size: 14px;
+    font-family: "微软雅黑","黑体",serif;
 }
 
 .gzt-textfield__error {
     font-size: 12px;
+    font-family: "微软雅黑","黑体",serif;
 }
 
 .gzt-cell--2-col {

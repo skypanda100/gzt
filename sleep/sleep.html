@@ -8,19 +8,41 @@
     <title></title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="../mdl/material.cyan-light_blue.min.css">
+    <link rel="stylesheet" href="../mdl/material.min.css">
     <link rel="stylesheet" href="../ext/styles.css">
-    <script src="../ext/echarts.min.js"></script>
-    <script src="../ext/jquery.min.js"></script>
     <link rel="stylesheet" href="../ext/components.css">
     <link rel="stylesheet" href="../ext/main.css">
+    <link rel="stylesheet" href="../calendar/css/mdDateTimePicker.css">
+
+    <script src="../ext/echarts.min.js"></script>
+    <script src="../ext/jquery.min.js"></script>
+    <script src="../calendar/js/moment.min.js"></script>
+    <script src="../calendar/js/lang/zh-cn.js"></script>
+    <script src="../calendar/js/scroll-into-view-if-needed.min.js"></script>
+    <script src="../calendar/js/draggabilly.pkgd.min.js"></script>
+    <script src="../calendar/js/mdDateTimePicker.js"></script>
+
+    <style>
+        .gzt-card-image.mdl-card {
+            width: 100%;
+            height: 300px;
+            background: url('../images/tt.jpg') center / cover;
+        }
+        .gzt-list-control {
+            width: 300px;
+        }
+
+        .gzt-list-radio {
+            display: inline;
+        }
+    </style>
 
 </head>
 <body>
 <div class="content mdl-grid mdl-grid--no-spacing" id="content">
     <div class="mdl-components mdl-js-components mdl-cell mdl-cell--12-col">
         <aside class="mdl-components__nav docs-text-styling mdl-shadow--4dp">
-            <a href="javascript:void(0);" class="mdl-components__link mdl-component is-active" id="day_compare" onclick="sideBarClicked(this, 0)">
+            <a href="javascript:void(0);" class="mdl-components__link mdl-component" id="day_compare" onclick="sideBarClicked(this, 0)">
                 <div class="mdl-components__link-image"
                      style="background-image: url('../images/tt9.jpg')">
                 </div>
@@ -71,19 +93,19 @@
         </aside>
         <main class="mdl-components__pages" id="content_day_compare">
             <div class="mdl-grid page-content">
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
                     <div style="width:100%;height:350px;" id="gzt_sleep_one_day_bar">
                     </div>
                 </div>
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
                     <div style="width:100%;height:350px;" id="gzt_sleep_one_day_pie">
                     </div>
                 </div>
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
                     <div style="width:100%;height:350px;" id="gzt_sleep_one_day_line">
                     </div>
                 </div>
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
                     <div style="width:100%;height:400px;" id="gzt_sleep_day">
                     </div>
                 </div>
@@ -91,19 +113,19 @@
         </main>
         <main class="mdl-components__pages" id="content_week_compare">
             <div class="mdl-grid page-content">
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
                     <div style="width:100%;height:350px;" id="gzt_sleep_one_week_bar">
                     </div>
                 </div>
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
                     <div style="width:100%;height:350px;" id="gzt_sleep_one_week_pie">
                     </div>
                 </div>
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
                     <div style="width:100%;height:350px;" id="gzt_sleep_one_week_line">
                     </div>
                 </div>
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                     <div style="width:100%;height:400px;" id="gzt_sleep_week">
                     </div>
                 </div>
@@ -111,19 +133,19 @@
         </main>
         <main class="mdl-components__pages" id="content_month_compare">
             <div class="mdl-grid page-content">
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
                     <div style="width:100%;height:350px;" id="gzt_sleep_one_month_bar">
                     </div>
                 </div>
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
                     <div style="width:100%;height:350px;" id="gzt_sleep_one_month_pie">
                     </div>
                 </div>
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--4-col">
                     <div style="width:100%;height:350px;" id="gzt_sleep_one_month_line">
                     </div>
                 </div>
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                     <div style="width:100%;height:400px;" id="gzt_sleep_month">
                     </div>
                 </div>
@@ -131,24 +153,265 @@
         </main>
         <main class="mdl-components__pages" id="content_sleep_time_compare">
             <div class="mdl-grid page-content">
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                     <div style="width:100%;height:400px;" id="gzt_sleep_start_scatter">
                     </div>
                 </div>
-                <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+                <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col">
                     <div style="width:100%;height:400px;" id="gzt_sleep_end_scatter">
                     </div>
                 </div>
             </div>
         </main>
+        <main class="mdl-components__pages" id="content_save_data">
+            <div class="page-content mdl-grid">
+                <div class="mdl-cell mdl-cell--3-col">
+                    <div class="mdl-grid ">
+                        <div class=" mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col ">
+                            <div class="gzt-card-image mdl-card" id="save_data_person">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdl-grid ">
+                        <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+                            <div class="mdl-cell mdl-cell--12-col" id="save_data_date_label"><h4><b>日期</b></h4></div>
+                            <ul class="gzt-list-control mdl-list">
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        <div class="mdl-list__item-avatar"
+                                             style="background: url('../images/tt9.jpg') center / cover">
+                                        </div>
+                                        2017-05-30
+                                    </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                      <label class="gzt-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
+                                        <input type="radio" id="list-option-1" class="mdl-radio__button" name="options" value="1"/>
+                                      </label>
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        <div class="mdl-list__item-avatar"
+                                             style="background: url('../images/tt9.jpg') center / cover">
+                                        </div>
+                                        2017-05-30
+                                    </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                      <label class="gzt-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-2">
+                                        <input type="radio" id="list-option-2" class="mdl-radio__button" name="options" value="2"/>
+                                      </label>
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        <div class="mdl-list__item-avatar"
+                                             style="background: url('../images/tt9.jpg') center / cover">
+                                        </div>
+                                        2017-05-30
+                                    </span>
+                                    <span class="mdl-list__item-secondary-action">
+                                      <label class="gzt-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-3">
+                                        <input type="radio" id="list-option-3" class="mdl-radio__button" name="options" value="3"/>
+                                      </label>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--3-col">
+                    <div class="mdl-grid ">
+                        <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
+                            <div class="mdl-cell mdl-cell--12-col" id="save_data_sleep_label"><h4><b>睡眠</b></h4></div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_sleep_start">
+                                <label class="mdl-textfield__label gzt-textfield__label" for="save_data_sleep_start">睡眠开始</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_sleep_end">
+                                <label class="mdl-textfield__label gzt-textfield__label" for="save_data_sleep_end">睡眠结束</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mdl-grid ">
+                        <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+                            <div class="mdl-grid ">
+                                <div class="mdl-cell mdl-cell--12-col" id="save_data_deep_sleep_label"><h4><b>深睡</b></h4></div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_start1">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_start1">深睡开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_end1">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_end1">深睡结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_start2">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_start2">深睡开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_end2">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_end2">深睡结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_start3">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_start3">深睡开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_end3">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_end3">深睡结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_start4">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_start4">深睡开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_end4">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_end4">深睡结束</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--3-col">
+                    <div class="mdl-grid ">
+                        <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+                            <div class="mdl-grid ">
+                                <div class="mdl-cell mdl-cell--12-col" id=""><h4><b>深睡</b></h4></div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_start5">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_start5">深睡开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_end5">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_end5">深睡结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_start6">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_start6">深睡开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_end6">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_end6">深睡结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_start7">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_start7">深睡开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_end7">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_end7">深睡结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_start8">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_start8">深睡开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_end8">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_end8">深睡结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_start9">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_start9">深睡开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_end9">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_end9">深睡结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_start10">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_start10">深睡开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="save_data_deep_sleep_end10">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="save_data_deep_sleep_end10">深睡结束</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--3-col">
+                    <div class="mdl-grid ">
+                        <div class="mdl-color--grey-50 mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+                            <div class="mdl-grid ">
+                                <div class="mdl-cell mdl-cell--12-col" id="awake_label"><h4><b>清醒</b></h4></div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="awake_start1">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="awake_start1">清醒开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="awake_end1">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="awake_end1">清醒结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="awake_start2">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="awake_start2">清醒开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="awake_end2">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="awake_end2">清醒结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="awake_start3">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="awake_start3">清醒开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="awake_end3">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="awake_end3">清醒结束</label>
+                                </div>
+                            </div>
+                            <div class="mdl-grid">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="awake_start4">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="awake_start4">清醒开始</label>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--6-col">
+                                    <input class="mdl-textfield__input gzt-textfield__input" type="text" id="awake_end4">
+                                    <label class="mdl-textfield__label gzt-textfield__label" for="awake_end4">清醒结束</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
     </div>
 </div>
 <script src="../mdl/material.min.js"></script>
 <script src="sleep.js"></script>
-<script>
-        $(function(){
-            searchSleepData(0);
-        });
+<script type="text/javascript">
+
+    $(function(){
+        $("#save_data").click();
+    });
 
     function searchSleepData(method){
         $.post("sleep.php", {},
@@ -213,6 +476,8 @@
                 }else if(method == 5){
 
                 }else{
+                    $("main").addClass("hidden");
+                    $("#content_save_data").removeClass("hidden").addClass("block");
 
                 }
             });
