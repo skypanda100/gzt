@@ -84,7 +84,8 @@ class AppNavDrawer extends Component {
             nestedItems={[
                 <ListItem primaryText="Comparison By Day" value="/sleep/comparison_by_day" />,
                 <ListItem primaryText="Comparison By Week" value="/sleep/comparison_by_week" />,
-                <ListItem primaryText="Comparison By Month" value="/sleep/comparison_by_month" />
+                <ListItem primaryText="Comparison By Month" value="/sleep/comparison_by_month" />,
+                <ListItem primaryText="Save Data" value="/sleep/save_data" />
             ]}
           />
         </SelectableList>

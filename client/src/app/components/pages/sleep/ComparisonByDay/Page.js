@@ -10,8 +10,14 @@ import ComparisonByDayOfBarCode from '!raw!./ComparisonByDayOfBar';
 import ComparisonByDayOfPie from './ComparisonByDayOfPie';
 import ComparisonByDayOfPieCode from '!raw!./ComparisonByDayOfPie';
 
+var divStyle = {
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center'
+}
+
 const ComparisonByDayPage = () => (
-  <div>
+  <div style={divStyle}>
       <Title render={(previousTitle) => `Comparison By Day - ${previousTitle}`} />
       <DataBlock
           code={ComparisonByDayOfLineCode}

@@ -8,8 +8,9 @@ import {
 import Master from './components/Master';
 import Home from './components/pages/Home';
 import ComparisonByDayPage from './components/pages/sleep/ComparisonByDay/Page';
-import ComparisonByWeek from './components/pages/sleep/ComparisonByWeek/ComparisonByWeek';
-import ComparisonByMonth from './components/pages/sleep/ComparisonByMonth/ComparisonByMonth';
+import ComparisonByWeekPage from './components/pages/sleep/ComparisonByWeek/ComparisonByWeek';
+import ComparisonByMonthPage from './components/pages/sleep/ComparisonByMonth/ComparisonByMonth';
+import SaveDataPage from './components/pages/sleep/SaveData/Page';
 
 const AppRoutes = (
   <Route path="/" component={Master}>
@@ -18,8 +19,9 @@ const AppRoutes = (
     <Redirect from="sleep" to="/sleep/comparison_by_day" />
     <Route path="sleep">
         <Route path="comparison_by_day" component={ComparisonByDayPage} />
-        <Route path="comparison_by_week" component={ComparisonByWeek} />
-        <Route path="comparison_by_month" component={ComparisonByMonth} />
+        <Route path="comparison_by_week" component={ComparisonByWeekPage} />
+        <Route path="comparison_by_month" component={ComparisonByMonthPage} />
+        <Route path="save_data" component={SaveDataPage} />
     </Route>
   </Route>
 );
