@@ -1,3 +1,4 @@
 /client/node_modules
 /.idea
 /client/build
+/client/package-lock.json
