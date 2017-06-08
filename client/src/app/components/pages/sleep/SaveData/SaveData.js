@@ -43,6 +43,12 @@ class SaveData extends Component {
         super();
     }
 
+    state = {
+        personValue: 0,
+        message:"",
+        messageOpen:false,
+    };
+
     handleTouchTap = (msg) => {
         this.setState({
             messageOpen: true,
@@ -107,6 +113,12 @@ class SaveData extends Component {
         }
         this.calculateTime();
     };
+
+    clearHandle = (event) => {
+    }
+
+    saveHandle = (event) => {
+    }
 
     calculateTime = () => {
         let sleepLabel = this.sleepLabel;
@@ -237,12 +249,6 @@ class SaveData extends Component {
 
         return sleepDateStr;
     }
-
-    state = {
-        personValue: 0,
-        message:"",
-        messageOpen:false,
-    };
 
     render () {
         return (
@@ -483,8 +489,18 @@ class SaveData extends Component {
                         />
                     </div>
                     <div>
-                        <RaisedButton label="Clear" primary={true} style={{width:'46%',margin:'2%'}}/>
-                        <RaisedButton label="Save" secondary={true}  style={{width:'46%',margin:'2%'}} />
+                        <RaisedButton
+                            label="Clear"
+                            primary={true}
+                            style={{width:'46%',margin:'2%'}}
+                            onTouchTap={this.clearHandle}
+                        />
+                        <RaisedButton
+                            label="Save"
+                            secondary={true}
+                            style={{width:'46%',margin:'2%'}}
+                            onTouchTap={this.saveHandle}
+                        />
                     </div>
                 </div>
             </Paper>
