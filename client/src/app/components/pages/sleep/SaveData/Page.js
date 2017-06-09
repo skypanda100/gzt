@@ -16,7 +16,7 @@ const paperStyle = {
     width: '98%',
     marginLeft: '1%',
     marginRight: '1%',
-    padding: 20,
+    padding: 0,
     textAlign: 'left',
     display: 'inline-block',
     verticalAlign:'top',
