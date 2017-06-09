@@ -9,41 +9,54 @@ import ComparisonByDayOfBar from './ComparisonByDayOfBar';
 import ComparisonByDayOfBarCode from '!raw!./ComparisonByDayOfBar';
 import ComparisonByDayOfPie from './ComparisonByDayOfPie';
 import ComparisonByDayOfPieCode from '!raw!./ComparisonByDayOfPie';
+import Paper from 'material-ui/Paper';
 
-var divStyle = {
+const divStyle = {
     flex:1,
     justifyContent:'center',
     alignItems:'center'
-}
+};
+
+const paperStyle = {
+    height: '100%',
+    width: '98%',
+    marginLeft: '1%',
+    marginRight: '1%',
+    marginBottom: '1%',
+    padding: 20,
+    textAlign: 'left',
+    display: 'inline-block',
+    verticalAlign:'top',
+};
 
 const ComparisonByDayPage = () => (
-  <div style={divStyle}>
-      <Title render={(previousTitle) => `Comparison By Day - ${previousTitle}`} />
-      <DataBlock
-          code={ComparisonByDayOfLineCode}
-          title="Line"
-      >
-          <ComparisonByDayOfLine />
-      </DataBlock>
-      <DataBlock
-          code={ComparisonByDayOfTemperatureCode}
-          title="Temperature"
-      >
-          <ComparisonByDayOfTemperature />
-      </DataBlock>
-      <DataBlock
-          code={ComparisonByDayOfBarCode}
-          title="Bar"
-      >
-          <ComparisonByDayOfBar />
-      </DataBlock>
-      <DataBlock
-          code={ComparisonByDayOfPieCode}
-          title="Pie"
-      >
-          <ComparisonByDayOfPie />
-      </DataBlock>
-  </div>
+    <div style={divStyle}>
+        <Title render={(previousTitle) => `Comparison By Day - ${previousTitle}`} />
+        <Paper
+            style={paperStyle}
+            zDepth={1}
+        >
+            <ComparisonByDayOfLine />
+        </Paper>
+        <Paper
+            style={paperStyle}
+            zDepth={1}
+        >
+            <ComparisonByDayOfTemperature />
+        </Paper>
+        <Paper
+            style={paperStyle}
+            zDepth={1}
+        >
+            <ComparisonByDayOfBar />
+        </Paper>
+        <Paper
+            style={paperStyle}
+            zDepth={1}
+        >
+            <ComparisonByDayOfPie />
+        </Paper>
+    </div>
 );
 
 export default ComparisonByDayPage;
