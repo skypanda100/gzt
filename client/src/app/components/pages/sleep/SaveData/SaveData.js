@@ -245,6 +245,9 @@ class SaveData extends Component {
             this.handleTouchTap("please set value into SleepDate");
             return;
         }
+        if(hhmm.length == 3){
+            hhmm = "0" + hhmm;
+        }
         if(hhmm.length == 4){
             this.setState({
                 [event.target.id] : this.formatDate(sleepDate, hhmm),
@@ -267,6 +270,9 @@ class SaveData extends Component {
             this.handleTouchTap("please set value into SleepDate");
             return;
         }
+        if(hhmm.length == 3){
+            hhmm = "0" + hhmm;
+        }
         if(hhmm.length == 4){
             this.setState({
                 [event.target.id] : this.formatDate(sleepDate, hhmm),
@@ -288,6 +294,9 @@ class SaveData extends Component {
         if(typeof(sleepDate) == "undefined"){
             this.handleTouchTap("please set value into SleepDate");
             return;
+        }
+        if(hhmm.length == 3){
+            hhmm = "0" + hhmm;
         }
         if(hhmm.length == 4){
             this.setState({

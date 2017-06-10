@@ -1,14 +1,9 @@
 import React from 'react';
 import Title from 'react-title-component';
-import DataBlock from '../../../blocks/index';
 import ComparisonByDayOfLine from './ComparisonByDayOfLine';
-import ComparisonByDayOfLineCode from '!raw!./ComparisonByDayOfLine';
 import ComparisonByDayOfTemperature from './ComparisonByDayOfTemperature';
-import ComparisonByDayOfTemperatureCode from '!raw!./ComparisonByDayOfTemperature';
 import ComparisonByDayOfBar from './ComparisonByDayOfBar';
-import ComparisonByDayOfBarCode from '!raw!./ComparisonByDayOfBar';
 import ComparisonByDayOfPie from './ComparisonByDayOfPie';
-import ComparisonByDayOfPieCode from '!raw!./ComparisonByDayOfPie';
 import Paper from 'material-ui/Paper';
 
 const divStyle = {
@@ -17,13 +12,25 @@ const divStyle = {
     alignItems:'center'
 };
 
-const paperStyle = {
+const paperStyle01 = {
     height: '100%',
-    width: '98%',
-    marginLeft: '1%',
-    marginRight: '1%',
+    width: '33.3%',
+    marginLeft: '0%',
+    marginRight: '0%',
     marginBottom: '1%',
-    padding: 20,
+    padding: 5,
+    textAlign: 'left',
+    display: 'inline-block',
+    verticalAlign:'top',
+};
+
+const paperStyle02 = {
+    height: '100%',
+    width: '100%',
+    marginLeft: '0%',
+    marginRight: '0%',
+    marginBottom: '1%',
+    padding: 5,
     textAlign: 'left',
     display: 'inline-block',
     verticalAlign:'top',
@@ -33,28 +40,28 @@ const ComparisonByDayPage = () => (
     <div style={divStyle}>
         <Title render={(previousTitle) => `Comparison By Day - ${previousTitle}`} />
         <Paper
-            style={paperStyle}
-            zDepth={1}
-        >
-            <ComparisonByDayOfLine />
-        </Paper>
-        <Paper
-            style={paperStyle}
+            style={paperStyle01}
             zDepth={1}
         >
             <ComparisonByDayOfTemperature />
         </Paper>
         <Paper
-            style={paperStyle}
+            style={paperStyle01}
             zDepth={1}
         >
             <ComparisonByDayOfBar />
         </Paper>
         <Paper
-            style={paperStyle}
+            style={paperStyle01}
             zDepth={1}
         >
             <ComparisonByDayOfPie />
+        </Paper>
+        <Paper
+            style={paperStyle02}
+            zDepth={1}
+        >
+            <ComparisonByDayOfLine />
         </Paper>
     </div>
 );

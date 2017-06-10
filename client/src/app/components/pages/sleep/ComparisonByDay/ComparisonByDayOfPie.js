@@ -69,7 +69,6 @@ class ComparisonByDayOfPie extends Component {
         var option = {
             title : {
                 text: '',
-                subtext: date,
             },
             tooltip : {
                 trigger: 'item',
@@ -111,7 +110,7 @@ class ComparisonByDayOfPie extends Component {
 
     render () {
         return (
-            <div id='pie' style={{width:'100%',height:'400px'}}>
+            <div id='pie' style={{width:'100%',height:'300px'}}>
             </div>
         )
     }

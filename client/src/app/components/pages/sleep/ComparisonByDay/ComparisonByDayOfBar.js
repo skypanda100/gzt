@@ -69,7 +69,6 @@ class ComparisonByDayOfBar extends Component {
         var option = {
             title: {
                 text: '',
-                subtext: date
             },
             tooltip: {
                 trigger: 'axis',
@@ -138,7 +137,7 @@ class ComparisonByDayOfBar extends Component {
 
     render () {
         return (
-            <div id='bar' style={{width:'100%',height:'400px'}}>
+            <div id='bar' style={{width:'100%',height:'300px'}}>
             </div>
         )
     }

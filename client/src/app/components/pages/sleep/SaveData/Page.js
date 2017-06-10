@@ -1,8 +1,6 @@
 import React from 'react';
 import Title from 'react-title-component';
-import DataBlock from '../../../blocks/index';
 import SaveData from './SaveData';
-import SaveDataCode from '!raw!./SaveData';
 import Paper from 'material-ui/Paper';
 
 const divStyle = {

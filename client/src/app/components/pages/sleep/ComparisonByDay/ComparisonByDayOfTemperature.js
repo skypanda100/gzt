@@ -69,7 +69,6 @@ class ComparisonByDayOfTemperature extends Component {
         var option = {
             title : {
                 text: '',
-                subtext:date
             },
             tooltip : {
                 trigger: 'axis',
@@ -171,7 +170,7 @@ class ComparisonByDayOfTemperature extends Component {
 
     render () {
         return (
-            <div id='temperature' style={{width:'100%',height:'400px'}}>
+            <div id='temperature' style={{width:'100%',height:'300px'}}>
             </div>
         )
     }
