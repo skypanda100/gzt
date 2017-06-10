@@ -5,7 +5,6 @@
  * Date: 2017/5/26
  * Time: 19:59
  */
-header("content-type:application/json");
 
 require_once "../../db/pgsql.php";
 
@@ -186,6 +185,10 @@ $data_r = array("date_day" => $date_day_r
                 , "zdt_deep_day" => $zdt_deep_day_r
                 , "zdt_shallow_day" => $zdt_shallow_day_r
                 );
+
+header("content-type:application/json");
+header('Access-Control-Allow-Origin:*');
+//header('Access-Control-Allow-Methods:POST');
 
 echo json_encode($data_r);
 ?>

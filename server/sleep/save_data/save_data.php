@@ -5,10 +5,9 @@
  * Date: 2017/6/9
  * Time: 19:05
  */
-header("content-type:application/json");
 
 require_once "../../db/pgsql.php";
-/*
+
 $person = null;
 if(isset($_POST["person"]))
 {
@@ -174,7 +173,7 @@ if(isset($_POST["awakeStart02"]))
 $awakeEnd02 = null;
 if(isset($_POST["awakeEnd02"]))
 {
-    $awakeStart02 = $_POST["awakeEnd02"];
+    $awakeEnd02 = $_POST["awakeEnd02"];
 }
 
 $awakeStart03 = null;
@@ -186,7 +185,7 @@ if(isset($_POST["awakeStart03"]))
 $awakeEnd03 = null;
 if(isset($_POST["awakeEnd03"]))
 {
-    $awakeStart03 = $_POST["awakeEnd03"];
+    $awakeEnd03 = $_POST["awakeEnd03"];
 }
 
 $awakeStart04 = null;
@@ -198,17 +197,60 @@ if(isset($_POST["awakeStart04"]))
 $awakeEnd04 = null;
 if(isset($_POST["awakeEnd04"]))
 {
-    $awakeStart04 = $_POST["awakeEnd04"];
+    $awakeEnd04 = $_POST["awakeEnd04"];
 }
 
 $db = new pgsql("192.168.1.3", "15432", "postgres", "postgres", "123456");
 //$db = new pgsql("192.168.233.138", "15432", "postgres", "postgres", "123456");
 
 $db->connect();
-$sql = "";*/
-$ret = array();
-$ret["person"] = $person;
-$ret["sleepDate"] = $sleepDate;
+$sql = "insert into status_sleep values("
+    . $person
+    . ",'$sleepDate'"
+    . ",'$sleepStart'"
+    . ",'$sleepEnd'"
+    . (empty($deepSleepStart01)? ",null" : ",'$deepSleepStart01'")
+    . (empty($deepSleepEnd01)? ",null" : ",'$deepSleepEnd01'")
+    . (empty($deepSleepStart02)? ",null" : ",'$deepSleepStart02'")
+    . (empty($deepSleepEnd02)? ",null" : ",'$deepSleepEnd02'")
+    . (empty($deepSleepStart03)? ",null" : ",'$deepSleepStart03'")
+    . (empty($deepSleepEnd03)? ",null" : ",'$deepSleepEnd03'")
+    . (empty($deepSleepStart04)? ",null" : ",'$deepSleepStart04'")
+    . (empty($deepSleepEnd04)? ",null" : ",'$deepSleepEnd04'")
+    . (empty($deepSleepStart05)? ",null" : ",'$deepSleepStart05'")
+    . (empty($deepSleepEnd05)? ",null" : ",'$deepSleepEnd05'")
+    . (empty($deepSleepStart06)? ",null" : ",'$deepSleepStart06'")
+    . (empty($deepSleepEnd06)? ",null" : ",'$deepSleepEnd06'")
+    . (empty($deepSleepStart07)? ",null" : ",'$deepSleepStart07'")
+    . (empty($deepSleepEnd07)? ",null" : ",'$deepSleepEnd07'")
+    . (empty($deepSleepStart08)? ",null" : ",'$deepSleepStart08'")
+    . (empty($deepSleepEnd08)? ",null" : ",'$deepSleepEnd08'")
+    . (empty($deepSleepStart09)? ",null" : ",'$deepSleepStart09'")
+    . (empty($deepSleepEnd09)? ",null" : ",'$deepSleepEnd09'")
+    . (empty($deepSleepStart10)? ",null" : ",'$deepSleepStart10'")
+    . (empty($deepSleepEnd10)? ",null" : ",'$deepSleepEnd10'")
+    . (empty($awakeStart01)? ",null" : ",'$awakeStart01'")
+    . (empty($awakeEnd01)? ",null" : ",'$awakeEnd01'")
+    . (empty($awakeStart02)? ",null" : ",'$awakeStart02'")
+    . (empty($awakeEnd02)? ",null" : ",'$awakeEnd02'")
+    . (empty($awakeStart03)? ",null" : ",'$awakeStart03'")
+    . (empty($awakeEnd03)? ",null" : ",'$awakeEnd03'")
+    . (empty($awakeStart04)? ",null" : ",'$awakeStart04'")
+    . (empty($awakeEnd04)? ",null" : ",'$awakeEnd04'")
+    . ")";
 
+$result = $db->query($sql);
+
+$db->free();
+
+header("content-type:application/json");
+header('Access-Control-Allow-Origin:*');
+
+$ret = array();
+if(!$result){
+    $ret["msg"] = $db->lastError();
+}else{
+    $ret["msg"] = "insert sleep data into database successfully";
+}
 echo json_encode($ret);
 ?>

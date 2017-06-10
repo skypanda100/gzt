@@ -22,7 +22,8 @@ class pgsql
     private $db;
     // 查询的结果
     private $result;
-
+    // erro
+    private $error;
     /**
      * pgsql constructor.
      * @param $host
@@ -64,9 +65,9 @@ class pgsql
         try {
             $this->result = pg_query($this->linkid, $query);
             if (!$this->result)
-                throw new Exception("The database query failed.");
+                $this->error = "The database execute failed.";
         } catch (Exception $e) {
-            echo $e->getMessage();
+            $this->error = $e->getMessage();
         }
         return $this->result;
     }
@@ -127,6 +128,15 @@ class pgsql
     function free()
     {
         pg_free_result($this->result);
+    }
+
+    /**
+     * 错误信息
+     * @return string
+     */
+    function lastError()
+    {
+        return $this->error;
     }
 }
 //这个DB类，一般不写析构（不释放资源）
