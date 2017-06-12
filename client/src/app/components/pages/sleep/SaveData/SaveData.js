@@ -15,6 +15,7 @@ import DateTimeUtil from '../../../utils/DateTimeUtil';
 import CommonUtil from '../../../utils/CommonUtil';
 import Divider from 'material-ui/Divider';
 import 'whatwg-fetch';
+import echarts from "echarts";
 
 const items = [];
 items.push(<MenuItem value={0} key={0} primaryText={`GaoGe`} />);
@@ -227,6 +228,7 @@ class SaveData extends Component {
         this.setState({
             personValue:value
         });
+        this.calendar(null);
     };
 
     pickerHandleChange = (event, date) => {
@@ -542,6 +544,53 @@ class SaveData extends Component {
         sleepDateStr = DateTimeUtil.Date2String(sleepDate, "yyyy-MM-dd hh:mm");
 
         return sleepDateStr;
+    }
+
+    getVirtulData = (year) => {
+        var year = year || '2017';
+        var date = +echarts.number.parseDate(year + '-01-01');
+        var end = +echarts.number.parseDate((+year + 1) + '-01-01');
+        var dayTime = 3600 * 24 * 1000;
+        var data = [];
+        for (var time = date; time < end; time += dayTime) {
+            data.push([
+                echarts.format.formatTime('yyyy-MM-dd', time),
+                Math.floor(Math.random() * 1000)
+            ]);
+        }
+        return data;
+    }
+
+    calendar = (data) => {
+        var chart = echarts.init(document.getElementById('calendar'));
+        var option = {
+            tooltip: {
+                position: 'top'
+            },
+            visualMap: {
+                min: 0,
+                max: 1000,
+                calculable: true,
+                orient: 'horizontal',
+                left: 'center',
+                top: 'top'
+            },
+
+            calendar: [
+                {
+                    range: '2017',
+                    cellSize: ['auto', 20]
+                }
+            ],
+
+            series: [{
+                type: 'heatmap',
+                coordinateSystem: 'calendar',
+                calendarIndex: 0,
+                data: this.getVirtulData(2017)
+            }]
+        };
+        chart.setOption(option);
     }
 
     render () {
@@ -891,6 +940,9 @@ class SaveData extends Component {
                 </div>
             </Paper>
             <Paper style={paperStyle02} zDepth={0}>
+                <div id='calendar' style={{width:'100%',height:'300px'}}>
+
+                </div>
                 <div>
                     <h3>Sleep Time</h3>
                     <p style={{fontSize:25}} ref={(input) => { this.sleepLabel = input; }}>0 hours 0 minutes</p>
