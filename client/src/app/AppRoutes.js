@@ -8,8 +8,8 @@ import {
 import Master from './components/Master';
 import Home from './components/pages/Home';
 import ComparisonByDayPage from './components/pages/sleep/ComparisonByDay/Page';
-import ComparisonByWeekPage from './components/pages/sleep/ComparisonByWeek/ComparisonByWeek';
-import ComparisonByMonthPage from './components/pages/sleep/ComparisonByMonth/ComparisonByMonth';
+import ComparisonByWeekPage from './components/pages/sleep/ComparisonByWeek/Page';
+import ComparisonByMonthPage from './components/pages/sleep/ComparisonByMonth/Page';
 import SaveDataPage from './components/pages/sleep/SaveData/Page';
 
 const AppRoutes = (

@@ -1,9 +1,9 @@
 import React from 'react';
 import Title from 'react-title-component';
-import ComparisonByDayOfLine from './ComparisonByDayOfLine';
-import ComparisonByDayOfTemperature from './ComparisonByDayOfTemperature';
-import ComparisonByDayOfBar from './ComparisonByDayOfBar';
-import ComparisonByDayOfPie from './ComparisonByDayOfPie';
+import ComparisonByWeekOfLine from './ComparisonByWeekOfLine';
+import ComparisonByWeekOfTemperature from './ComparisonByWeekOfTemperature';
+import ComparisonByWeekOfBar from './ComparisonByWeekOfBar';
+import ComparisonByWeekOfPie from './ComparisonByWeekOfPie';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 
@@ -37,10 +37,10 @@ const paperStyle02 = {
     verticalAlign:'top',
 };
 
-const ComparisonByDayPage = () => (
+const ComparisonByWeekPage = () => (
     <div style={divStyle}>
-        <Title render={(previousTitle) => `Comparison By Day - ${previousTitle}`} />
-        <h2>Comparison by day</h2>
+        <Title render={(previousTitle) => `Comparison By Week - ${previousTitle}`} />
+        <h2>Comparison by week</h2>
         <br/>
         <Divider/>
         <br/>
@@ -48,27 +48,27 @@ const ComparisonByDayPage = () => (
             style={paperStyle01}
             zDepth={1}
         >
-            <ComparisonByDayOfTemperature />
+            <ComparisonByWeekOfTemperature />
         </Paper>
         <Paper
             style={paperStyle01}
             zDepth={1}
         >
-            <ComparisonByDayOfBar />
+            <ComparisonByWeekOfBar />
         </Paper>
         <Paper
             style={paperStyle01}
             zDepth={1}
         >
-            <ComparisonByDayOfPie />
+            <ComparisonByWeekOfPie />
         </Paper>
         <Paper
             style={paperStyle02}
             zDepth={1}
         >
-            <ComparisonByDayOfLine />
+            <ComparisonByWeekOfLine />
         </Paper>
     </div>
 );
 
-export default ComparisonByDayPage;
+export default ComparisonByWeekPage;

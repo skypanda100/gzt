@@ -547,10 +547,6 @@ class SaveData extends Component {
     render () {
         return (
         <div style={{textAlign:'left'}}>
-            <h2>Save sleep data into DataBase</h2>
-            <br/>
-            <Divider/>
-            <br/>
             <Paper style={paperStyle01} zDepth={0}>
                 <div >
                     <SelectField

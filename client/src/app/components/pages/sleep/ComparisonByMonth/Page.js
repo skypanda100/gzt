@@ -1,9 +1,9 @@
 import React from 'react';
 import Title from 'react-title-component';
-import ComparisonByDayOfLine from './ComparisonByDayOfLine';
-import ComparisonByDayOfTemperature from './ComparisonByDayOfTemperature';
-import ComparisonByDayOfBar from './ComparisonByDayOfBar';
-import ComparisonByDayOfPie from './ComparisonByDayOfPie';
+import ComparisonByMonthOfLine from './ComparisonByMonthOfLine';
+import ComparisonByMonthOfTemperature from './ComparisonByMonthOfTemperature';
+import ComparisonByMonthOfBar from './ComparisonByMonthOfBar';
+import ComparisonByMonthOfPie from './ComparisonByMonthOfPie';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 
@@ -37,10 +37,10 @@ const paperStyle02 = {
     verticalAlign:'top',
 };
 
-const ComparisonByDayPage = () => (
+const ComparisonByMonthPage = () => (
     <div style={divStyle}>
-        <Title render={(previousTitle) => `Comparison By Day - ${previousTitle}`} />
-        <h2>Comparison by day</h2>
+        <Title render={(previousTitle) => `Comparison By Month - ${previousTitle}`} />
+        <h2>Comparison by month</h2>
         <br/>
         <Divider/>
         <br/>
@@ -48,27 +48,27 @@ const ComparisonByDayPage = () => (
             style={paperStyle01}
             zDepth={1}
         >
-            <ComparisonByDayOfTemperature />
+            <ComparisonByMonthOfTemperature />
         </Paper>
         <Paper
             style={paperStyle01}
             zDepth={1}
         >
-            <ComparisonByDayOfBar />
+            <ComparisonByMonthOfBar />
         </Paper>
         <Paper
             style={paperStyle01}
             zDepth={1}
         >
-            <ComparisonByDayOfPie />
+            <ComparisonByMonthOfPie />
         </Paper>
         <Paper
             style={paperStyle02}
             zDepth={1}
         >
-            <ComparisonByDayOfLine />
+            <ComparisonByMonthOfLine />
         </Paper>
     </div>
 );
 
-export default ComparisonByDayPage;
+export default ComparisonByMonthPage;

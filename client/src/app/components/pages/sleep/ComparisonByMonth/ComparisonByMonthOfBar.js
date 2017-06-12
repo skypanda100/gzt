@@ -6,14 +6,14 @@ import withWidth, {MEDIUM, LARGE} from 'material-ui/utils/withWidth';
 import echarts from "echarts";
 import 'whatwg-fetch';
 
-class ComparisonByDayOfBar extends Component {
+class ComparisonByMonthOfBar extends Component {
 
     constructor () {
         super();
     }
 
     post(postData, dispatch) {
-        fetch('http://192.168.1.3:8765/gzt/server/sleep/comparison_by_day/comparison_by_day_of_bar.php', {
+        fetch('http://192.168.1.3:8765/gzt/server/sleep/comparison_by_month/comparison_by_month_of_bar.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -33,20 +33,6 @@ class ComparisonByDayOfBar extends Component {
                     isSuccess: false
                 });
             });
-        /*fetch('/day.json')
-            .then(response => response.json())
-            .then(json => {
-                dispatch({
-                    message: json,
-                    isSuccess: true
-                });
-            })
-            .catch((err) => {
-                dispatch({
-                    message: err.message,
-                    isSuccess: false
-                });
-            });*/
     }
 
     draw(data){
@@ -57,11 +43,11 @@ class ComparisonByDayOfBar extends Component {
         var zdt_shallow;
         if(data.isSuccess){
             var data_r = data.message;
-            date = data_r.date_day[data_r.date_day.length - 1];
-            gg_deep = data_r.gg_deep_day[data_r.gg_deep_day.length - 1];
-            gg_shallow = data_r.gg_shallow_day[data_r.gg_shallow_day.length - 1];
-            zdt_deep = data_r.zdt_deep_day[data_r.zdt_deep_day.length - 1];
-            zdt_shallow = data_r.zdt_shallow_day[data_r.zdt_shallow_day.length - 1];
+            date = data_r.date_month[data_r.date_month.length - 1];
+            gg_deep = data_r.gg_deep_month[data_r.gg_deep_month.length - 1];
+            gg_shallow = data_r.gg_shallow_month[data_r.gg_shallow_month.length - 1];
+            zdt_deep = data_r.zdt_deep_month[data_r.zdt_deep_month.length - 1];
+            zdt_shallow = data_r.zdt_shallow_month[data_r.zdt_shallow_month.length - 1];
         }
 
         var chart = echarts.init(document.getElementById('bar'));
@@ -143,4 +129,4 @@ class ComparisonByDayOfBar extends Component {
     }
 }
 
-export default withWidth()(ComparisonByDayOfBar);
+export default withWidth()(ComparisonByMonthOfBar);
