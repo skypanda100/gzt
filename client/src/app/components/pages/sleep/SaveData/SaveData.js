@@ -14,7 +14,6 @@ import Snackbar from 'material-ui/Snackbar';
 import DateTimeUtil from '../../../utils/DateTimeUtil';
 import CommonUtil from '../../../utils/CommonUtil';
 import Divider from 'material-ui/Divider';
-import 'whatwg-fetch';
 import echarts from "echarts";
 
 const items = [];
@@ -42,6 +41,9 @@ const paperStyle02 = {
     display: 'inline-block',
     verticalAlign:'top',
 };
+
+var cellSize = [60, 60];
+var pieRadius = 25;
 
 class SaveData extends Component {
 
@@ -84,6 +86,12 @@ class SaveData extends Component {
         awakeEnd03:"",
         awakeStart04:"",
         awakeEnd04:"",
+        range:[],
+        date_r:[],
+        gg_deep_r:[],
+        gg_shallow_r:[],
+        zdt_deep_r:[],
+        zdt_shallow_r:[],
     };
 
     tfHandleChange = (event) => {
@@ -227,8 +235,9 @@ class SaveData extends Component {
     slcHandleChange = (event, index, value) => {
         this.setState({
             personValue:value
+        }, ()=>{
+            this.calendar();
         });
-        this.calendar(null);
     };
 
     pickerHandleChange = (event, date) => {
@@ -409,9 +418,10 @@ class SaveData extends Component {
                 .then(response => response.json())
                 .then(json => {
                     this.handleTouchTap(json.msg);
+                    this.lastData();
                 })
                 .catch((err) => {
-                    this.handleTouchTap(err);
+                    this.handleTouchTap(err.message);
                 });
         }
     }
@@ -546,51 +556,148 @@ class SaveData extends Component {
         return sleepDateStr;
     }
 
-    getVirtulData = (year) => {
-        var year = year || '2017';
-        var date = +echarts.number.parseDate(year + '-01-01');
-        var end = +echarts.number.parseDate((+year + 1) + '-01-01');
-        var dayTime = 3600 * 24 * 1000;
-        var data = [];
-        for (var time = date; time < end; time += dayTime) {
-            data.push([
-                echarts.format.formatTime('yyyy-MM-dd', time),
-                Math.floor(Math.random() * 1000)
-            ]);
-        }
-        return data;
+    lastData() {
+        this.setState({
+            range:[],
+            date_r:[],
+            gg_deep_r:[],
+            gg_shallow_r:[],
+            zdt_deep_r:[],
+            zdt_shallow_r:[],
+        });
+
+        fetch('http://192.168.1.3:8765/gzt/server/sleep/save_data/last_data.php', {
+            method: 'POST',
+            body: {}
+        })
+            .then(response => response.json())
+            .then(json => {
+                let range = [json.date_day[0], json.date_day[json.date_day.length - 1]];
+                let date_r = [];
+                for(let i = 0;i < json.date_day.length;i++){
+                    date_r.push([
+                       json.date_day[i],
+                        Math.floor(Math.random() * 10000)
+                    ]);
+                }
+                let gg_deep_r = json.gg_deep_day;
+                let gg_shallow_r = json.gg_shallow_day;
+                let zdt_deep_r = json.zdt_deep_day;
+                let zdt_shallow_r = json.zdt_shallow_day;
+                this.setState({
+                    range:range,
+                    date_r:date_r,
+                    gg_deep_r:gg_deep_r,
+                    gg_shallow_r:gg_shallow_r,
+                    zdt_deep_r:zdt_deep_r,
+                    zdt_shallow_r:zdt_shallow_r,
+                });
+
+                this.calendar();
+            })
+            .catch((err) => {
+                this.handleTouchTap(err.message);
+            });
     }
 
-    calendar = (data) => {
-        var chart = echarts.init(document.getElementById('calendar'));
-        var option = {
-            tooltip: {
-                position: 'top'
+    getPieSeries = (chart) => {
+        let deep = (this.state.personValue == 0 ? this.state.gg_deep_r : this.state.zdt_deep_r);
+        let shallow = (this.state.personValue == 0 ? this.state.gg_shallow_r : this.state.zdt_shallow_r);
+        let date_r = [];
+        let deep_r = [];
+        let shallow_r = [];
+        for(let i = 0;i < this.state.date_r.length;i++){
+            if(deep[i] == 0 && shallow[i] == 0){
+                continue;
+            }
+            date_r.push(this.state.date_r[i]);
+            deep_r.push(deep[i]);
+            shallow_r.push(shallow[i]);
+        }
+
+        return echarts.util.map(date_r, function (item, index) {
+            let center = chart.convertToPixel('calendar', item);
+            let data_r = [
+                    {name: 'deep', value: deep_r[index].toFixed(1)},
+                    {name: 'shallow', value: shallow_r[index].toFixed(1)}
+                ];
+            return {
+                id: index + 'pie',
+                type: 'pie',
+                center: center,
+                label: {
+                    normal: {
+                        formatter: '{c}',
+                        position: 'inside'
+                    }
+                },
+                radius: pieRadius,
+                data: data_r
+            };
+        });
+    }
+
+    calendar = () => {
+        echarts.dispose(document.getElementById('calendar'));
+        let chart = echarts.init(document.getElementById('calendar'));
+
+        let option = {
+            tooltip : {},
+            legend: {
+                data: ['deep', 'shallow'],
+                bottom: 20
             },
-            visualMap: {
-                min: 0,
-                max: 1000,
-                calculable: true,
-                orient: 'horizontal',
+            calendar: {
+                top: 'middle',
                 left: 'center',
-                top: 'top'
+                orient: 'vertical',
+                cellSize: cellSize,
+                yearLabel: {
+                    show: false,
+                    textStyle: {
+                        fontSize: 20
+                    }
+                },
+                dayLabel: {
+                    margin: 10,
+                    firstDay: 1,
+                    nameMap: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+                },
+                monthLabel: {
+                    show: false
+                },
+                range: this.state.range
             },
-
-            calendar: [
-                {
-                    range: '2017',
-                    cellSize: ['auto', 20]
-                }
-            ],
-
             series: [{
-                type: 'heatmap',
+                id: 'label',
+                type: 'scatter',
                 coordinateSystem: 'calendar',
-                calendarIndex: 0,
-                data: this.getVirtulData(2017)
+                symbolSize: 1,
+                label: {
+                    normal: {
+                        show: true,
+                        formatter: function (params) {
+                            return echarts.format.formatTime('dd', params.value[0]);
+                        },
+                        offset: [-cellSize[0] / 2 + 10, -cellSize[1] / 2 + 10],
+                        textStyle: {
+                            color: '#000',
+                            fontSize: 12
+                        }
+                    }
+                },
+                data: this.state.date_r
             }]
         };
+
         chart.setOption(option);
+        chart.setOption({
+            series: this.getPieSeries(chart)
+        });
+}
+
+    componentDidMount() {
+        this.lastData();
     }
 
     render () {
@@ -940,7 +1047,7 @@ class SaveData extends Component {
                 </div>
             </Paper>
             <Paper style={paperStyle02} zDepth={0}>
-                <div id='calendar' style={{width:'100%',height:'300px'}}>
+                <div id='calendar' style={{width:'100%',height:'400px'}}>
 
                 </div>
                 <div>

@@ -76,7 +76,7 @@ class ComparisonByMonthOfLine extends Component {
             dataZoom : {
                 show : true,
                 realtime : true,
-                start : 80,
+                start : 0,
                 end : 100
             },
             toolbox: {

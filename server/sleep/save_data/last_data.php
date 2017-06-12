@@ -2,50 +2,24 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2017/5/26
- * Time: 19:59
+ * Date: 2017/6/12
+ * Time: 20:59
  */
-
 require_once "../../db/pgsql.php";
-
-$start_date = null;
-if(isset($_POST["start_date"]))
-{
-    $start_date = $_POST["start_date"];
-}
-
-$end_date = null;
-if(isset($_POST["end_date"]))
-{
-    $end_date = $_POST["end_date"];
-}
 
 $db = new pgsql("192.168.1.3", "15432", "postgres", "postgres", "123456");
 //$db = new pgsql("192.168.233.138", "15432", "postgres", "postgres", "123456");
 
 $db->connect();
 $sql = "";
-if(!is_null($start_date) && !is_null($end_date))
-{
-    $sql = "select * from status_sleep where date >= '$start_date'and date <= '$end_date'order by date";
 
-}
-else if(!is_null($start_date) && is_null($end_date))
-{
-    $sql = "select * from status_sleep where date >= '$start_date' order by date";
-}
-else if(is_null($start_date) && !is_null($end_date))
-{
-    $sql = "select * from status_sleep where date <= '$end_date'order by date";
-}
-else
-{
-    $sql = "select * from status_sleep order by date";
-}
+$start_date = date('Y-m-d 00:00:00',strtotime('-30 day'));
+$end_date = date('Y-m-d 00:00:00');
 
+$sql = "select * from status_sleep where date >= '$start_date' and date <= '$end_date' order by date";
 
-$s_date = null;
-$e_date = null;
+$s_date = strtotime($start_date);
+$e_date = strtotime($end_date);
 $gg_date_r = array();
 $gg_deep_r = array();
 $gg_shallow_r = array();
@@ -123,33 +97,20 @@ while(($row = $db->fetchRow()) != NULL)
         array_push($zdt_deep_r, $deep / 60 / 60.0);
         array_push($zdt_shallow_r, $shallow / 60 / 60.0);
     }
-
-    if(is_null($s_date))
-    {
-        $s_date = strtotime($date);
-    }
-    else
-    {
-        $e_date = strtotime($date);
-    }
 }
 
 $db->free();
 
-//week
-$date_week_r = array();
-$gg_deep_week = 0;
-$gg_deep_week_r = array();
-$gg_shallow_week_r = array();
-$zdt_shallow_week = 0;
-$zdt_deep_week_r = array();
-$zdt_shallow_week_r = array();
-$is_week_done = false;
+//day
+$date_day_r = array();
+$gg_deep_day_r = array();
+$gg_shallow_day_r = array();
+$zdt_deep_day_r = array();
+$zdt_shallow_day_r = array();
 
 $tmp_date = $s_date;
 $day_seconds = 24 * 60 * 60;
 do{
-    $date_week = date("w", $tmp_date);
     $date_day = date("d", $tmp_date);
     $date = strftime("%Y-%m-%d", $tmp_date);
     $tmp_gg_deep = 0;
@@ -172,47 +133,23 @@ do{
         $tmp_zdt_shallow = $zdt_shallow_r[$index];
     }
 
-    //week
-    $gg_deep_week += $tmp_gg_deep;
-    $gg_shallow_week += $tmp_gg_shallow;
-    $zdt_deep_week += $tmp_zdt_deep;
-    $zdt_shallow_week += $tmp_zdt_shallow;
-    $is_week_done = false;
-
-    if($date_week == 0)
-    {
-        array_push($date_week_r, $date);
-        array_push($gg_deep_week_r, $gg_deep_week);
-        array_push($gg_shallow_week_r, $gg_shallow_week);
-        array_push($zdt_deep_week_r, $zdt_deep_week);
-        array_push($zdt_shallow_week_r, $zdt_shallow_week);
-
-        $gg_deep_week = 0;
-        $gg_shallow_week = 0;
-        $zdt_deep_week = 0;
-        $zdt_shallow_week = 0;
-        $is_week_done = true;
-    }
+    array_push($date_day_r, $date);
+    array_push($gg_deep_day_r, $tmp_gg_deep);
+    array_push($gg_shallow_day_r, $tmp_gg_shallow);
+    array_push($zdt_deep_day_r, $tmp_zdt_deep);
+    array_push($zdt_shallow_day_r, $tmp_zdt_shallow);
 
     $tmp_date = $tmp_date + $day_seconds;
 }
 while(($tmp_date - $e_date) <= 0);
 
-if(!$is_week_done)
-{
-    array_push($date_week_r, $date);
-    array_push($gg_deep_week_r, $gg_deep_week);
-    array_push($gg_shallow_week_r, $gg_shallow_week);
-    array_push($zdt_deep_week_r, $zdt_deep_week);
-    array_push($zdt_shallow_week_r, $zdt_shallow_week);
-}
 
-$data_r = array("date_week" => $date_week_r
-                , "gg_deep_week" => $gg_deep_week_r
-                , "gg_shallow_week" => $gg_shallow_week_r
-                , "zdt_deep_week" => $zdt_deep_week_r
-                , "zdt_shallow_week" => $zdt_shallow_week_r
-                );
+$data_r = array("date_day" => $date_day_r
+, "gg_deep_day" => $gg_deep_day_r
+, "gg_shallow_day" => $gg_shallow_day_r
+, "zdt_deep_day" => $zdt_deep_day_r
+, "zdt_shallow_day" => $zdt_shallow_day_r
+);
 
 header("content-type:application/json");
 header('Access-Control-Allow-Origin:*');

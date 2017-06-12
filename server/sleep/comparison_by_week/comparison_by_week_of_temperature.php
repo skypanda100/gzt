@@ -149,6 +149,7 @@ $is_week_done = false;
 $tmp_date = $s_date;
 $day_seconds = 24 * 60 * 60;
 do{
+    $date_week = date("w", $tmp_date);
     $date_day = date("d", $tmp_date);
     $date = strftime("%Y-%m-%d", $tmp_date);
     $tmp_gg_deep = 0;

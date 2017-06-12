@@ -76,7 +76,7 @@ class ComparisonByWeekOfLine extends Component {
             dataZoom : {
                 show : true,
                 realtime : true,
-                start : 80,
+                start : 40,
                 end : 100
             },
             toolbox: {
