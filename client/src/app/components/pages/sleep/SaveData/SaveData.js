@@ -43,7 +43,7 @@ const paperStyle02 = {
 };
 
 var cellSize = [60, 60];
-var pieRadius = 25;
+var pieRadius = 20;
 
 class SaveData extends Component {
 
@@ -627,10 +627,12 @@ class SaveData extends Component {
                 center: center,
                 label: {
                     normal: {
+                        show:false,
                         formatter: '{c}',
                         position: 'inside'
                     }
                 },
+                color:['#0097A7', '#00BCD4'],
                 radius: pieRadius,
                 data: data_r
             };
