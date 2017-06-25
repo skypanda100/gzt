@@ -258,6 +258,10 @@ class SaveData extends Component {
         }
         if(hhmm.length == 3){
             hhmm = "0" + hhmm;
+        }else if(hhmm.length == 2){
+            hhmm = "00" + hhmm;
+        }else if(hhmm.length == 1){
+            hhmm = "000" + hhmm;
         }
         if(hhmm.length == 4){
             this.setState({
@@ -283,6 +287,10 @@ class SaveData extends Component {
         }
         if(hhmm.length == 3){
             hhmm = "0" + hhmm;
+        }else if(hhmm.length == 2){
+            hhmm = "00" + hhmm;
+        }else if(hhmm.length == 1){
+            hhmm = "000" + hhmm;
         }
         if(hhmm.length == 4){
             this.setState({
@@ -308,6 +316,10 @@ class SaveData extends Component {
         }
         if(hhmm.length == 3){
             hhmm = "0" + hhmm;
+        }else if(hhmm.length == 2){
+            hhmm = "00" + hhmm;
+        }else if(hhmm.length == 1){
+            hhmm = "000" + hhmm;
         }
         if(hhmm.length == 4){
             this.setState({
