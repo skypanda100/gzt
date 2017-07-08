@@ -39,6 +39,21 @@ const paperStyle02 = {
     verticalAlign:'top',
 };
 
+var ggSleepDayInDb;
+var ggDeepTotal;
+var ggDeepAverage;
+var ggDeepDay;
+var ggSleepTotal;
+var ggSleepAverage;
+var ggSleepDay;
+var zdtSleepDayInDb;
+var zdtDeepTotal;
+var zdtDeepAverage;
+var zdtDeepDay;
+var zdtSleepTotal;
+var zdtSleepAverage;
+var zdtSleepDay;
+
 class ComparisonBySumOfData extends Component {
 
     constructor () {
@@ -46,7 +61,7 @@ class ComparisonBySumOfData extends Component {
     }
 
     post(postData, dispatch) {
-        fetch('http://192.168.1.3:8765/gzt/server/sleep/comparison_by_week/comparison_by_week_of_bar.php', {
+        fetch('http://192.168.1.3:8765/gzt/server/sleep/comparison_by_sum/comparison_by_sum.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -69,88 +84,71 @@ class ComparisonBySumOfData extends Component {
     }
 
     draw(data){
-        var date;
-        var gg_deep;
-        var gg_shallow;
-        var zdt_deep;
-        var zdt_shallow;
+        let gg_day = 0;
+        let gg_deep_average = 0;
+        let gg_deep_total = 0;
+        let gg_deep_day = 0;
+        let gg_sleep_average = 0;
+        let gg_sleep_total = 0;
+        let gg_sleep_day = 0;
+        let zdt_day = 0;
+        let zdt_deep_average = 0;
+        let zdt_deep_total = 0;
+        let zdt_deep_day = 0;
+        let zdt_sleep_average = 0;
+        let zdt_sleep_total = 0;
+        let zdt_sleep_day = 0;
+
         if(data.isSuccess){
-            var data_r = data.message;
-            date = data_r.date_week[data_r.date_week.length - 1];
-            gg_deep = data_r.gg_deep_week[data_r.gg_deep_week.length - 1];
-            gg_shallow = data_r.gg_shallow_week[data_r.gg_shallow_week.length - 1];
-            zdt_deep = data_r.zdt_deep_week[data_r.zdt_deep_week.length - 1];
-            zdt_shallow = data_r.zdt_shallow_week[data_r.zdt_shallow_week.length - 1];
+            let data_r = data.message;
+            gg_day = data_r.gg_day;
+            gg_deep_average = data_r.gg_deep_average.toFixed(2);
+            gg_deep_total = data_r.gg_deep_total.toFixed(2);
+            gg_deep_day = data_r.gg_deep_day.toFixed(2);
+            gg_sleep_average = data_r.gg_sleep_average.toFixed(2);
+            gg_sleep_total = data_r.gg_sleep_total.toFixed(2);
+            gg_sleep_day = data_r.gg_sleep_day.toFixed(2);
+            zdt_day = data_r.zdt_day;
+            zdt_deep_average = data_r.zdt_deep_average.toFixed(2);
+            zdt_deep_total = data_r.zdt_deep_total.toFixed(2);
+            zdt_deep_day = data_r.zdt_deep_day.toFixed(2);
+            zdt_sleep_average = data_r.zdt_sleep_average.toFixed(2);
+            zdt_sleep_total = data_r.zdt_sleep_total.toFixed(2);
+            zdt_sleep_day = data_r.zdt_sleep_day.toFixed(2);
+
+            ggSleepDayInDb.innerHTML = "gg's sleep days in db:" + gg_day;
+            ggDeepTotal.innerHTML = gg_deep_total;
+            ggDeepAverage.innerHTML = gg_deep_average;
+            ggDeepDay.innerHTML = gg_deep_day;
+            ggSleepTotal.innerHTML = gg_sleep_total;
+            ggSleepAverage.innerHTML = gg_sleep_average;
+            ggSleepDay.innerHTML = gg_sleep_day;
+            zdtSleepDayInDb.innerHTML = "zdt's sleep days in db:" + zdt_day;
+            zdtDeepTotal.innerHTML = zdt_deep_total;
+            zdtDeepAverage.innerHTML = zdt_deep_average;
+            zdtDeepDay.innerHTML = zdt_deep_day;
+            zdtSleepTotal.innerHTML = zdt_sleep_total;
+            zdtSleepAverage.innerHTML = zdt_sleep_average;
+            zdtSleepDay.innerHTML = zdt_sleep_day;
         }
-
-        var chart = echarts.init(document.getElementById('bar'));
-
-        var option = {
-            title: {
-                text: '',
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                },
-                formatter: function(params) {
-                    // for text color
-                    var res = '<strong>' + params[0].name + '</strong>'
-                    for (var i = 0, l = params.length; i < l; i++) {
-                        res += '<br/>' + params[i].seriesName + ' : ' + params[i].value.toFixed(2)
-                    }
-                    res += '</div>';
-                    return res;
-                }
-            },
-            legend: {
-                x: 'right',
-                data:['GG','ZDT']
-            },
-            toolbox: {
-                show: false,
-                orient: 'vertical',
-                y: 'center',
-                feature: {
-                    mark: {show: true},
-                }
-            },
-            calculable: true,
-            grid: {
-                y: 50,
-                y2: 25,
-                x2: 6
-            },
-            xAxis: [
-                {
-                    type: 'category',
-                    data: ['SUM', 'DEEP']
-                }
-            ],
-            yAxis: [
-                {
-                    type: 'value'
-                }
-            ],
-            series: [
-                {
-                    name: 'GG',
-                    type: 'bar',
-                    data: [gg_deep + gg_shallow, gg_deep]
-                },
-                {
-                    name: 'ZDT',
-                    type: 'bar',
-                    data: [zdt_deep + zdt_shallow, zdt_deep]
-                }
-            ]
-        };
-
-        chart.setOption(option);
     }
 
     componentDidMount() {
+        ggSleepDayInDb = this.ggSleepDayInDb;
+        ggDeepTotal = this.ggDeepTotal;
+        ggDeepAverage = this.ggDeepAverage;
+        ggDeepDay = this.ggDeepDay;
+        ggSleepTotal = this.ggSleepTotal;
+        ggSleepAverage = this.ggSleepAverage;
+        ggSleepDay = this.ggSleepDay;
+        zdtSleepDayInDb = this.zdtSleepDayInDb;
+        zdtDeepTotal = this.zdtDeepTotal;
+        zdtDeepAverage = this.zdtDeepAverage;
+        zdtDeepDay = this.zdtDeepDay;
+        zdtSleepTotal = this.zdtSleepTotal;
+        zdtSleepAverage = this.zdtSleepAverage;
+        zdtSleepDay = this.zdtSleepDay;
+
         this.post('', this.draw);
     }
 
@@ -172,7 +170,7 @@ class ComparisonBySumOfData extends Component {
                         <div
                             style={{marginLeft: '1%',display: 'inline-block'}}
                         >
-                            <p style={{fontSize:25}} ref={(input) => { this.ggSleepLabel = input; }}>gg's sleep days in db:20</p>
+                            <p style={{fontSize:25}} ref={(input) => { this.ggSleepDayInDb = input; }}>gg's sleep days in db:0</p>
                         </div>
                         <Table>
                             <TableHeader
@@ -181,9 +179,9 @@ class ComparisonBySumOfData extends Component {
                             >
                                 <TableRow>
                                     <TableHeaderColumn>Type</TableHeaderColumn>
-                                    <TableHeaderColumn>Total</TableHeaderColumn>
-                                    <TableHeaderColumn>Average</TableHeaderColumn>
-                                    <TableHeaderColumn>Number of days</TableHeaderColumn>
+                                    <TableHeaderColumn>Total(hour)</TableHeaderColumn>
+                                    <TableHeaderColumn>Average(hour)</TableHeaderColumn>
+                                    <TableHeaderColumn>Days(day)</TableHeaderColumn>
                                 </TableRow>
                             </TableHeader>
                             <TableBody
@@ -191,15 +189,27 @@ class ComparisonBySumOfData extends Component {
                             >
                                 <TableRow>
                                     <TableRowColumn>Deep Sleep</TableRowColumn>
-                                    <TableRowColumn>5</TableRowColumn>
-                                    <TableRowColumn>100</TableRowColumn>
-                                    <TableRowColumn>2.5</TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.ggDeepTotal = input; }}></p>
+                                    </TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.ggDeepAverage = input; }}></p>
+                                    </TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.ggDeepDay = input; }}></p>
+                                    </TableRowColumn>
                                 </TableRow>
                                 <TableRow>
                                     <TableRowColumn>Sleep</TableRowColumn>
-                                    <TableRowColumn>5</TableRowColumn>
-                                    <TableRowColumn>100</TableRowColumn>
-                                    <TableRowColumn>2.5</TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.ggSleepTotal = input; }}></p>
+                                    </TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.ggSleepAverage = input; }}></p>
+                                    </TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.ggSleepDay = input; }}></p>
+                                    </TableRowColumn>
                                 </TableRow>
                             </TableBody>
                         </Table>
@@ -218,7 +228,7 @@ class ComparisonBySumOfData extends Component {
                         <div
                             style={{marginLeft: '1%',display: 'inline-block'}}
                         >
-                            <p style={{fontSize:25}} ref={(input) => { this.zdtSleepLabel = input; }}>zdt's sleep days in db:20</p>
+                            <p style={{fontSize:25}} ref={(input) => { this.zdtSleepDayInDb = input; }}>zdt's sleep days in db:0</p>
                         </div>
                         <Table>
                             <TableHeader
@@ -227,9 +237,9 @@ class ComparisonBySumOfData extends Component {
                             >
                                 <TableRow>
                                     <TableHeaderColumn>Type</TableHeaderColumn>
-                                    <TableHeaderColumn>Total</TableHeaderColumn>
-                                    <TableHeaderColumn>Average</TableHeaderColumn>
-                                    <TableHeaderColumn>Number of days</TableHeaderColumn>
+                                    <TableHeaderColumn>Total(hour)</TableHeaderColumn>
+                                    <TableHeaderColumn>Average(hour)</TableHeaderColumn>
+                                    <TableHeaderColumn>Days(day)</TableHeaderColumn>
                                 </TableRow>
                             </TableHeader>
                             <TableBody
@@ -237,15 +247,27 @@ class ComparisonBySumOfData extends Component {
                             >
                                 <TableRow>
                                     <TableRowColumn>Deep Sleep</TableRowColumn>
-                                    <TableRowColumn>5</TableRowColumn>
-                                    <TableRowColumn>100</TableRowColumn>
-                                    <TableRowColumn>2.5</TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtDeepTotal = input; }}></p>
+                                    </TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtDeepAverage = input; }}></p>
+                                    </TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtDeepDay = input; }}></p>
+                                    </TableRowColumn>
                                 </TableRow>
                                 <TableRow>
                                     <TableRowColumn>Sleep</TableRowColumn>
-                                    <TableRowColumn>5</TableRowColumn>
-                                    <TableRowColumn>100</TableRowColumn>
-                                    <TableRowColumn>2.5</TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtSleepTotal = input; }}></p>
+                                    </TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtSleepAverage = input; }}></p>
+                                    </TableRowColumn>
+                                    <TableRowColumn>
+                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtSleepDay = input; }}></p>
+                                    </TableRowColumn>
                                 </TableRow>
                             </TableBody>
                         </Table>
