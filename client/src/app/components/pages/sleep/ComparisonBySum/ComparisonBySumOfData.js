@@ -116,14 +116,14 @@ class ComparisonBySumOfData extends Component {
             zdt_sleep_total = data_r.zdt_sleep_total.toFixed(2);
             zdt_sleep_day = data_r.zdt_sleep_day.toFixed(2);
 
-            ggSleepDayInDb.innerHTML = "gg's sleep days in db:" + gg_day;
+            ggSleepDayInDb.innerHTML = gg_day;
             ggDeepTotal.innerHTML = gg_deep_total;
             ggDeepAverage.innerHTML = gg_deep_average;
             ggDeepDay.innerHTML = gg_deep_day;
             ggSleepTotal.innerHTML = gg_sleep_total;
             ggSleepAverage.innerHTML = gg_sleep_average;
             ggSleepDay.innerHTML = gg_sleep_day;
-            zdtSleepDayInDb.innerHTML = "zdt's sleep days in db:" + zdt_day;
+            zdtSleepDayInDb.innerHTML = zdt_day;
             zdtDeepTotal.innerHTML = zdt_deep_total;
             zdtDeepAverage.innerHTML = zdt_deep_average;
             zdtDeepDay.innerHTML = zdt_deep_day;
@@ -163,14 +163,15 @@ class ComparisonBySumOfData extends Component {
                 >
                     <div>
                         <img
-                            src="images/gzt_calendar.jpg"
+                            src="images/gzt_gg.jpg"
                             width="150px"
                             height="150px"
                         />
                         <div
-                            style={{marginLeft: '1%',display: 'inline-block'}}
+                            style={{marginLeft: '2%',display: 'inline-block'}}
                         >
-                            <p style={{fontSize:25}} ref={(input) => { this.ggSleepDayInDb = input; }}>gg's sleep days in db:0</p>
+                            <p style={{fontSize:25}} >gg's sleep days in db:</p>
+                            <p style={{fontSize:25}} ref={(input) => { this.ggSleepDayInDb = input; }}>0</p>
                         </div>
                         <Table>
                             <TableHeader
@@ -190,25 +191,25 @@ class ComparisonBySumOfData extends Component {
                                 <TableRow>
                                     <TableRowColumn>Deep Sleep</TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.ggDeepTotal = input; }}></p>
+                                        <div ref={(input) => { this.ggDeepTotal = input; }}></div>
                                     </TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.ggDeepAverage = input; }}></p>
+                                        <div ref={(input) => { this.ggDeepAverage = input; }}></div>
                                     </TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.ggDeepDay = input; }}></p>
+                                        <div ref={(input) => { this.ggDeepDay = input; }}></div>
                                     </TableRowColumn>
                                 </TableRow>
                                 <TableRow>
                                     <TableRowColumn>Sleep</TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.ggSleepTotal = input; }}></p>
+                                        <div ref={(input) => { this.ggSleepTotal = input; }}></div>
                                     </TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.ggSleepAverage = input; }}></p>
+                                        <div ref={(input) => { this.ggSleepAverage = input; }}></div>
                                     </TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.ggSleepDay = input; }}></p>
+                                        <div ref={(input) => { this.ggSleepDay = input; }}></div>
                                     </TableRowColumn>
                                 </TableRow>
                             </TableBody>
@@ -221,14 +222,15 @@ class ComparisonBySumOfData extends Component {
                 >
                     <div>
                         <img
-                            src="images/gzt_calendar.jpg"
+                            src="images/gzt_zdt.jpg"
                             width="150px"
                             height="150px"
                         />
                         <div
-                            style={{marginLeft: '1%',display: 'inline-block'}}
+                            style={{marginLeft: '2%',display: 'inline-block'}}
                         >
-                            <p style={{fontSize:25}} ref={(input) => { this.zdtSleepDayInDb = input; }}>zdt's sleep days in db:0</p>
+                            <p style={{fontSize:25}} >zdt's sleep days in db:</p>
+                            <p style={{fontSize:25}} ref={(input) => { this.zdtSleepDayInDb = input; }}>0</p>
                         </div>
                         <Table>
                             <TableHeader
@@ -248,25 +250,25 @@ class ComparisonBySumOfData extends Component {
                                 <TableRow>
                                     <TableRowColumn>Deep Sleep</TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtDeepTotal = input; }}></p>
+                                        <div ref={(input) => { this.zdtDeepTotal = input; }}></div>
                                     </TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtDeepAverage = input; }}></p>
+                                        <div ref={(input) => { this.zdtDeepAverage = input; }}></div>
                                     </TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtDeepDay = input; }}></p>
+                                        <div ref={(input) => { this.zdtDeepDay = input; }}></div>
                                     </TableRowColumn>
                                 </TableRow>
                                 <TableRow>
                                     <TableRowColumn>Sleep</TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtSleepTotal = input; }}></p>
+                                        <div ref={(input) => { this.zdtSleepTotal = input; }}></div>
                                     </TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtSleepAverage = input; }}></p>
+                                        <div ref={(input) => { this.zdtSleepAverage = input; }}></div>
                                     </TableRowColumn>
                                     <TableRowColumn>
-                                        <p style={{fontSize:20}}  ref={(input) => { this.zdtSleepDay = input; }}></p>
+                                        <div ref={(input) => { this.zdtSleepDay = input; }}></div>
                                     </TableRowColumn>
                                 </TableRow>
                             </TableBody>
