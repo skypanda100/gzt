@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 import withWidth, {MEDIUM, LARGE} from 'material-ui/utils/withWidth';
 import 'whatwg-fetch';
 import Paper from 'material-ui/Paper';
-import Divider from 'material-ui/Divider';
 import {
     Table,
     TableBody,
@@ -116,14 +115,14 @@ class ComparisonBySumOfData extends Component {
             zdt_sleep_total = data_r.zdt_sleep_total.toFixed(2);
             zdt_sleep_day = data_r.zdt_sleep_day.toFixed(2);
 
-            ggSleepDayInDb.innerHTML = gg_day;
+            ggSleepDayInDb.innerHTML = gg_day + " days";
             ggDeepTotal.innerHTML = gg_deep_total;
             ggDeepAverage.innerHTML = gg_deep_average;
             ggDeepDay.innerHTML = gg_deep_day;
             ggSleepTotal.innerHTML = gg_sleep_total;
             ggSleepAverage.innerHTML = gg_sleep_average;
             ggSleepDay.innerHTML = gg_sleep_day;
-            zdtSleepDayInDb.innerHTML = zdt_day;
+            zdtSleepDayInDb.innerHTML = zdt_day + " days";
             zdtDeepTotal.innerHTML = zdt_deep_total;
             zdtDeepAverage.innerHTML = zdt_deep_average;
             zdtDeepDay.innerHTML = zdt_deep_day;
@@ -162,58 +161,65 @@ class ComparisonBySumOfData extends Component {
                     zDepth={1}
                 >
                     <div>
-                        <img
-                            src="images/gzt_gg.jpg"
-                            width="150px"
-                            height="150px"
-                        />
                         <div
-                            style={{marginLeft: '2%',display: 'inline-block'}}
+                            style={{display: 'inline-block',float:'left'}}
                         >
-                            <p style={{fontSize:25}} >gg's sleep days in db:</p>
-                            <p style={{fontSize:25}} ref={(input) => { this.ggSleepDayInDb = input; }}>0</p>
+                            <img
+                                src="images/gzt_gg.jpg"
+                                width="150px"
+                                height="150px"
+                            />
                         </div>
-                        <Table>
-                            <TableHeader
-                                displaySelectAll={false}
-                                adjustForCheckbox={false}
-                            >
-                                <TableRow>
-                                    <TableHeaderColumn>Type</TableHeaderColumn>
-                                    <TableHeaderColumn>Total(hour)</TableHeaderColumn>
-                                    <TableHeaderColumn>Average(hour)</TableHeaderColumn>
-                                    <TableHeaderColumn>Days(day)</TableHeaderColumn>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody
-                                displayRowCheckbox={false}
-                            >
-                                <TableRow>
-                                    <TableRowColumn>Deep Sleep</TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.ggDeepTotal = input; }}></div>
-                                    </TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.ggDeepAverage = input; }}></div>
-                                    </TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.ggDeepDay = input; }}></div>
-                                    </TableRowColumn>
-                                </TableRow>
-                                <TableRow>
-                                    <TableRowColumn>Sleep</TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.ggSleepTotal = input; }}></div>
-                                    </TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.ggSleepAverage = input; }}></div>
-                                    </TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.ggSleepDay = input; }}></div>
-                                    </TableRowColumn>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
+                        <div
+                            style={{display: 'inline-block',float:'left',verticalAlign:'middle',marginLeft:'5%'}}
+                        >
+                            <p style={{fontSize:45}} ref={(input) => { this.ggSleepDayInDb = input; }}>0 days</p>
+                        </div>
+                        <div
+                            style={{display: 'inline-block'}}
+                        >
+                            <Table>
+                                <TableHeader
+                                    displaySelectAll={false}
+                                    adjustForCheckbox={false}
+                                >
+                                    <TableRow>
+                                        <TableHeaderColumn>Type</TableHeaderColumn>
+                                        <TableHeaderColumn>Total(hour)</TableHeaderColumn>
+                                        <TableHeaderColumn>Average(hour)</TableHeaderColumn>
+                                        <TableHeaderColumn>Days(day)</TableHeaderColumn>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody
+                                    displayRowCheckbox={false}
+                                >
+                                    <TableRow>
+                                        <TableRowColumn>Deep Sleep</TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.ggDeepTotal = input; }}></div>
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.ggDeepAverage = input; }}></div>
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.ggDeepDay = input; }}></div>
+                                        </TableRowColumn>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableRowColumn>Sleep</TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.ggSleepTotal = input; }}></div>
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.ggSleepAverage = input; }}></div>
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.ggSleepDay = input; }}></div>
+                                        </TableRowColumn>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </div>
                     </div>
                 </Paper>
                 <Paper
@@ -221,58 +227,65 @@ class ComparisonBySumOfData extends Component {
                     zDepth={1}
                 >
                     <div>
-                        <img
-                            src="images/gzt_zdt.jpg"
-                            width="150px"
-                            height="150px"
-                        />
                         <div
-                            style={{marginLeft: '2%',display: 'inline-block'}}
+                            style={{display: 'inline-block',float:'left'}}
                         >
-                            <p style={{fontSize:25}} >zdt's sleep days in db:</p>
-                            <p style={{fontSize:25}} ref={(input) => { this.zdtSleepDayInDb = input; }}>0</p>
+                            <img
+                                src="images/gzt_zdt.jpg"
+                                width="150px"
+                                height="150px"
+                            />
                         </div>
-                        <Table>
-                            <TableHeader
-                                displaySelectAll={false}
-                                adjustForCheckbox={false}
-                            >
-                                <TableRow>
-                                    <TableHeaderColumn>Type</TableHeaderColumn>
-                                    <TableHeaderColumn>Total(hour)</TableHeaderColumn>
-                                    <TableHeaderColumn>Average(hour)</TableHeaderColumn>
-                                    <TableHeaderColumn>Days(day)</TableHeaderColumn>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody
-                                displayRowCheckbox={false}
-                            >
-                                <TableRow>
-                                    <TableRowColumn>Deep Sleep</TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.zdtDeepTotal = input; }}></div>
-                                    </TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.zdtDeepAverage = input; }}></div>
-                                    </TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.zdtDeepDay = input; }}></div>
-                                    </TableRowColumn>
-                                </TableRow>
-                                <TableRow>
-                                    <TableRowColumn>Sleep</TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.zdtSleepTotal = input; }}></div>
-                                    </TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.zdtSleepAverage = input; }}></div>
-                                    </TableRowColumn>
-                                    <TableRowColumn>
-                                        <div ref={(input) => { this.zdtSleepDay = input; }}></div>
-                                    </TableRowColumn>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
+                        <div
+                            style={{display: 'inline-block',float:'left',verticalAlign:'middle',marginLeft:'5%'}}
+                        >
+                            <p style={{fontSize:45}} ref={(input) => { this.zdtSleepDayInDb = input; }}>0 days</p>
+                        </div>
+                        <div
+                            style={{display: 'inline-block'}}
+                        >
+                            <Table>
+                                <TableHeader
+                                    displaySelectAll={false}
+                                    adjustForCheckbox={false}
+                                >
+                                    <TableRow>
+                                        <TableHeaderColumn>Type</TableHeaderColumn>
+                                        <TableHeaderColumn>Total(hour)</TableHeaderColumn>
+                                        <TableHeaderColumn>Average(hour)</TableHeaderColumn>
+                                        <TableHeaderColumn>Days(day)</TableHeaderColumn>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody
+                                    displayRowCheckbox={false}
+                                >
+                                    <TableRow>
+                                        <TableRowColumn>Deep Sleep</TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.zdtDeepTotal = input; }}></div>
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.zdtDeepAverage = input; }}></div>
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.zdtDeepDay = input; }}></div>
+                                        </TableRowColumn>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableRowColumn>Sleep</TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.zdtSleepTotal = input; }}></div>
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.zdtSleepAverage = input; }}></div>
+                                        </TableRowColumn>
+                                        <TableRowColumn>
+                                            <div ref={(input) => { this.zdtSleepDay = input; }}></div>
+                                        </TableRowColumn>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </div>
                     </div>
                 </Paper>
 
