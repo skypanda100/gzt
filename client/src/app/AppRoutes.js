@@ -10,6 +10,7 @@ import Home from './components/pages/Home';
 import ComparisonByDayPage from './components/pages/sleep/ComparisonByDay/Page';
 import ComparisonByWeekPage from './components/pages/sleep/ComparisonByWeek/Page';
 import ComparisonByMonthPage from './components/pages/sleep/ComparisonByMonth/Page';
+import ComparisonBySumPage from './components/pages/sleep/ComparisonBySum/Page';
 import SaveDataPage from './components/pages/sleep/SaveData/Page';
 
 const AppRoutes = (
@@ -21,6 +22,7 @@ const AppRoutes = (
         <Route path="comparison_by_day" component={ComparisonByDayPage} />
         <Route path="comparison_by_week" component={ComparisonByWeekPage} />
         <Route path="comparison_by_month" component={ComparisonByMonthPage} />
+        <Route path="comparison_by_sum" component={ComparisonBySumPage} />
         <Route path="save_data" component={SaveDataPage} />
     </Route>
   </Route>
