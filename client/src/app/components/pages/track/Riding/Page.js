@@ -12,24 +12,17 @@ const divStyle = {
 
 const paperStyle = {
     height: '100%',
-    width: '100%',
-    marginLeft: '0%',
-    marginRight: '0%',
-    padding: 0,
-    textAlign: 'left',
-    display: 'inline-block',
-    verticalAlign:'top',
+    width: '100%'
 };
 
 const RidingPage = () => (
   <div style={divStyle}>
       <Title render={(previousTitle) => `Riding - ${previousTitle}`} />
-      <Paper
+      <div
           style={paperStyle}
-          zDepth={0}
       >
           <Riding />
-      </Paper>
+      </div>
   </div>
 );
 

@@ -212,22 +212,27 @@ class Master extends Component {
           onChangeList={this.handleChangeList}
           open={navDrawerOpen}
         />
-        <FullWidthSection style={styles.footer}>
-          <p style={prepareStyles(styles.p)}>
-            {'Hand crafted with love by the programmer at '}
-            <a style={styles.a} href="https://github.com/skypanda100">
-              skypanda100
-            </a>
-          </p>
-          <IconButton
-            iconStyle={styles.iconButton}
-            iconClassName="muidocs-icon-custom-github"
-            href="https://github.com/skypanda100/gzt"
-          />
-          <p style={prepareStyles(styles.browserstack)}>
-            {'Thanks to my wife for providing a such terrible idea'}
-          </p>
-        </FullWidthSection>
+          {
+              (title == 'Track' ? <div/>
+                      :
+                      <FullWidthSection style={styles.footer}>
+                          <p style={prepareStyles(styles.p)}>
+                              {'Hand crafted with love by the programmer at '}
+                              <a style={styles.a} href="https://github.com/skypanda100">
+                                  skypanda100
+                              </a>
+                          </p>
+                          <IconButton
+                              iconStyle={styles.iconButton}
+                              iconClassName="muidocs-icon-custom-github"
+                              href="https://github.com/skypanda100/gzt"
+                          />
+                          <p style={prepareStyles(styles.browserstack)}>
+                              {'Thanks to my wife for providing a such terrible idea'}
+                          </p>
+                      </FullWidthSection>
+              )
+          }
       </div>
     );
   }

@@ -4,32 +4,16 @@
 import React, {Component} from 'react';
 import withWidth, {MEDIUM, LARGE} from 'material-ui/utils/withWidth';
 import 'whatwg-fetch';
-import { Map, Marker } from 'react-amap';
-
+import { Map } from 'react-amap';
+const mapStyle = {
+    height: '100%',
+    width: '100%',
+    position:'fixed'
+};
 class Riding extends Component {
-    constructor() {
-        super();
-        this.toolEvents = {
-            created: (tool) => {
-                this.tool = tool;
-            }
-        }
-        this.mapPlugins = ['ToolBar'];
-        this.mapCenter = {longitude: 120, latitude: 35};
-        this.markerPosition = {longitude: 121, latitude: 36};
-    }
-
     render(){
-        return <div>
-            <div style={{width: '100%', height: '750px'}}>
-                <Map
-                    plugins={this.mapPlugins}
-                    center={this.mapCenter}
-                    zoom={6}
-                >
-                    <Marker position={this.markerPosition} />
-                </Map>
-            </div>
+        return <div style={mapStyle}>
+            <Map amapkey={'68f3565852fbef16563622d83de57562'}/>
         </div>
     }
 }
