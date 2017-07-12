@@ -60,6 +60,9 @@ class Master extends Component {
         paddingTop: spacing.desktopKeylineIncrement,
         minHeight: 400,
       },
+      rootMap: {
+          minHeight: 600,
+      },
       content: {
         margin: spacing.desktopGutter,
       },
@@ -147,7 +150,7 @@ class Master extends Component {
     const styles = this.getStyles();
     const title =
       router.isActive('/sleep') ? 'Sleep' :
-      router.isActive('/calendar') ? 'Calendar' :
+      router.isActive('/track') ? 'Track' :
       router.isActive('/other') ? 'Other' : '';
 
     let docked = false;
@@ -162,6 +165,7 @@ class Master extends Component {
         zIndex: styles.appBar.zIndex - 1,
       };
       styles.root.paddingLeft = 256;
+      styles.rootMap.paddingLeft = 256;
       styles.footer.paddingLeft = 256;
     }
 
@@ -182,13 +186,22 @@ class Master extends Component {
           showMenuIconButton={showMenuIconButton}
         />
         {title !== '' ?
-          <div style={prepareStyles(styles.root)}>
-            <div style={prepareStyles(styles.content)}>
-              {React.cloneElement(children, {
-                onChangeMuiTheme: this.handleChangeMuiTheme,
-              })}
-            </div>
-          </div> :
+            (title == 'Track' ?
+                    <div style={prepareStyles(styles.rootMap)}>
+                        {React.cloneElement(children, {
+                            onChangeMuiTheme: this.handleChangeMuiTheme,
+                        })}
+                    </div>
+                    :
+                    <div style={prepareStyles(styles.root)}>
+                      <div style={prepareStyles(styles.content)}>
+                          {React.cloneElement(children, {
+                              onChangeMuiTheme: this.handleChangeMuiTheme,
+                          })}
+                      </div>
+                    </div>
+            )
+          :
           children
         }
         <AppNavDrawer

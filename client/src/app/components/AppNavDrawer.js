@@ -86,8 +86,15 @@ class AppNavDrawer extends Component {
                 <ListItem primaryText="Comparison By Week" value="/sleep/comparison_by_week" />,
                 <ListItem primaryText="Comparison By Month" value="/sleep/comparison_by_month" />,
                 <ListItem primaryText="Comparison By Sum" value="/sleep/comparison_by_sum" />,
-                <ListItem primaryText="Save Data" value="/sleep/save_data" />
+                <ListItem primaryText="Save Data" value="/sleep/save_data" />,
             ]}
+          />
+          <ListItem
+              primaryText="Track"
+              primaryTogglesNestedList={true}
+              nestedItems={[
+                <ListItem primaryText="Riding" value="/track/riding" />,
+              ]}
           />
         </SelectableList>
         <Divider />

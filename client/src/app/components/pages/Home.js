@@ -30,9 +30,9 @@ class HomePage extends Component {
           firstChild={true}
         />
         <HomeFeature
-          heading="Calendar"
-          route="/calendar"
-          img="images/gzt_calendar.jpg"
+          heading="Track"
+          route="/track"
+          img="images/gzt_track.jpg"
         />
         <HomeFeature
           heading="Other"

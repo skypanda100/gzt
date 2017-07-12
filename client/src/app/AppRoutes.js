@@ -12,19 +12,24 @@ import ComparisonByWeekPage from './components/pages/sleep/ComparisonByWeek/Page
 import ComparisonByMonthPage from './components/pages/sleep/ComparisonByMonth/Page';
 import ComparisonBySumPage from './components/pages/sleep/ComparisonBySum/Page';
 import SaveDataPage from './components/pages/sleep/SaveData/Page';
+import RidingPage from './components/pages/track/Riding/Page';
 
 const AppRoutes = (
   <Route path="/" component={Master}>
-    <IndexRoute component={Home} />
-    <Route path="home" component={Home} />
-    <Redirect from="sleep" to="/sleep/comparison_by_day" />
-    <Route path="sleep">
-        <Route path="comparison_by_day" component={ComparisonByDayPage} />
-        <Route path="comparison_by_week" component={ComparisonByWeekPage} />
-        <Route path="comparison_by_month" component={ComparisonByMonthPage} />
-        <Route path="comparison_by_sum" component={ComparisonBySumPage} />
-        <Route path="save_data" component={SaveDataPage} />
-    </Route>
+      <IndexRoute component={Home} />
+      <Route path="home" component={Home} />
+      <Redirect from="sleep" to="/sleep/comparison_by_day" />
+      <Route path="sleep">
+          <Route path="comparison_by_day" component={ComparisonByDayPage} />
+          <Route path="comparison_by_week" component={ComparisonByWeekPage} />
+          <Route path="comparison_by_month" component={ComparisonByMonthPage} />
+          <Route path="comparison_by_sum" component={ComparisonBySumPage} />
+          <Route path="save_data" component={SaveDataPage} />
+      </Route>
+      <Redirect from="track" to="/track/riding" />
+      <Route path="track">
+          <Route path="riding" component={RidingPage} />
+      </Route>
   </Route>
 );
 
