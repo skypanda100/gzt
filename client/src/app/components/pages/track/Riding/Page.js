@@ -1,8 +1,6 @@
 import React from 'react';
 import Title from 'react-title-component';
 import Riding from './Riding';
-import Paper from 'material-ui/Paper';
-import Divider from 'material-ui/Divider';
 
 const divStyle = {
     flex:1,
