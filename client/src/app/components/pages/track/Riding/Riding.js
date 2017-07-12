@@ -4,71 +4,31 @@
 import React, {Component} from 'react';
 import withWidth, {MEDIUM, LARGE} from 'material-ui/utils/withWidth';
 import 'whatwg-fetch';
-import { Map, Polyline } from 'react-amap';
+
 
 const mapStyle = {
     height: '100%',
-    width: '100%',
-    position:'fixed'
+    left: '256px',
+    right: '0px',
+    position:'absolute'
 };
 
-const randomPath = () => ({
-    longitude: 60 + Math.random() * 50,
-    latitude: 10 + Math.random() * 40,
-})
-
 class Riding extends Component {
-    constructor(){
-        super();
-        this.state = {
-            visible: true,
-            draggable: true,
-            path: Array(5).fill(true).map(randomPath),
-        };
-        this.lineEvents = {
-            created: (ins) => {console.log(ins)},
-            show: () => {console.log('line show')},
-            hide: () => {console.log('line hide')},
-            click: () => {console.log('line clicked')},
-        }
+    componentDidMount () {
+        var BMap = window.BMap;//取出window中的BMap对象
+        var map = new BMap.Map("allmap"); // 创建Map实例
+        map.centerAndZoom(new BMap.Point(116.404, 39.915), 11); // 初始化地图,设置中心点坐标和地图级别
+        map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+        map.setCurrentCity("北京"); // 设置地图显示的城市 此项是必须设置的
+        map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
     }
 
-    toggleVisible(){
-        this.setState({
-            visible: !this.state.visible,
-        });
-    }
-
-    toggleDraggable(){
-        this.setState({
-            draggable: !this.state.draggable,
-        })
-    }
-
-    changePath(){
-        this.setState({
-            path: Array(5).fill(true).map(randomPath),
-        });
-    }
-
-    render(){
-        return <div>
-            <div style={mapStyle}>
-                <Map
-                    amapkey={'68f3565852fbef16563622d83de57562'}
-                    plugins={['ToolBar']} zoom={3}>
-                    <Polyline
-                        path={ this.state.path }
-                        events={ this.lineEvents }
-                        visible={ this.state.visible }
-                        draggable={ this.state.draggable }
-                    />
-                </Map>
-            </div>
-            <button onClick={() => {this.toggleVisible() } }>Toggle Visible</button>
-            <button onClick={() => {this.toggleDraggable() } }>Toggle Draggable</button>
-            <button onClick={() => {this.changePath() } }>Change Path</button>
-        </div>
+    render () {
+        return (
+                <div
+                    id='allmap'
+                    style={mapStyle} />
+        )
     }
 }
 
