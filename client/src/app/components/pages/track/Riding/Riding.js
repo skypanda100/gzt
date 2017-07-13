@@ -14,7 +14,7 @@ const mapStyle = {
     position:'absolute'
 };
 
-var g_points = [];
+var g_points = null;
 var g_map = null;
 var g_car = null;
 var g_BMap = null;
@@ -22,6 +22,7 @@ var g_index = 0;
 
 class Riding extends Component {
     componentDidMount () {
+        g_points = [];
         let BMap = window.BMap;
         g_BMap = BMap;
         //获取所有点的坐标
@@ -773,14 +774,14 @@ class Riding extends Component {
         g_map = new BMap.Map("allmap");
         g_map.centerAndZoom(g_points[0], 14);
         g_map.enableScrollWheelZoom();
-        g_map.addControl(new BMap.NavigationControl());
+        // g_map.addControl(new BMap.NavigationControl());
         g_map.addControl(new BMap.ScaleControl());
         g_map.addControl(new BMap.OverviewMapControl({isOpen: true}));
         //画面移动到起点和终点的中间
         let centerPoint = new BMap.Point((g_points[0].lng + g_points[g_points.length - 1].lng) / 2, (g_points[0].lat + g_points[g_points.length - 1].lat) / 2);
         g_map.panTo(centerPoint);
         //连接所有点
-        g_map.addOverlay(new BMap.Polyline(g_points, {strokeColor: "#A52A2A", strokeWeight: 5, strokeOpacity: 1}));
+        g_map.addOverlay(new BMap.Polyline(g_points, {strokeColor: "#A52A2A", strokeWeight: 5, strokeOpacity: 0.5}));
         //显示小车子
         g_car = new BMap.Marker(g_points[0]);
         g_map.addOverlay(g_car);
