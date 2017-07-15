@@ -6,6 +6,8 @@
  * Date: 2017/5/25
  * Time: 15:13
  */
+ini_set('date.timezone','Asia/Shanghai');
+
 class pgsql
 {
     // PostgreSQL连接标识符

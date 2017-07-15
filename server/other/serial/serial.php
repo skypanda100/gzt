@@ -19,8 +19,9 @@ if(!is_null($data)){
         $db = new pgsql("192.168.1.3", "15432", "postgres", "postgres", "123456");
         //$db = new pgsql("192.168.233.138", "15432", "postgres", "postgres", "123456");
 
+        $datetime = date('Y-m-d H:i:s');
         $sql = "insert into serial values("
-            . "now(),"
+            . "'$datetime',"
             . "$data_r[0],"
             . "$data_r[1],"
             . "$data_r[2],"
@@ -44,6 +45,19 @@ if(!is_null($data)){
         $db->connect();
         $result = $db->query($sql);
         $db->free();
+
+        //将PC客户端发过来的数据POST到端口2121
+        $post_data['type'] = 'publish';
+        $post_data['content'] = $data;
+        $ch = curl_init();
+        curl_setopt ($ch, CURLOPT_URL, "http://localhost:2121");
+        curl_setopt ($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        $file_contents = curl_exec($ch);
+        curl_close($ch);
     }
 }
 

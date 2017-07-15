@@ -816,9 +816,9 @@ class Riding extends Component {
 
     render () {
         return (
-                <div
-                    id='allmap'
-                    style={mapStyle} />
+            <div
+                id='allmap'
+                style={mapStyle} />
         )
     }
 }

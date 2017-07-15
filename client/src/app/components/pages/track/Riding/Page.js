@@ -14,14 +14,14 @@ const paperStyle = {
 };
 
 const RidingPage = () => (
-  <div style={divStyle}>
-      <Title render={(previousTitle) => `Riding - ${previousTitle}`} />
-      <div
-          style={paperStyle}
-      >
-          <Riding />
-      </div>
-  </div>
+    <div style={divStyle}>
+        <Title render={(previousTitle) => `Riding - ${previousTitle}`} />
+        <div
+            style={paperStyle}
+        >
+            <Riding />
+        </div>
+    </div>
 );
 
 export default RidingPage;

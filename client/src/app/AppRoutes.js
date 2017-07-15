@@ -13,6 +13,7 @@ import ComparisonByMonthPage from './components/pages/sleep/ComparisonByMonth/Pa
 import ComparisonBySumPage from './components/pages/sleep/ComparisonBySum/Page';
 import SaveDataPage from './components/pages/sleep/SaveData/Page';
 import RidingPage from './components/pages/track/Riding/Page';
+import RealTimePage from './components/pages/other/Serial/RealTime/Page';
 
 const AppRoutes = (
   <Route path="/" component={Master}>
@@ -30,6 +31,11 @@ const AppRoutes = (
       <Route path="track">
           <Route path="riding" component={RidingPage} />
       </Route>
+      <Redirect from="other" to="/other/realtime" />
+      <Route path="other">
+          <Route path="realtime" component={RealTimePage} />
+      </Route>
+
   </Route>
 );
 

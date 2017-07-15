@@ -96,6 +96,26 @@ class AppNavDrawer extends Component {
                 <ListItem primaryText="Riding" value="/track/riding" />,
               ]}
           />
+          <ListItem
+              primaryText="Other"
+              primaryTogglesNestedList={true}
+              nestedItems={[
+                <ListItem
+                    primaryText="Serial"
+                    primaryTogglesNestedList={true}
+                    nestedItems={[
+                      <ListItem
+                          primaryText="RealTime"
+                          value="/other/realtime"
+                      />,
+                      <ListItem
+                          primaryText="History"
+                          value="/other/history"
+                      />,
+                    ]}
+                />,
+              ]}
+          />
         </SelectableList>
         <Divider />
         <SelectableList
