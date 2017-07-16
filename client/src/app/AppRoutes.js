@@ -14,6 +14,7 @@ import ComparisonBySumPage from './components/pages/sleep/ComparisonBySum/Page';
 import SaveDataPage from './components/pages/sleep/SaveData/Page';
 import RidingPage from './components/pages/track/Riding/Page';
 import RealTimePage from './components/pages/other/Serial/RealTime/Page';
+import HistoryPage from './components/pages/other/Serial/History/Page';
 
 const AppRoutes = (
   <Route path="/" component={Master}>
@@ -35,7 +36,9 @@ const AppRoutes = (
       <Route path="other">
           <Route path="realtime" component={RealTimePage} />
       </Route>
-
+      <Route path="other">
+          <Route path="history" component={HistoryPage} />
+      </Route>
   </Route>
 );
 

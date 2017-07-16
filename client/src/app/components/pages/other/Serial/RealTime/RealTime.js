@@ -11,7 +11,7 @@ import DateTimeUtil from '../../../../utils/DateTimeUtil';
 
 const paperStyle01 = {
     height: '280px',
-    width: '30%',
+    width: '280px',
     marginLeft: '0%',
     marginRight: '1%',
     marginBottom: '1%',
@@ -21,35 +21,18 @@ const paperStyle01 = {
     verticalAlign:'top',
 };
 
-const paperStyle02 = {
-    height: '280px',
-    width: '69%',
-    marginLeft: '0%',
-    marginRight: '0%',
-    marginBottom: '0%',
-    padding: 5,
-    textAlign: 'left',
-    display: 'inline-block',
-    verticalAlign:'top',
-};
-var count = 5 * 12 * 60 * 6;
-var datetime_r = new Array();
-var temp_r = new Array();
-var humidity_r = new Array();
-var pm25_r = new Array();
-var co2_r = new Array();
-var hcho_r = new Array();
+var datetime = null;
+var temp = null;
+var humidity = null;
+var pm25 = null;
+var co2 = null;
+var hcho = null;
 var thisObj = null;
 var temp_realtime_chart = null;
 var humidity_realtime_chart = null;
 var pm25_realtime_chart = null;
 var co2_realtime_chart = null;
 var hcho_realtime_chart = null;
-var temp_realtime_6hr_chart = null;
-var humidity_realtime_6hr_chart = null;
-var pm25_realtime_6hr_chart = null;
-var co2_realtime_6hr_chart = null;
-var hcho_realtime_6hr_chart = null;
 
 class RealTime extends Component {
 
@@ -57,76 +40,26 @@ class RealTime extends Component {
         super();
     }
 
-    post(postData, dispatch) {
-        fetch('http://192.168.1.3:8765/gzt/server/other/serial/serial_query.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: postData
-        })
-            .then(response => response.json())
-            .then(json => {
-                dispatch({
-                    message: json,
-                    isSuccess: true
-                });
-            })
-            .catch((err) => {
-                dispatch({
-                    message: err.message,
-                    isSuccess: false
-                });
-            });
-    }
-
-    query(data){
-        if(data.isSuccess){
-            let data_r = data.message;
-            datetime_r = data_r.datetime;
-            temp_r = data_r.temp;
-            humidity_r = data_r.humidity;
-            pm25_r = data_r.pm25;
-            co2_r = data_r.co2;
-            hcho_r = data_r.hcho;
-
-            thisObj.draw_realtime();
-            thisObj.draw_realtime_6hr();
-        }else{
-            alert(data.message);
-        }
-    }
-
     receive(msg){
         let data_r = msg.split(",");
-        let datetime = DateTimeUtil.Date2String(new Date(), "yyyy-MM-dd hh:mm:ss");
-        let temp = data_r[4];
-        let humidity = data_r[5];
-        let pm25 = data_r[1];
-        let co2 = data_r[0];
-        let hcho = data_r[3];
-        datetime_r.push(datetime);
-        temp_r.push(temp);
-        humidity_r.push(humidity);
-        pm25_r.push(pm25);
-        co2_r.push(co2);
-        hcho_r.push(hcho);
-        if(datetime_r.length >= count){
-            datetime_r.shift();
-            temp_r.shift();
-            humidity_r.shift();
-            pm25_r.shift();
-            co2_r.shift();
-            hcho_r.shift();
-        }
+        datetime = DateTimeUtil.Date2String(new Date(), "yyyy-MM-dd hh:mm:ss");
+        temp = data_r[4];
+        humidity = data_r[5];
+        pm25 = data_r[1];
+        co2 = data_r[0];
+        hcho = data_r[3];
         this.draw_realtime();
-        this.draw_realtime_6hr();
     }
 
     draw_realtime(){
         //温度
-        temp_realtime_chart = echarts.init(document.getElementById('temp_realtime'));
+        if(temp_realtime_chart == null){
+            temp_realtime_chart = echarts.init(document.getElementById('temp_realtime'));
+        }
         let option = {
+            title : {
+                text: 'temperature'
+            },
             tooltip : {
                 formatter: "{a} <br/>{b} : {c}"
             },
@@ -152,14 +85,43 @@ class RealTime extends Component {
                             width: 30
                         }
                     },
-                    /*title : {
-                        show : true,
-                        offsetCenter: ['-60%', -15],       // x, y，单位px
+                    axisTick: {            // 坐标轴小标记
+                        show: false
+                    },
+                    axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+                        show: true,
+                        formatter: function(v){
+                            switch (v+''){
+                                case '-10': return '-10';
+                                case '0': return '0';
+                                case '10': return '10';
+                                case '20': return '20';
+                                case '30': return '30';
+                                case '40': return '40';
+                                default: return '';
+                            }
+                        },
                         textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                            color: '#333',
-                            fontSize : 15
+                            color: '#333'
                         }
-                    },*/
+                    },
+                    splitLine: {           // 分隔线
+                        show: true,        // 默认显示，属性show控制显示与否
+                        length :30,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            color: '#eee',
+                            width: 2,
+                            type: 'solid'
+                        }
+                    },
+                    /*title : {
+                     show : true,
+                     offsetCenter: ['-60%', -15],       // x, y，单位px
+                     textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                     color: '#333',
+                     fontSize : 15
+                     }
+                     },*/
                     detail : {
                         show : true,
                         offsetCenter: ['-60%', 0],       // x, y，单位px
@@ -169,15 +131,20 @@ class RealTime extends Component {
                             fontSize : 30
                         }
                     },
-                    data: [{value: temp_r[temp_r.length - 1], name: ''}]
+                    data: [{value: temp, name: ''}]
                 }
             ]
         };
         temp_realtime_chart.setOption(option);
 
         //湿度
-        humidity_realtime_chart = echarts.init(document.getElementById('humidity_realtime'));
+        if(humidity_realtime_chart == null){
+            humidity_realtime_chart = echarts.init(document.getElementById('humidity_realtime'));
+        }
         option = {
+            title : {
+                text: 'humidity'
+            },
             tooltip : {
                 formatter: "{a} <br/>{b} : {c}"
             },
@@ -203,6 +170,35 @@ class RealTime extends Component {
                             width: 30
                         }
                     },
+                    axisTick: {            // 坐标轴小标记
+                        show: false
+                    },
+                    axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+                        show: true,
+                        formatter: function(v){
+                            switch (v+''){
+                                case '0': return '0';
+                                case '20': return '20';
+                                case '40': return '40';
+                                case '60': return '60';
+                                case '80': return '80';
+                                case '100': return '100';
+                                default: return '';
+                            }
+                        },
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            color: '#333'
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        show: true,        // 默认显示，属性show控制显示与否
+                        length :30,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            color: '#eee',
+                            width: 2,
+                            type: 'solid'
+                        }
+                    },
                     /*title : {
                         show : true,
                         offsetCenter: ['-60%', -15],       // x, y，单位px
@@ -220,15 +216,20 @@ class RealTime extends Component {
                             fontSize : 30
                         }
                     },
-                    data: [{value: humidity_r[humidity_r.length - 1], name: ''}]
+                    data: [{value: humidity, name: ''}]
                 }
             ]
         };
         humidity_realtime_chart.setOption(option);
 
         //PM2.5
-        pm25_realtime_chart = echarts.init(document.getElementById('pm25_realtime'));
+        if(pm25_realtime_chart == null){
+            pm25_realtime_chart = echarts.init(document.getElementById('pm25_realtime'));
+        }
         option = {
+            title : {
+                text: 'pm2.5'
+            },
             tooltip : {
                 formatter: "{a} <br/>{b} : {c}"
             },
@@ -254,6 +255,35 @@ class RealTime extends Component {
                             width: 30
                         }
                     },
+                    axisTick: {            // 坐标轴小标记
+                        show: false
+                    },
+                    axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+                        show: true,
+                        formatter: function(v){
+                            switch (v+''){
+                                case '0': return '0';
+                                case '100': return '100';
+                                case '200': return '200';
+                                case '300': return '300';
+                                case '400': return '400';
+                                case '500': return '500';
+                                default: return '';
+                            }
+                        },
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            color: '#333'
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        show: true,        // 默认显示，属性show控制显示与否
+                        length :30,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            color: '#eee',
+                            width: 2,
+                            type: 'solid'
+                        }
+                    },
                     /*title : {
                         show : true,
                         offsetCenter: ['-60%', -15],       // x, y，单位px
@@ -271,15 +301,20 @@ class RealTime extends Component {
                             fontSize : 30
                         }
                     },
-                    data: [{value: pm25_r[pm25_r.length - 1], name: ''}]
+                    data: [{value: pm25, name: ''}]
                 }
             ]
         };
         pm25_realtime_chart.setOption(option);
 
         //co2
-        co2_realtime_chart = echarts.init(document.getElementById('co2_realtime'));
+        if(co2_realtime_chart == null){
+            co2_realtime_chart = echarts.init(document.getElementById('co2_realtime'));
+        }
         option = {
+            title : {
+                text: 'co2'
+            },
             tooltip : {
                 formatter: "{a} <br/>{b} : {c}"
             },
@@ -292,7 +327,7 @@ class RealTime extends Component {
             },
             series: [
                 {
-                    name: 'CO2',
+                    name: 'co2',
                     type: 'gauge',
                     startAngle: 140,
                     endAngle : -140,
@@ -305,6 +340,35 @@ class RealTime extends Component {
                             width: 30
                         }
                     },
+                    axisTick: {            // 坐标轴小标记
+                        show: false
+                    },
+                    axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+                        show: true,
+                        formatter: function(v){
+                            switch (v+''){
+                                case '0': return '0';
+                                case '400': return '400';
+                                case '800': return '800';
+                                case '1200': return '1200';
+                                case '1600': return '1600';
+                                case '2000': return '2000';
+                                default: return '';
+                            }
+                        },
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            color: '#333'
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        show: true,        // 默认显示，属性show控制显示与否
+                        length :30,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            color: '#eee',
+                            width: 2,
+                            type: 'solid'
+                        }
+                    },
                     /*title : {
                         show : true,
                         offsetCenter: ['-60%', -15],       // x, y，单位px
@@ -322,15 +386,20 @@ class RealTime extends Component {
                             fontSize : 30
                         }
                     },
-                    data: [{value: co2_r[co2_r.length - 1], name: ''}]
+                    data: [{value: co2, name: ''}]
                 }
             ]
         };
         co2_realtime_chart.setOption(option);
 
         //hcho
-        hcho_realtime_chart = echarts.init(document.getElementById('hcho_realtime'));
+        if(hcho_realtime_chart == null){
+            hcho_realtime_chart = echarts.init(document.getElementById('hcho_realtime'));
+        }
         option = {
+            title : {
+                text: 'hcho'
+            },
             tooltip : {
                 formatter: "{a} <br/>{b} : {c}"
             },
@@ -343,7 +412,7 @@ class RealTime extends Component {
             },
             series: [
                 {
-                    name: 'HCHO',
+                    name: 'hcho',
                     type: 'gauge',
                     startAngle: 140,
                     endAngle : -140,
@@ -354,6 +423,35 @@ class RealTime extends Component {
                         lineStyle: {       // 属性lineStyle控制线条样式
                             color: [[0.2, '#89D6EF'],[0.6, '#00BCD4'],[0.8, '#EFD689'],[1, '#ff4500']],
                             width: 30
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        show: false
+                    },
+                    axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+                        show: true,
+                        formatter: function(v){
+                            switch (v+''){
+                                case '0': return '0';
+                                case '0.2': return '0.2';
+                                case '0.4': return '0.4';
+                                case '0.6': return '0.6';
+                                case '0.8': return '0.8';
+                                case '1': return '1.0';
+                                default: return '';
+                            }
+                        },
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            color: '#333'
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        show: true,        // 默认显示，属性show控制显示与否
+                        length :30,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            color: '#eee',
+                            width: 2,
+                            type: 'solid'
                         }
                     },
                     /*title : {
@@ -373,310 +471,11 @@ class RealTime extends Component {
                             fontSize : 30
                         }
                     },
-                    data: [{value: hcho_r[hcho_r.length - 1], name: ''}]
+                    data: [{value: hcho, name: ''}]
                 }
             ]
         };
         hcho_realtime_chart.setOption(option);
-    }
-
-    draw_realtime_6hr(){
-        //温度
-        temp_realtime_6hr_chart = echarts.init(document.getElementById('temp_realtime_6hr'));
-        let option = {
-            title : {
-                text: 'temperature'
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['temperature']
-            },
-            toolbox: {
-                show : false,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    boundaryGap : false,
-                    data : datetime_r
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value',
-                    axisLabel : {
-                        formatter: '{value}°C'
-                    }
-                }
-            ],
-            series : [
-                {
-                    name:'temperature',
-                    type:'line',
-                    data:temp_r,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: 'max'},
-                            {type : 'min', name: 'min'}
-                        ]
-                    },
-                    /*markLine : {
-                        data : [
-                            {type : 'average', name: 'average'}
-                        ]
-                    }*/
-                }
-            ]
-        };
-        temp_realtime_6hr_chart.setOption(option);
-
-        //湿度
-        humidity_realtime_6hr_chart = echarts.init(document.getElementById('humidity_realtime_6hr'));
-        option = {
-            title : {
-                text: 'humidity'
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['humidity']
-            },
-            toolbox: {
-                show : false,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    boundaryGap : false,
-                    data : datetime_r
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value',
-                    axisLabel : {
-                        formatter: '{value}%'
-                    }
-                }
-            ],
-            series : [
-                {
-                    name:'humidity',
-                    type:'line',
-                    data:humidity_r,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: 'max'},
-                            {type : 'min', name: 'min'}
-                        ]
-                    },
-                    /*markLine : {
-                     data : [
-                     {type : 'average', name: 'average'}
-                     ]
-                     }*/
-                }
-            ]
-        };
-        humidity_realtime_6hr_chart.setOption(option);
-
-        //pm2.5
-        pm25_realtime_6hr_chart = echarts.init(document.getElementById('pm25_realtime_6hr'));
-        option = {
-            title : {
-                text: 'pm2.5'
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['pm2.5']
-            },
-            toolbox: {
-                show : false,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    boundaryGap : false,
-                    data : datetime_r
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value',
-                    axisLabel : {
-                        formatter: '{value}'
-                    }
-                }
-            ],
-            series : [
-                {
-                    name:'pm2.5',
-                    type:'line',
-                    data:pm25_r,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: 'max'},
-                            {type : 'min', name: 'min'}
-                        ]
-                    },
-                    /*markLine : {
-                     data : [
-                     {type : 'average', name: 'average'}
-                     ]
-                     }*/
-                }
-            ]
-        };
-        pm25_realtime_6hr_chart.setOption(option);
-
-        //co2
-        co2_realtime_6hr_chart = echarts.init(document.getElementById('co2_realtime_6hr'));
-        option = {
-            title : {
-                text: 'co2'
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['co2']
-            },
-            toolbox: {
-                show : false,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    boundaryGap : false,
-                    data : datetime_r
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value',
-                    axisLabel : {
-                        formatter: '{value}'
-                    }
-                }
-            ],
-            series : [
-                {
-                    name:'co2',
-                    type:'line',
-                    data:co2_r,
-                    smooth:true,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: 'max'},
-                            {type : 'min', name: 'min'}
-                        ]
-                    },
-                    markLine : {
-                        data : [
-                            {name: 'standard', xAxis: 1, yAxis: 1000}
-                        ]
-                    }
-                }
-            ]
-        };
-        co2_realtime_6hr_chart.setOption(option);
-
-        //hcho
-        hcho_realtime_6hr_chart = echarts.init(document.getElementById('hcho_realtime_6hr'));
-        option = {
-            title : {
-                text: 'hcho'
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['hcho']
-            },
-            toolbox: {
-                show : false,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    boundaryGap : false,
-                    data : datetime_r
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value',
-                    axisLabel : {
-                        formatter: '{value}'
-                    }
-                }
-            ],
-            series : [
-                {
-                    name:'hcho',
-                    type:'line',
-                    data:hcho_r,
-                    smooth:true,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: 'max'},
-                            {type : 'min', name: 'min'}
-                        ]
-                    },
-                    markLine : {
-                        data : [
-                            {name: 'standard', xAxis: 1, yAxis: 0.08}
-                        ]
-                    }
-                }
-            ]
-        };
-        hcho_realtime_6hr_chart.setOption(option);
     }
 
     connect(){
@@ -697,7 +496,21 @@ class RealTime extends Component {
     componentDidMount() {
         thisObj = this;
         this.connect();
-        this.post('', this.query);
+    }
+
+    componentWillUnmount() {
+        datetime = null;
+        temp = null;
+        humidity = null;
+        pm25 = null;
+        co2 = null;
+        hcho = null;
+        thisObj = null;
+        temp_realtime_chart = null;
+        humidity_realtime_chart = null;
+        pm25_realtime_chart = null;
+        co2_realtime_chart = null;
+        hcho_realtime_chart = null;
     }
 
     render () {
@@ -711,28 +524,12 @@ class RealTime extends Component {
 
                     </div>
                 </Paper>
-                <Paper
-                    style={paperStyle02}
-                    zDepth={1}
-                >
-                    <div id="temp_realtime_6hr" style={{width:'100%',height:'100%'}}>
-
-                    </div>
-                </Paper>
 
                 <Paper
                     style={paperStyle01}
                     zDepth={1}
                 >
                     <div id="humidity_realtime" style={{width:'100%',height:'100%'}}>
-
-                    </div>
-                </Paper>
-                <Paper
-                    style={paperStyle02}
-                    zDepth={1}
-                >
-                    <div id="humidity_realtime_6hr" style={{width:'100%',height:'100%'}}>
 
                     </div>
                 </Paper>
@@ -745,14 +542,6 @@ class RealTime extends Component {
 
                     </div>
                 </Paper>
-                <Paper
-                    style={paperStyle02}
-                    zDepth={1}
-                >
-                    <div id="pm25_realtime_6hr" style={{width:'100%',height:'100%'}}>
-
-                    </div>
-                </Paper>
 
                 <Paper
                     style={paperStyle01}
@@ -762,28 +551,12 @@ class RealTime extends Component {
 
                     </div>
                 </Paper>
-                <Paper
-                    style={paperStyle02}
-                    zDepth={1}
-                >
-                    <div id="co2_realtime_6hr" style={{width:'100%',height:'100%'}}>
-
-                    </div>
-                </Paper>
 
                 <Paper
                     style={paperStyle01}
                     zDepth={1}
                 >
                     <div id="hcho_realtime" style={{width:'100%',height:'100%'}}>
-
-                    </div>
-                </Paper>
-                <Paper
-                    style={paperStyle02}
-                    zDepth={1}
-                >
-                    <div id="hcho_realtime_6hr" style={{width:'100%',height:'100%'}}>
 
                     </div>
                 </Paper>

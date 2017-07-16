@@ -51,7 +51,7 @@
     "material-ui": "^0.18.0",
     "babel-polyfill": "^6.16.0",
     "simple-assign": "^0.1.0",
-    "echarts": "^3.6.0",
+    "echarts": "^3.6.2",
     "whatwg-fetch": "^2.0.3",
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3"

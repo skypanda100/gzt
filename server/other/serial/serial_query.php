@@ -22,7 +22,7 @@ if(isset($_POST["end_date"]))
 
 $sql = "";
 if(is_null($start_date) && is_null($end_date)){
-    $start_date = date('Y-m-d H:i:s',strtotime('-6 hour'));
+    $start_date = date('Y-m-d H:i:s',strtotime('-3 hour'));
     $end_date = date('Y-m-d H:i:s');
     $sql = "select * from serial where datetime >= '$start_date'and datetime <= '$end_date'order by datetime asc";
 }else if(!is_null($start_date) && is_null($end_date)){
