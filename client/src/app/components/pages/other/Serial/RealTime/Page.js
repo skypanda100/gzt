@@ -10,7 +10,8 @@ const divStyle = {
 
 const paperStyle = {
     height: '100%',
-    width: '100%'
+    width: '100%',
+    // textAlign: 'center'
 };
 
 const RealTimePage = () => (

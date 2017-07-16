@@ -9,7 +9,7 @@ import GPS from '../../../utils/GPS';
 const mapStyle = {
     top: '64px',
     bottom: '0px',
-    left: '256px',
+    left: '0px',
     right: '0px',
     position:'absolute'
 };
@@ -790,7 +790,7 @@ class Riding extends Component {
             function(){
                 this.replay();
             }.bind(this)
-            , 400
+            , 20
         );
     }
 

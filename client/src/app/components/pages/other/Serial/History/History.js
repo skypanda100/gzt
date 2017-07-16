@@ -105,128 +105,6 @@ class History extends Component {
     }
 
     draw_realtime_6hr(){
-        //温度
-        if(temp_realtime_6hr_chart == null){
-            temp_realtime_6hr_chart = echarts.init(document.getElementById('temp_realtime_6hr'));
-        }
-        let option = {
-            title : {
-                text: 'temperature'
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['temperature']
-            },
-            toolbox: {
-                show : false,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    boundaryGap : false,
-                    data : datetime_r
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value',
-                    axisLabel : {
-                        formatter: '{value}°C'
-                    }
-                }
-            ],
-            series : [
-                {
-                    name:'temperature',
-                    type:'line',
-                    data:temp_r,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: 'max'},
-                            {type : 'min', name: 'min'}
-                        ]
-                    },
-                    /*markLine : {
-                        data : [
-                            {type : 'average', name: 'average'}
-                        ]
-                    }*/
-                }
-            ]
-        };
-        temp_realtime_6hr_chart.setOption(option);
-
-        //湿度
-        if(humidity_realtime_6hr_chart == null){
-            humidity_realtime_6hr_chart = echarts.init(document.getElementById('humidity_realtime_6hr'));
-        }
-        option = {
-            title : {
-                text: 'humidity'
-            },
-            tooltip : {
-                trigger: 'axis'
-            },
-            legend: {
-                data:['humidity']
-            },
-            toolbox: {
-                show : false,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ['line', 'bar']},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
-            calculable : true,
-            xAxis : [
-                {
-                    type : 'category',
-                    boundaryGap : false,
-                    data : datetime_r
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value',
-                    axisLabel : {
-                        formatter: '{value}%'
-                    }
-                }
-            ],
-            series : [
-                {
-                    name:'humidity',
-                    type:'line',
-                    data:humidity_r,
-                    markPoint : {
-                        data : [
-                            {type : 'max', name: 'max'},
-                            {type : 'min', name: 'min'}
-                        ]
-                    },
-                    /*markLine : {
-                     data : [
-                     {type : 'average', name: 'average'}
-                     ]
-                     }*/
-                }
-            ]
-        };
-        humidity_realtime_6hr_chart.setOption(option);
-
         //pm2.5
         if(pm25_realtime_6hr_chart == null){
             pm25_realtime_6hr_chart = echarts.init(document.getElementById('pm25_realtime_6hr'));
@@ -411,6 +289,129 @@ class History extends Component {
             ]
         };
         hcho_realtime_6hr_chart.setOption(option);
+
+        //温度
+        if(temp_realtime_6hr_chart == null){
+            temp_realtime_6hr_chart = echarts.init(document.getElementById('temp_realtime_6hr'));
+        }
+        let option = {
+            title : {
+                text: 'temperature'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['temperature']
+            },
+            toolbox: {
+                show : false,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : datetime_r
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value}°C'
+                    }
+                }
+            ],
+            series : [
+                {
+                    name:'temperature',
+                    type:'line',
+                    data:temp_r,
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: 'max'},
+                            {type : 'min', name: 'min'}
+                        ]
+                    },
+                    /*markLine : {
+                     data : [
+                     {type : 'average', name: 'average'}
+                     ]
+                     }*/
+                }
+            ]
+        };
+        temp_realtime_6hr_chart.setOption(option);
+
+        //湿度
+        if(humidity_realtime_6hr_chart == null){
+            humidity_realtime_6hr_chart = echarts.init(document.getElementById('humidity_realtime_6hr'));
+        }
+        option = {
+            title : {
+                text: 'humidity'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['humidity']
+            },
+            toolbox: {
+                show : false,
+                feature : {
+                    mark : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : datetime_r
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value}%'
+                    }
+                }
+            ],
+            series : [
+                {
+                    name:'humidity',
+                    type:'line',
+                    data:humidity_r,
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: 'max'},
+                            {type : 'min', name: 'min'}
+                        ]
+                    },
+                    /*markLine : {
+                     data : [
+                     {type : 'average', name: 'average'}
+                     ]
+                     }*/
+                }
+            ]
+        };
+        humidity_realtime_6hr_chart.setOption(option);
+
     }
 
     connect(){
@@ -456,24 +457,6 @@ class History extends Component {
                     style={paperStyle02}
                     zDepth={1}
                 >
-                    <div id="temp_realtime_6hr" style={{width:'100%',height:'100%'}}>
-
-                    </div>
-                </Paper>
-
-                <Paper
-                    style={paperStyle02}
-                    zDepth={1}
-                >
-                    <div id="humidity_realtime_6hr" style={{width:'100%',height:'100%'}}>
-
-                    </div>
-                </Paper>
-
-                <Paper
-                    style={paperStyle02}
-                    zDepth={1}
-                >
                     <div id="pm25_realtime_6hr" style={{width:'100%',height:'100%'}}>
 
                     </div>
@@ -493,6 +476,24 @@ class History extends Component {
                     zDepth={1}
                 >
                     <div id="hcho_realtime_6hr" style={{width:'100%',height:'100%'}}>
+
+                    </div>
+                </Paper>
+
+                <Paper
+                    style={paperStyle02}
+                    zDepth={1}
+                >
+                    <div id="temp_realtime_6hr" style={{width:'100%',height:'100%'}}>
+
+                    </div>
+                </Paper>
+
+                <Paper
+                    style={paperStyle02}
+                    zDepth={1}
+                >
+                    <div id="humidity_realtime_6hr" style={{width:'100%',height:'100%'}}>
 
                     </div>
                 </Paper>

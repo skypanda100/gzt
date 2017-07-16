@@ -10,8 +10,8 @@ import Paper from 'material-ui/Paper';
 import DateTimeUtil from '../../../../utils/DateTimeUtil';
 
 const paperStyle01 = {
-    height: '280px',
-    width: '280px',
+    height: '300px',
+    width: '300px',
     marginLeft: '0%',
     marginRight: '1%',
     marginBottom: '1%',
@@ -52,176 +52,6 @@ class RealTime extends Component {
     }
 
     draw_realtime(){
-        //温度
-        if(temp_realtime_chart == null){
-            temp_realtime_chart = echarts.init(document.getElementById('temp_realtime'));
-        }
-        let option = {
-            title : {
-                text: 'temperature'
-            },
-            tooltip : {
-                formatter: "{a} <br/>{b} : {c}"
-            },
-            toolbox: {
-                show: false,
-                feature: {
-                    restore: {},
-                    saveAsImage: {}
-                }
-            },
-            series: [
-                {
-                    name: 'temperature',
-                    type: 'gauge',
-                    startAngle: 140,
-                    endAngle : -140,
-                    min: -10,                     // 最小值
-                    max: 40,                   // 最大值
-                    axisLine: {            // 坐标轴线
-                        show: true,        // 默认显示，属性show控制显示与否
-                        lineStyle: {       // 属性lineStyle控制线条样式
-                            color: [[0.2, '#89D6EF'],[0.6, '#00BCD4'],[0.8, '#EFD689'],[1, '#ff4500']],
-                            width: 30
-                        }
-                    },
-                    axisTick: {            // 坐标轴小标记
-                        show: false
-                    },
-                    axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
-                        show: true,
-                        formatter: function(v){
-                            switch (v+''){
-                                case '-10': return '-10';
-                                case '0': return '0';
-                                case '10': return '10';
-                                case '20': return '20';
-                                case '30': return '30';
-                                case '40': return '40';
-                                default: return '';
-                            }
-                        },
-                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                            color: '#333'
-                        }
-                    },
-                    splitLine: {           // 分隔线
-                        show: true,        // 默认显示，属性show控制显示与否
-                        length :30,         // 属性length控制线长
-                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                            color: '#eee',
-                            width: 2,
-                            type: 'solid'
-                        }
-                    },
-                    /*title : {
-                     show : true,
-                     offsetCenter: ['-60%', -15],       // x, y，单位px
-                     textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                     color: '#333',
-                     fontSize : 15
-                     }
-                     },*/
-                    detail : {
-                        show : true,
-                        offsetCenter: ['-60%', 0],       // x, y，单位px
-                        formatter:'{value}℃',
-                        textStyle: {
-                            color: 'auto',
-                            fontSize : 30
-                        }
-                    },
-                    data: [{value: temp, name: ''}]
-                }
-            ]
-        };
-        temp_realtime_chart.setOption(option);
-
-        //湿度
-        if(humidity_realtime_chart == null){
-            humidity_realtime_chart = echarts.init(document.getElementById('humidity_realtime'));
-        }
-        option = {
-            title : {
-                text: 'humidity'
-            },
-            tooltip : {
-                formatter: "{a} <br/>{b} : {c}"
-            },
-            toolbox: {
-                show: false,
-                feature: {
-                    restore: {},
-                    saveAsImage: {}
-                }
-            },
-            series: [
-                {
-                    name: 'humidity',
-                    type: 'gauge',
-                    startAngle: 140,
-                    endAngle : -140,
-                    min: 0,                     // 最小值
-                    max: 100,                   // 最大值
-                    axisLine: {            // 坐标轴线
-                        show: true,        // 默认显示，属性show控制显示与否
-                        lineStyle: {       // 属性lineStyle控制线条样式
-                            color: [[0.2, '#89D6EF'],[0.6, '#00BCD4'],[0.8, '#EFD689'],[1, '#ff4500']],
-                            width: 30
-                        }
-                    },
-                    axisTick: {            // 坐标轴小标记
-                        show: false
-                    },
-                    axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
-                        show: true,
-                        formatter: function(v){
-                            switch (v+''){
-                                case '0': return '0';
-                                case '20': return '20';
-                                case '40': return '40';
-                                case '60': return '60';
-                                case '80': return '80';
-                                case '100': return '100';
-                                default: return '';
-                            }
-                        },
-                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                            color: '#333'
-                        }
-                    },
-                    splitLine: {           // 分隔线
-                        show: true,        // 默认显示，属性show控制显示与否
-                        length :30,         // 属性length控制线长
-                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                            color: '#eee',
-                            width: 2,
-                            type: 'solid'
-                        }
-                    },
-                    /*title : {
-                        show : true,
-                        offsetCenter: ['-60%', -15],       // x, y，单位px
-                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                            color: '#333',
-                            fontSize : 15
-                        }
-                    },*/
-                    detail : {
-                        show : true,
-                        offsetCenter: ['-60%', 0],       // x, y，单位px
-                        formatter:'{value}%',
-                        textStyle: {
-                            color: 'auto',
-                            fontSize : 30
-                        }
-                    },
-                    data: [{value: humidity, name: ''}]
-                }
-            ]
-        };
-        humidity_realtime_chart.setOption(option);
-
         //PM2.5
         if(pm25_realtime_chart == null){
             pm25_realtime_chart = echarts.init(document.getElementById('pm25_realtime'));
@@ -476,6 +306,177 @@ class RealTime extends Component {
             ]
         };
         hcho_realtime_chart.setOption(option);
+
+        //温度
+        if(temp_realtime_chart == null){
+            temp_realtime_chart = echarts.init(document.getElementById('temp_realtime'));
+        }
+        let option = {
+            title : {
+                text: 'temperature'
+            },
+            tooltip : {
+                formatter: "{a} <br/>{b} : {c}"
+            },
+            toolbox: {
+                show: false,
+                feature: {
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            series: [
+                {
+                    name: 'temperature',
+                    type: 'gauge',
+                    startAngle: 140,
+                    endAngle : -140,
+                    min: -10,                     // 最小值
+                    max: 40,                   // 最大值
+                    axisLine: {            // 坐标轴线
+                        show: true,        // 默认显示，属性show控制显示与否
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.2, '#89D6EF'],[0.6, '#00BCD4'],[0.8, '#EFD689'],[1, '#ff4500']],
+                            width: 30
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        show: false
+                    },
+                    axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+                        show: true,
+                        formatter: function(v){
+                            switch (v+''){
+                                case '-10': return '-10';
+                                case '0': return '0';
+                                case '10': return '10';
+                                case '20': return '20';
+                                case '30': return '30';
+                                case '40': return '40';
+                                default: return '';
+                            }
+                        },
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            color: '#333'
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        show: true,        // 默认显示，属性show控制显示与否
+                        length :30,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            color: '#eee',
+                            width: 2,
+                            type: 'solid'
+                        }
+                    },
+                    /*title : {
+                     show : true,
+                     offsetCenter: ['-60%', -15],       // x, y，单位px
+                     textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                     color: '#333',
+                     fontSize : 15
+                     }
+                     },*/
+                    detail : {
+                        show : true,
+                        offsetCenter: ['-60%', 0],       // x, y，单位px
+                        formatter:'{value}℃',
+                        textStyle: {
+                            color: 'auto',
+                            fontSize : 30
+                        }
+                    },
+                    data: [{value: temp, name: ''}]
+                }
+            ]
+        };
+        temp_realtime_chart.setOption(option);
+
+        //湿度
+        if(humidity_realtime_chart == null){
+            humidity_realtime_chart = echarts.init(document.getElementById('humidity_realtime'));
+        }
+        option = {
+            title : {
+                text: 'humidity'
+            },
+            tooltip : {
+                formatter: "{a} <br/>{b} : {c}"
+            },
+            toolbox: {
+                show: false,
+                feature: {
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            series: [
+                {
+                    name: 'humidity',
+                    type: 'gauge',
+                    startAngle: 140,
+                    endAngle : -140,
+                    min: 0,                     // 最小值
+                    max: 100,                   // 最大值
+                    axisLine: {            // 坐标轴线
+                        show: true,        // 默认显示，属性show控制显示与否
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.2, '#89D6EF'],[0.6, '#00BCD4'],[0.8, '#EFD689'],[1, '#ff4500']],
+                            width: 30
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        show: false
+                    },
+                    axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+                        show: true,
+                        formatter: function(v){
+                            switch (v+''){
+                                case '0': return '0';
+                                case '20': return '20';
+                                case '40': return '40';
+                                case '60': return '60';
+                                case '80': return '80';
+                                case '100': return '100';
+                                default: return '';
+                            }
+                        },
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            color: '#333'
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        show: true,        // 默认显示，属性show控制显示与否
+                        length :30,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            color: '#eee',
+                            width: 2,
+                            type: 'solid'
+                        }
+                    },
+                    /*title : {
+                     show : true,
+                     offsetCenter: ['-60%', -15],       // x, y，单位px
+                     textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                     color: '#333',
+                     fontSize : 15
+                     }
+                     },*/
+                    detail : {
+                        show : true,
+                        offsetCenter: ['-60%', 0],       // x, y，单位px
+                        formatter:'{value}%',
+                        textStyle: {
+                            color: 'auto',
+                            fontSize : 30
+                        }
+                    },
+                    data: [{value: humidity, name: ''}]
+                }
+            ]
+        };
+        humidity_realtime_chart.setOption(option);
+
     }
 
     connect(){
@@ -520,24 +521,6 @@ class RealTime extends Component {
                     style={paperStyle01}
                     zDepth={1}
                 >
-                    <div id="temp_realtime" style={{width:'100%',height:'100%'}}>
-
-                    </div>
-                </Paper>
-
-                <Paper
-                    style={paperStyle01}
-                    zDepth={1}
-                >
-                    <div id="humidity_realtime" style={{width:'100%',height:'100%'}}>
-
-                    </div>
-                </Paper>
-
-                <Paper
-                    style={paperStyle01}
-                    zDepth={1}
-                >
                     <div id="pm25_realtime" style={{width:'100%',height:'100%'}}>
 
                     </div>
@@ -560,6 +543,25 @@ class RealTime extends Component {
 
                     </div>
                 </Paper>
+
+                <Paper
+                    style={paperStyle01}
+                    zDepth={1}
+                >
+                    <div id="temp_realtime" style={{width:'100%',height:'100%'}}>
+
+                    </div>
+                </Paper>
+
+                <Paper
+                    style={paperStyle01}
+                    zDepth={1}
+                >
+                    <div id="humidity_realtime" style={{width:'100%',height:'100%'}}>
+
+                    </div>
+                </Paper>
+
             </div>
         )
     }
