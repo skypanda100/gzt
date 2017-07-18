@@ -15,6 +15,7 @@ import SaveDataPage from './components/pages/sleep/SaveData/Page';
 import RidingPage from './components/pages/track/Riding/Page';
 import RealTimePage from './components/pages/other/Serial/RealTime/Page';
 import HistoryPage from './components/pages/other/Serial/History/Page';
+import ScreensaverPage from './components/pages/other/Screensaver/Page';
 
 const AppRoutes = (
   <Route path="/" component={Master}>
@@ -38,6 +39,9 @@ const AppRoutes = (
       </Route>
       <Route path="other">
           <Route path="history" component={HistoryPage} />
+      </Route>
+      <Route path="other">
+          <Route path="screensaver" component={ScreensaverPage} />
       </Route>
   </Route>
 );

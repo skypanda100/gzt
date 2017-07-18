@@ -114,6 +114,7 @@ class AppNavDrawer extends Component {
                       />,
                     ]}
                 />,
+                <ListItem primaryText="Screensaver" value="/other/screensaver" />,
               ]}
           />
         </SelectableList>
