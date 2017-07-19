@@ -6,42 +6,57 @@ import withWidth, {MEDIUM, LARGE} from 'material-ui/utils/withWidth';
 import 'whatwg-fetch';
 import Paper from 'material-ui/Paper';
 import screenfull from 'screenfull';
-import FadeModal from 'reboron/FadeModal';
-import ScaleModal from 'reboron/ScaleModal';
+import FadeModal from 'boron/FadeModal';
+import ScaleModal from 'boron/ScaleModal';
+import WaveModal from 'boron/WaveModal';
+import DropModal from 'boron/DropModal';
+import OutlineModal from 'boron/OutlineModal';
+import FlyModal from 'boron/FlyModal';
 
 const containerStyle = {
     height: '100%',
     width: '100%',
-    backgroundImage: 'url(images/test1.png)',
-    backgroundSize:'100% 100%',
-    display:'block'
 };
 
 const modalStyle = {
-    height: '100%',
-    width: '100%',
-    display:'block'
-}
-
-const fadeModalStyle = {
     width: '100%',
     height: '100%',
-    margin: '0px',
-    backgroundImage: 'url(images/test1.png)',
-    backgroundSize:'100% 100%',
-    float: 'left',
-
 };
 
-const scaleModalStyle = {
-    width: '100%',
-    height: '100%',
+var prevContentStyle = {
+    backgroundColor: 'black',
+    backgroundImage: 'url(images/test1.png)',
+    backgroundSize:'100% 100%',
+    position: 'absolute',
+    top: '0px',
+    left: '0px',
+    right: '0px',
+    bottom: '0px',
+};
+
+var nextContentStyle = {
+    backgroundColor: 'black',
     backgroundImage: 'url(images/test2.png)',
     backgroundSize:'100% 100%',
-    float: 'left',
+    position: 'absolute',
+    top: '0px',
+    left: '0px',
+    right: '0px',
+    bottom: '0px',
+};
+
+const modalDivStyle = {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    top: '0px',
+    left: '0px',
+    right: '0px',
+    bottom: '0px',
 };
 
 var index = 0;
+var images = new Array("images/test1.png", "images/test2.png", "images/gzt_other.jpg", "images/gzt_sleep.jpg");
 
 class Screensaver extends Component {
 
@@ -49,13 +64,27 @@ class Screensaver extends Component {
         super(props);
     }
 
-    replay(){
+    changeBackground(){
         if(index % 2 == 0){
-            this.refs.fadeModal.show();
-            this.refs.scaleModal.hide();
+            let prev_index = index % images.length;
+            prevContentStyle.backgroundImage = 'url(' + images[prev_index] + ')';
         }else{
-            this.refs.scaleModal.show();
-            this.refs.fadeModal.hide();
+            let next_index = index % images.length;
+            nextContentStyle.backgroundImage = 'url(' + images[next_index] + ')';
+        }
+    }
+
+    replay(){
+        this.changeBackground();
+
+        if(index % 2 == 0){
+            //prev
+            this.refs.prevModal.show();
+            this.refs.nextModal.hide();
+        }else{
+            //next
+            this.refs.nextModal.show();
+            this.refs.prevModal.hide();
         }
         index++;
     }
@@ -81,19 +110,21 @@ class Screensaver extends Component {
         return (
             <div id="container" style={containerStyle}>
                 <button onClick={ () => this.showModal() }>Open</button>
-                <FadeModal
-                    ref={ 'fadeModal' }
+                <OutlineModal
+                    ref={ 'prevModal' }
                     modalStyle={modalStyle}
+                    contentStyle={prevContentStyle}
                 >
-                    <div style={fadeModalStyle} >
+                    <div style={modalDivStyle} >
                         <h2>I am a fadeModal</h2>
                     </div>
-                </FadeModal>
+                </OutlineModal>
                 <ScaleModal
-                    ref={ 'scaleModal' }
+                    ref={ 'nextModal' }
                     modalStyle={modalStyle}
+                    contentStyle={nextContentStyle}
                 >
-                    <div style={scaleModalStyle}>
+                    <div style={modalDivStyle}>
                         <h2>I am a scaleModal</h2>
                     </div>
                 </ScaleModal>
