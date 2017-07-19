@@ -58,13 +58,53 @@ const modalDivStyle = {
 var index = 0;
 var images = new Array("images/test1.png", "images/test2.png", "images/gzt_other.jpg", "images/gzt_sleep.jpg");
 
+var prevModal = null;
+var nextModal = null;
+
 class Screensaver extends Component {
 
     constructor(props) {
         super(props);
     }
 
-    changeBackground(){
+    changeModal() {
+        if(index % 6 == 0){
+            if(prevModal != null){
+                prevModal.hide();
+            }
+
+            if(nextModal != null){
+                nextModal.hide();
+            }
+
+            prevModal = this.refs.fadeModal;
+            nextModal = this.refs.scaleModal;
+        }else if(index % 6 == 2){
+            if(prevModal != null){
+                prevModal.hide();
+            }
+
+            if(nextModal != null){
+                nextModal.hide();
+            }
+
+            prevModal = this.refs.waveModal;
+            nextModal = this.refs.dropModal;
+        }else if(index % 6 == 4){
+            if(prevModal != null){
+                prevModal.hide();
+            }
+
+            if(nextModal != null){
+                nextModal.hide();
+            }
+
+            prevModal = this.refs.outlineModal;
+            nextModal = this.refs.flyModal;
+        }
+    }
+
+    changeBackground() {
         if(index % 2 == 0){
             let prev_index = index % images.length;
             prevContentStyle.backgroundImage = 'url(' + images[prev_index] + ')';
@@ -75,16 +115,17 @@ class Screensaver extends Component {
     }
 
     replay(){
+        this.changeModal();
         this.changeBackground();
 
         if(index % 2 == 0){
             //prev
-            this.refs.prevModal.show();
-            this.refs.nextModal.hide();
+            prevModal.show();
+            nextModal.hide();
         }else{
             //next
-            this.refs.nextModal.show();
-            this.refs.prevModal.hide();
+            nextModal.show();
+            prevModal.hide();
         }
         index++;
     }
@@ -110,17 +151,18 @@ class Screensaver extends Component {
         return (
             <div id="container" style={containerStyle}>
                 <button onClick={ () => this.showModal() }>Open</button>
-                <OutlineModal
-                    ref={ 'prevModal' }
+                <FadeModal
+                    ref = { 'fadeModal' }
                     modalStyle={modalStyle}
                     contentStyle={prevContentStyle}
                 >
                     <div style={modalDivStyle} >
                         <h2>I am a fadeModal</h2>
                     </div>
-                </OutlineModal>
+                </FadeModal>
+
                 <ScaleModal
-                    ref={ 'nextModal' }
+                    ref = { 'scaleModal' }
                     modalStyle={modalStyle}
                     contentStyle={nextContentStyle}
                 >
@@ -128,8 +170,47 @@ class Screensaver extends Component {
                         <h2>I am a scaleModal</h2>
                     </div>
                 </ScaleModal>
-            </div>
 
+                <WaveModal
+                    ref = { 'waveModal' }
+                    modalStyle={modalStyle}
+                    contentStyle={prevContentStyle}
+                >
+                    <div style={modalDivStyle}>
+                        <h2>I am a waveModal</h2>
+                    </div>
+                </WaveModal>
+
+                <DropModal
+                    ref = { 'dropModal' }
+                    modalStyle={modalStyle}
+                    contentStyle={nextContentStyle}
+                >
+                    <div style={modalDivStyle}>
+                        <h2>I am a dropModal</h2>
+                    </div>
+                </DropModal>
+
+                <OutlineModal
+                    ref = { 'outlineModal' }
+                    modalStyle={modalStyle}
+                    contentStyle={prevContentStyle}
+                >
+                    <div style={modalDivStyle} >
+                        <h2>I am a outlineModal</h2>
+                    </div>
+                </OutlineModal>
+
+                <FlyModal
+                    ref = { 'flyModal' }
+                    modalStyle={modalStyle}
+                    contentStyle={nextContentStyle}
+                >
+                    <div style={modalDivStyle} >
+                        <h2>I am a flyModal</h2>
+                    </div>
+                </FlyModal>
+            </div>
         );
     }
 }
