@@ -16,11 +16,16 @@ import FlyModal from 'boron/FlyModal';
 const containerStyle = {
     height: '100%',
     width: '100%',
+    backgroundColor: 'black',
 };
 
 const modalStyle = {
     width: '100%',
     height: '100%',
+};
+
+const backdropStyle = {
+    backgroundColor: 'black',
 };
 
 var prevContentStyle = {
@@ -56,7 +61,7 @@ const modalDivStyle = {
 };
 
 var index = 0;
-var images = new Array("images/test1.png", "images/test2.png", "images/gzt_other.jpg", "images/gzt_sleep.jpg");
+var images = new Array("images/one.jpg", "images/two.jpg", "images/three.jpg");
 
 var prevModal = null;
 var nextModal = null;
@@ -120,11 +125,11 @@ class Screensaver extends Component {
 
         if(index % 2 == 0){
             //prev
-            prevModal.show();
+            setTimeout(() => {prevModal.show();}, 500);
             nextModal.hide();
         }else{
             //next
-            nextModal.show();
+            setTimeout(() => {nextModal.show();}, 500);
             prevModal.hide();
         }
         index++;
@@ -149,67 +154,75 @@ class Screensaver extends Component {
 
     render() {
         return (
-            <div id="container" style={containerStyle}>
+            <div>
                 <button onClick={ () => this.showModal() }>Open</button>
-                <FadeModal
-                    ref = { 'fadeModal' }
-                    modalStyle={modalStyle}
-                    contentStyle={prevContentStyle}
-                >
-                    <div style={modalDivStyle} >
-                        <h2>I am a fadeModal</h2>
-                    </div>
-                </FadeModal>
+                <div id="container" style={containerStyle}>
+                    <FadeModal
+                        ref = { 'fadeModal' }
+                        modalStyle={modalStyle}
+                        contentStyle={prevContentStyle}
+                        backdropStyle={backdropStyle}
+                    >
+                        <div style={modalDivStyle} >
+                            <h2>I am a fadeModal</h2>
+                        </div>
+                    </FadeModal>
 
-                <ScaleModal
-                    ref = { 'scaleModal' }
-                    modalStyle={modalStyle}
-                    contentStyle={nextContentStyle}
-                >
-                    <div style={modalDivStyle}>
-                        <h2>I am a scaleModal</h2>
-                    </div>
-                </ScaleModal>
+                    <ScaleModal
+                        ref = { 'scaleModal' }
+                        modalStyle={modalStyle}
+                        contentStyle={nextContentStyle}
+                        backdropStyle={backdropStyle}
+                    >
+                        <div style={modalDivStyle}>
+                            <h2>I am a scaleModal</h2>
+                        </div>
+                    </ScaleModal>
 
-                <WaveModal
-                    ref = { 'waveModal' }
-                    modalStyle={modalStyle}
-                    contentStyle={prevContentStyle}
-                >
-                    <div style={modalDivStyle}>
-                        <h2>I am a waveModal</h2>
-                    </div>
-                </WaveModal>
+                    <WaveModal
+                        ref = { 'waveModal' }
+                        modalStyle={modalStyle}
+                        contentStyle={prevContentStyle}
+                        backdropStyle={backdropStyle}
+                    >
+                        <div style={modalDivStyle}>
+                            <h2>I am a waveModal</h2>
+                        </div>
+                    </WaveModal>
 
-                <DropModal
-                    ref = { 'dropModal' }
-                    modalStyle={modalStyle}
-                    contentStyle={nextContentStyle}
-                >
-                    <div style={modalDivStyle}>
-                        <h2>I am a dropModal</h2>
-                    </div>
-                </DropModal>
+                    <DropModal
+                        ref = { 'dropModal' }
+                        modalStyle={modalStyle}
+                        contentStyle={nextContentStyle}
+                        backdropStyle={backdropStyle}
+                    >
+                        <div style={modalDivStyle}>
+                            <h2>I am a dropModal</h2>
+                        </div>
+                    </DropModal>
 
-                <OutlineModal
-                    ref = { 'outlineModal' }
-                    modalStyle={modalStyle}
-                    contentStyle={prevContentStyle}
-                >
-                    <div style={modalDivStyle} >
-                        <h2>I am a outlineModal</h2>
-                    </div>
-                </OutlineModal>
+                    <OutlineModal
+                        ref = { 'outlineModal' }
+                        modalStyle={modalStyle}
+                        contentStyle={prevContentStyle}
+                        backdropStyle={backdropStyle}
+                    >
+                        <div style={modalDivStyle} >
+                            <h2>I am a outlineModal</h2>
+                        </div>
+                    </OutlineModal>
 
-                <FlyModal
-                    ref = { 'flyModal' }
-                    modalStyle={modalStyle}
-                    contentStyle={nextContentStyle}
-                >
-                    <div style={modalDivStyle} >
-                        <h2>I am a flyModal</h2>
-                    </div>
-                </FlyModal>
+                    <FlyModal
+                        ref = { 'flyModal' }
+                        modalStyle={modalStyle}
+                        contentStyle={nextContentStyle}
+                        backdropStyle={backdropStyle}
+                    >
+                        <div style={modalDivStyle} >
+                            <h2>I am a flyModal</h2>
+                        </div>
+                    </FlyModal>
+                </div>
             </div>
         );
     }
