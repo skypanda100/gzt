@@ -12,6 +12,7 @@ import WaveModal from 'boron/WaveModal';
 import DropModal from 'boron/DropModal';
 import OutlineModal from 'boron/OutlineModal';
 import FlyModal from 'boron/FlyModal';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const containerStyle = {
     height: '100%',
@@ -65,7 +66,7 @@ var images = new Array("images/one.jpg", "images/two.jpg", "images/three.jpg");
 
 var prevModal = null;
 var nextModal = null;
-
+var thisObj = null;
 class Screensaver extends Component {
 
     constructor(props) {
@@ -136,27 +137,34 @@ class Screensaver extends Component {
     }
 
     showModal() {
-        screenfull.toggle(document.getElementById("container"));
+        thisObj.timer = setInterval(
+            function(){
+                thisObj.replay();
+            }.bind(thisObj)
+            , 3000
+        );
+        
+        screenfull.toggle(thisObj.refs.container);
     }
 
     componentDidMount() {
-        this.timer = setInterval(
-            function(){
-                this.replay();
-            }.bind(this)
-            , 3000
-        );
+        thisObj = this;
     }
 
     componentWillUnmount() {
         this.timer && clearTimeout(this.timer);
+        thisObj = null;
     }
 
     render() {
         return (
             <div>
-                <button onClick={ () => this.showModal() }>Open</button>
-                <div id="container" style={containerStyle}>
+                <RaisedButton
+                    label="Test"
+                    primary={true}
+                    onTouchTap={this.showModal}
+                />
+                <div ref={'container'} style={containerStyle}>
                     <FadeModal
                         ref = { 'fadeModal' }
                         modalStyle={modalStyle}
