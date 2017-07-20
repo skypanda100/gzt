@@ -13,6 +13,7 @@ import DropModal from 'boron/DropModal';
 import OutlineModal from 'boron/OutlineModal';
 import FlyModal from 'boron/FlyModal';
 import RaisedButton from 'material-ui/RaisedButton';
+import DateTimeUtil from '../../../utils/DateTimeUtil';
 
 const containerStyle = {
     height: '100%',
@@ -54,6 +55,8 @@ var nextContentStyle = {
 const modalDivStyle = {
     width: '100%',
     height: '100%',
+    padding: '15px',
+    textAlign: 'left',
     position: 'absolute',
     top: '0px',
     left: '0px',
@@ -63,6 +66,7 @@ const modalDivStyle = {
 
 var index = 0;
 var images = new Array("images/one.jpg", "images/two.jpg", "images/three.jpg");
+var imageUrl = "http://192.168.1.3:8765/gzt/screensaver/";
 
 var prevModal = null;
 var nextModal = null;
@@ -71,6 +75,38 @@ class Screensaver extends Component {
 
     constructor(props) {
         super(props);
+    }
+
+    post(postData, dispatch) {
+        fetch('http://192.168.1.3:8765/gzt/server/other/screen_saver/screen_saver_query.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: postData
+        })
+            .then(response => response.json())
+            .then(json => {
+                dispatch({
+                    message: json,
+                    isSuccess: true
+                });
+            })
+            .catch((err) => {
+                dispatch({
+                    message: err.message,
+                    isSuccess: false
+                });
+            });
+    }
+
+    on_post(data){
+        let file_r = new Array();
+        if(data.isSuccess){
+            var data_r = data.message;
+            file_r = data_r.file;
+        }
+        images = file_r;
     }
 
     changeModal() {
@@ -113,10 +149,10 @@ class Screensaver extends Component {
     changeBackground() {
         if(index % 2 == 0){
             let prev_index = index % images.length;
-            prevContentStyle.backgroundImage = 'url(' + images[prev_index] + ')';
+            prevContentStyle.backgroundImage = 'url(' + encodeURI(imageUrl + images[prev_index]) + ')';
         }else{
             let next_index = index % images.length;
-            nextContentStyle.backgroundImage = 'url(' + images[next_index] + ')';
+            nextContentStyle.backgroundImage = 'url(' + encodeURI(imageUrl + images[next_index]) + ')';
         }
     }
 
@@ -137,22 +173,44 @@ class Screensaver extends Component {
     }
 
     showModal() {
-        thisObj.timer = setInterval(
+        thisObj.timerPic = setInterval(
             function(){
                 thisObj.replay();
             }.bind(thisObj)
             , 3000
         );
-        
+
+        thisObj.timerTime = setInterval(
+            function(){
+                thisObj.changeTime();
+            }.bind(thisObj)
+            , 1000
+        );
+
         screenfull.toggle(thisObj.refs.container);
+    }
+
+    changeTime(){
+        let date = new Date();
+        let ymdhm = DateTimeUtil.Date2String(date, "hh:mm");
+/*        thisObj.ymdhmFade.innerHTML = ymdhm;
+        thisObj.ymdhmScale.innerHTML = ymdhm;
+        thisObj.ymdhmWave.innerHTML = ymdhm;
+        thisObj.ymdhmDrop.innerHTML = ymdhm;
+        thisObj.ymdhmOutline.innerHTML = ymdhm;
+        thisObj.ymdhmFly.innerHTML = ymdhm;*/
     }
 
     componentDidMount() {
         thisObj = this;
+
+        this.post('', this.on_post);
     }
 
     componentWillUnmount() {
-        this.timer && clearTimeout(this.timer);
+        this.timerPic && clearTimeout(this.timerPic);
+        this.timerTime && clearTimeout(this.timerTime);
+
         thisObj = null;
     }
 
@@ -172,7 +230,13 @@ class Screensaver extends Component {
                         backdropStyle={backdropStyle}
                     >
                         <div style={modalDivStyle} >
-                            <h2>I am a fadeModal</h2>
+                            <div>
+                                <div
+                                    style={{fontSize:35}}
+                                    ref={(input) => { this.ymdhmFade = input; }}
+                                >
+                                </div>
+                            </div>
                         </div>
                     </FadeModal>
 
@@ -183,7 +247,13 @@ class Screensaver extends Component {
                         backdropStyle={backdropStyle}
                     >
                         <div style={modalDivStyle}>
-                            <h2>I am a scaleModal</h2>
+                            <div>
+                                <div
+                                    style={{fontSize:35}}
+                                    ref={(input) => { this.ymdhmScale = input; }}
+                                >
+                                </div>
+                            </div>
                         </div>
                     </ScaleModal>
 
@@ -194,7 +264,13 @@ class Screensaver extends Component {
                         backdropStyle={backdropStyle}
                     >
                         <div style={modalDivStyle}>
-                            <h2>I am a waveModal</h2>
+                            <div>
+                                <div
+                                    style={{fontSize:35}}
+                                    ref={(input) => { this.ymdhmWave = input; }}
+                                >
+                                </div>
+                            </div>
                         </div>
                     </WaveModal>
 
@@ -205,7 +281,13 @@ class Screensaver extends Component {
                         backdropStyle={backdropStyle}
                     >
                         <div style={modalDivStyle}>
-                            <h2>I am a dropModal</h2>
+                            <div>
+                                <div
+                                    style={{fontSize:35}}
+                                    ref={(input) => { this.ymdhmDrop = input; }}
+                                >
+                                </div>
+                            </div>
                         </div>
                     </DropModal>
 
@@ -216,7 +298,13 @@ class Screensaver extends Component {
                         backdropStyle={backdropStyle}
                     >
                         <div style={modalDivStyle} >
-                            <h2>I am a outlineModal</h2>
+                            <div>
+                                <div
+                                    style={{fontSize:35}}
+                                    ref={(input) => { this.ymdhmOutline = input; }}
+                                >
+                                </div>
+                            </div>
                         </div>
                     </OutlineModal>
 
@@ -227,7 +315,13 @@ class Screensaver extends Component {
                         backdropStyle={backdropStyle}
                     >
                         <div style={modalDivStyle} >
-                            <h2>I am a flyModal</h2>
+                            <div>
+                                <div
+                                    style={{fontSize:35}}
+                                    ref={(input) => { this.ymdhmFly = input; }}
+                                >
+                                </div>
+                            </div>
                         </div>
                     </FlyModal>
                 </div>
