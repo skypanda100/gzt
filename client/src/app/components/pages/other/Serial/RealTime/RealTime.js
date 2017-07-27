@@ -24,7 +24,7 @@ const paperStyle01 = {
 };
 
 const paperStyle02 = {
-    height: '300px',
+    height: '400px',
     width: '300px',
     padding: 5,
     textAlign: 'left',
@@ -33,9 +33,9 @@ const paperStyle02 = {
 };
 
 const floatingButtonStyle = {
-    position: 'absolute',
-    right: '20px',
-    bottom: '20px',
+    position: 'fixed',
+    right: '5px',
+    bottom: '15px',
 };
 
 var datetime = null;
@@ -52,6 +52,10 @@ var co2_realtime_chart = null;
 var hcho_realtime_chart = null;
 
 class ChartRealTime extends Component {
+    static propTypes = {
+        visible: false,
+    };
+
     constructor () {
         super();
     }
@@ -485,12 +489,12 @@ class ChartRealTime extends Component {
 
     render () {
         return (
-            <div>
+            <div style={{display:(this.props.visible ? 'block' : 'none')}}>
                 <Paper
                     style={paperStyle01}
                     zDepth={1}
                 >
-                    <div id="pm25_realtime" style={{width:'100%',height:'100%'}}>
+                    <div id="pm25_realtime" style={{width:paperStyle01.width,height:paperStyle01.height}}>
 
                     </div>
                 </Paper>
@@ -499,7 +503,7 @@ class ChartRealTime extends Component {
                     style={paperStyle01}
                     zDepth={1}
                 >
-                    <div id="co2_realtime" style={{width:'100%',height:'100%'}}>
+                    <div id="co2_realtime" style={{width:paperStyle01.width,height:paperStyle01.height}}>
 
                     </div>
                 </Paper>
@@ -508,7 +512,7 @@ class ChartRealTime extends Component {
                     style={paperStyle01}
                     zDepth={1}
                 >
-                    <div id="hcho_realtime" style={{width:'100%',height:'100%'}}>
+                    <div id="hcho_realtime" style={{width:paperStyle01.width,height:paperStyle01.height}}>
 
                     </div>
                 </Paper>
@@ -517,7 +521,7 @@ class ChartRealTime extends Component {
                     style={paperStyle01}
                     zDepth={1}
                 >
-                    <div id="temp_realtime" style={{width:'100%',height:'100%'}}>
+                    <div id="temp_realtime" style={{width:paperStyle01.width,height:paperStyle01.height}}>
 
                     </div>
                 </Paper>
@@ -526,7 +530,7 @@ class ChartRealTime extends Component {
                     style={paperStyle01}
                     zDepth={1}
                 >
-                    <div id="humidity_realtime" style={{width:'100%',height:'100%'}}>
+                    <div id="humidity_realtime" style={{width:paperStyle01.width,height:paperStyle01.height}}>
 
                     </div>
                 </Paper>
@@ -536,17 +540,20 @@ class ChartRealTime extends Component {
 }
 
 class TextRealTime extends Component {
+    static propTypes = {
+        visible: true,
+    };
+
     constructor () {
         super();
     }
 
     draw_realtime(){
-
     }
 
     render () {
         return (
-            <div>
+            <div style={{display:(this.props.visible ? 'block' : 'none'),textAlign: 'center'}}>
                 <Paper
                     style={paperStyle02}
                     zDepth={1}
@@ -582,7 +589,8 @@ class RealTime extends Component {
     }
 
     draw_realtime(){
-
+        thisObj.textRealTime.draw_realtime();
+        thisObj.chartRealTime.draw_realtime();
     }
 
     connect(){
@@ -620,25 +628,21 @@ class RealTime extends Component {
         hcho_realtime_chart = null;
     }
 
-    redoHandler(){
+    redoHandler = (event) => {
         this.setState({
             isText: !this.state.isText,
         });
-        this.render();
-    }
-
-    getComponent(){
-        if(this.state.isText){
-            return <TextRealTime/>;
-        }else{
-            return <ChartRealTime/>;
-        }
     }
 
     render () {
         return (
             <div>
-                {this.getComponent()}
+                <TextRealTime
+                    ref={(input) => { this.textRealTime = input; }}
+                    visible={this.state.isText}/>
+                <ChartRealTime
+                    ref={(input) => { this.chartRealTime = input; }}
+                    visible={!this.state.isText}/>
                 <FloatingActionButton
                     style={floatingButtonStyle}
                     onTouchTap={this.redoHandler}
