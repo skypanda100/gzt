@@ -14,4 +14,6 @@
 
 ![](https://github.com/skypanda100/gzt/blob/master/screenshot/5.png)
 
+![](https://github.com/skypanda100/gzt/blob/master/screenshot/7.png)
+
 ![](https://github.com/skypanda100/gzt/blob/master/screenshot/6.png)
