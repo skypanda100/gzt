@@ -10,6 +10,8 @@ import Paper from 'material-ui/Paper';
 import DateTimeUtil from '../../../../utils/DateTimeUtil';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentRedo from 'material-ui/svg-icons/content/redo';
+import SvgIcon from 'material-ui/SvgIcon';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
 
 const paperStyle01 = {
     height: '300px',
@@ -24,19 +26,25 @@ const paperStyle01 = {
 };
 
 const paperStyle02 = {
-    height: '400px',
-    width: '300px',
-    padding: 5,
-    textAlign: 'left',
+    height: '80%',
+    width: '350px',
+    padding: 0,
+    textAlign: 'center',
     display: 'inline-block',
     verticalAlign:'top',
 };
 
 const floatingButtonStyle = {
     position: 'fixed',
-    right: '5px',
-    bottom: '15px',
+    right: '20px',
+    bottom: '20px',
 };
+
+const StarIcon = (props) => (
+    <SvgIcon {...props}>
+        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" />
+    </SvgIcon>
+);
 
 var datetime = null;
 var temp = null;
@@ -544,11 +552,154 @@ class TextRealTime extends Component {
         visible: true,
     };
 
+    state = {
+        tempGrade: 0,
+        humidityGrade: 0,
+        pm25Grade: 0,
+        co2Grade: 0,
+        hchoGrade: 0,
+    };
+
     constructor () {
         super();
     }
 
     draw_realtime(){
+        if(temp < 10 || temp > 30){
+            this.setState({
+               tempGrade: 0,
+            });
+        }else if(temp < 12 || temp > 29){
+            this.setState({
+                tempGrade: 1,
+            });
+        }else if(temp < 14 || temp > 28){
+            this.setState({
+                tempGrade: 2,
+            });
+        }else if(temp < 16 || temp > 26){
+            this.setState({
+                tempGrade: 3,
+            });
+        }else if(temp < 18 || temp > 25){
+            this.setState({
+                tempGrade: 4,
+            });
+        }else{
+            this.setState({
+                tempGrade: 5,
+            });
+        }
+
+        if(humidity < 10 || humidity > 75){
+            this.setState({
+                humidityGrade: 0,
+            });
+        }else if(humidity < 20 || humidity > 72){
+            this.setState({
+                humidityGrade: 1,
+            });
+        }else if(humidity < 30 || humidity > 69){
+            this.setState({
+                humidityGrade: 2,
+            });
+        }else if(humidity < 35 || humidity > 66){
+            this.setState({
+                humidityGrade: 3,
+            });
+        }else if(humidity < 40 || humidity > 63){
+            this.setState({
+                humidityGrade: 4,
+            });
+        }else{
+            this.setState({
+                humidityGrade: 5,
+            });
+        }
+
+        if(co2 < 250 || co2 >= 2000){
+            this.setState({
+                co2Grade: 0,
+            });
+        }else if(co2 >= 1500 && co2 < 2000){
+            this.setState({
+                co2Grade: 1,
+            });
+        }else if(co2 >= 1300 && co2 < 1500){
+            this.setState({
+                co2Grade: 2,
+            });
+        }else if(co2 >= 1000 && co2 < 1300){
+            this.setState({
+                co2Grade: 3,
+            });
+        }else if(co2 >= 350 && co2 < 1000){
+            this.setState({
+                co2Grade: 4,
+            });
+        }else{
+            this.setState({
+                co2Grade: 5,
+            });
+        }
+
+        if(pm25 >= 250){
+            this.setState({
+                pm25Grade: 0,
+            });
+        }else if(pm25 >= 150 && pm25 < 250){
+            this.setState({
+                pm25Grade: 1,
+            });
+        }else if(pm25 >= 115 && pm25 < 150){
+            this.setState({
+                pm25Grade: 2,
+            });
+        }else if(pm25 >= 75 && pm25 < 115){
+            this.setState({
+                pm25Grade: 3,
+            });
+        }else if(pm25 >= 35 && pm25 < 75){
+            this.setState({
+                pm25Grade: 4,
+            });
+        }else{
+            this.setState({
+                pm25Grade: 5,
+            });
+        }
+
+        if(hcho >= 0.08){
+            this.setState({
+                hchoGrade: 0,
+            });
+        }else if(hcho >= 0.07){
+            this.setState({
+                hchoGrade: 1,
+            });
+        }else if(hcho >= 0.06){
+            this.setState({
+                hchoGrade: 2,
+            });
+        }else if(hcho >= 0.05){
+            this.setState({
+                hchoGrade: 3,
+            });
+        }else if(hcho >= 0.04){
+            this.setState({
+                hchoGrade: 4,
+            });
+        }else{
+            this.setState({
+                hchoGrade: 5,
+            });
+        }
+
+        this.temperatureLabel.innerHTML = temp;
+        this.humidityLabel.innerHTML = humidity;
+        this.pm25Label.innerHTML = pm25;
+        this.co2Label.innerHTML = co2;
+        this.hchoLabel.innerHTML = hcho;
     }
 
     render () {
@@ -556,10 +707,106 @@ class TextRealTime extends Component {
             <div style={{display:(this.props.visible ? 'block' : 'none'),textAlign: 'center'}}>
                 <Paper
                     style={paperStyle02}
-                    zDepth={1}
+                    zDepth={0}
                 >
                     <div id="text_realtime" style={{width:'100%',height:'100%'}}>
-
+                        <h2 style={{textAlign:'center'}}>Indoor Air Quality</h2>
+                        <table border="0" width="100%">
+                            <col align="left" width="40%"/>
+                            <col align="left"  width="20%"/>
+                            <col align="left"  width="40%"/>
+                            <tr height="70px">
+                                <td>
+                                    <p style={{textAlign:'left',fontSize:18}} >
+                                        temp(℃)
+                                    </p>
+                                </td>
+                                <td>
+                                    <p style={{textAlign:'left',fontSize:25}} ref={(input) => { this.temperatureLabel = input; }}>
+                                    </p>
+                                </td>
+                                <td>
+                                    <ActionGrade color={1 <= this.state.tempGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={2 <= this.state.tempGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={3 <= this.state.tempGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={4 <= this.state.tempGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={5 <= this.state.tempGrade ? '#B82525' : ''}/>
+                                </td>
+                            </tr>
+                            <tr height="70px">
+                                <td>
+                                    <p style={{textAlign:'left',fontSize:18}} >
+                                        humidity(%)
+                                    </p>
+                                </td>
+                                <td>
+                                    <p style={{textAlign:'left',fontSize:25}} ref={(input) => { this.humidityLabel = input; }}>
+                                    </p>
+                                </td>
+                                <td>
+                                    <ActionGrade color={1 <= this.state.humidityGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={2 <= this.state.humidityGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={3 <= this.state.humidityGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={4 <= this.state.humidityGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={5 <= this.state.humidityGrade ? '#B82525' : ''}/>
+                                </td>
+                            </tr>
+                            <tr height="70px">
+                                <td>
+                                    <p style={{textAlign:'left',fontSize:18}} >
+                                        pm2.5(AQI)
+                                    </p>
+                                </td>
+                                <td>
+                                    <p style={{textAlign:'left',fontSize:25}} ref={(input) => { this.pm25Label = input; }}>
+                                    </p>
+                                </td>
+                                <td>
+                                    <ActionGrade color={1 <= this.state.pm25Grade ? '#B82525' : ''}/>
+                                    <ActionGrade color={2 <= this.state.pm25Grade ? '#B82525' : ''}/>
+                                    <ActionGrade color={3 <= this.state.pm25Grade ? '#B82525' : ''}/>
+                                    <ActionGrade color={4 <= this.state.pm25Grade ? '#B82525' : ''}/>
+                                    <ActionGrade color={5 <= this.state.pm25Grade ? '#B82525' : ''}/>
+                                </td>
+                            </tr>
+                            <tr height="70px">
+                                <td>
+                                    <p style={{textAlign:'left',fontSize:18}} >
+                                        co2(PPM)
+                                    </p>
+                                </td>
+                                <td>
+                                    <p style={{textAlign:'left',fontSize:25}} ref={(input) => { this.co2Label = input; }}>
+                                    </p>
+                                </td>
+                                <td>
+                                    <ActionGrade color={1 <= this.state.co2Grade ? '#B82525' : ''}/>
+                                    <ActionGrade color={2 <= this.state.co2Grade ? '#B82525' : ''}/>
+                                    <ActionGrade color={3 <= this.state.co2Grade ? '#B82525' : ''}/>
+                                    <ActionGrade color={4 <= this.state.co2Grade ? '#B82525' : ''}/>
+                                    <ActionGrade color={5 <= this.state.co2Grade ? '#B82525' : ''}/>
+                                </td>
+                            </tr>
+                            <tr height="70px">
+                                <td>
+                                    <p style={{textAlign:'left',fontSize:18}} >
+                                        hcho(mg/m3)
+                                    </p>
+                                </td>
+                                <td>
+                                    <p style={{textAlign:'left',fontSize:25}} ref={(input) => { this.hchoLabel = input; }}>
+                                    </p>
+                                </td>
+                                <td>
+                                    <ActionGrade color={1 <= this.state.hchoGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={2 <= this.state.hchoGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={3 <= this.state.hchoGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={4 <= this.state.hchoGrade ? '#B82525' : ''}/>
+                                    <ActionGrade color={5 <= this.state.hchoGrade ? '#B82525' : ''}/>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
                     </div>
                 </Paper>
             </div>
