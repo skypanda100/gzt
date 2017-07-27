@@ -8,6 +8,8 @@ import 'whatwg-fetch';
 import io from 'socket.io-client';
 import Paper from 'material-ui/Paper';
 import DateTimeUtil from '../../../../utils/DateTimeUtil';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentRedo from 'material-ui/svg-icons/content/redo';
 
 const paperStyle01 = {
     height: '300px',
@@ -19,6 +21,21 @@ const paperStyle01 = {
     textAlign: 'left',
     display: 'inline-block',
     verticalAlign:'top',
+};
+
+const paperStyle02 = {
+    height: '300px',
+    width: '300px',
+    padding: 5,
+    textAlign: 'left',
+    display: 'inline-block',
+    verticalAlign:'top',
+};
+
+const floatingButtonStyle = {
+    position: 'absolute',
+    right: '20px',
+    bottom: '20px',
 };
 
 var datetime = null;
@@ -34,21 +51,9 @@ var pm25_realtime_chart = null;
 var co2_realtime_chart = null;
 var hcho_realtime_chart = null;
 
-class RealTime extends Component {
-
+class ChartRealTime extends Component {
     constructor () {
         super();
-    }
-
-    receive(msg){
-        let data_r = msg.split(",");
-        datetime = DateTimeUtil.Date2String(new Date(), "yyyy-MM-dd hh:mm:ss");
-        temp = data_r[4];
-        humidity = data_r[5];
-        pm25 = data_r[1];
-        co2 = data_r[0];
-        hcho = data_r[3];
-        this.draw_realtime();
     }
 
     draw_realtime(){
@@ -115,13 +120,13 @@ class RealTime extends Component {
                         }
                     },
                     /*title : {
-                        show : true,
-                        offsetCenter: ['-60%', -15],       // x, y，单位px
-                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                            color: '#333',
-                            fontSize : 15
-                        }
-                    },*/
+                     show : true,
+                     offsetCenter: ['-60%', -15],       // x, y，单位px
+                     textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                     color: '#333',
+                     fontSize : 15
+                     }
+                     },*/
                     detail : {
                         show : true,
                         offsetCenter: ['-60%', 0],
@@ -200,13 +205,13 @@ class RealTime extends Component {
                         }
                     },
                     /*title : {
-                        show : true,
-                        offsetCenter: ['-60%', -15],       // x, y，单位px
-                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                            color: '#333',
-                            fontSize : 15
-                        }
-                    },*/
+                     show : true,
+                     offsetCenter: ['-60%', -15],       // x, y，单位px
+                     textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                     color: '#333',
+                     fontSize : 15
+                     }
+                     },*/
                     detail : {
                         show : true,
                         offsetCenter: ['-60%', 0],
@@ -285,13 +290,13 @@ class RealTime extends Component {
                         }
                     },
                     /*title : {
-                        show : true,
-                        offsetCenter: ['-60%', -15],       // x, y，单位px
-                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                            color: '#333',
-                            fontSize : 15
-                        }
-                    },*/
+                     show : true,
+                     offsetCenter: ['-60%', -15],       // x, y，单位px
+                     textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                     color: '#333',
+                     fontSize : 15
+                     }
+                     },*/
                     detail : {
                         show : true,
                         offsetCenter: ['-60%', 0],
@@ -476,42 +481,6 @@ class RealTime extends Component {
             ]
         };
         humidity_realtime_chart.setOption(option);
-
-    }
-
-    connect(){
-        //uid
-        let uid = Date.parse(new Date());
-        // 连接服务端
-        let socket = io('http://192.168.1.3:2120');
-        // 连接后登录
-        socket.on('connect', function(){
-            socket.emit('login', uid);
-        });
-        // 后端推送来消息时
-        socket.on('new_msg', function(msg){
-            thisObj.receive(msg);
-        });
-    }
-
-    componentDidMount() {
-        thisObj = this;
-        this.connect();
-    }
-
-    componentWillUnmount() {
-        datetime = null;
-        temp = null;
-        humidity = null;
-        pm25 = null;
-        co2 = null;
-        hcho = null;
-        thisObj = null;
-        temp_realtime_chart = null;
-        humidity_realtime_chart = null;
-        pm25_realtime_chart = null;
-        co2_realtime_chart = null;
-        hcho_realtime_chart = null;
     }
 
     render () {
@@ -561,7 +530,121 @@ class RealTime extends Component {
 
                     </div>
                 </Paper>
+            </div>
+        )
+    }
+}
 
+class TextRealTime extends Component {
+    constructor () {
+        super();
+    }
+
+    draw_realtime(){
+
+    }
+
+    render () {
+        return (
+            <div>
+                <Paper
+                    style={paperStyle02}
+                    zDepth={1}
+                >
+                    <div id="text_realtime" style={{width:'100%',height:'100%'}}>
+
+                    </div>
+                </Paper>
+            </div>
+        )
+    }
+}
+
+class RealTime extends Component {
+
+    constructor () {
+        super();
+    }
+
+    state = {
+        isText: true,
+    };
+
+    receive(msg){
+        let data_r = msg.split(",");
+        datetime = DateTimeUtil.Date2String(new Date(), "yyyy-MM-dd hh:mm:ss");
+        temp = data_r[4];
+        humidity = data_r[5];
+        pm25 = data_r[1];
+        co2 = data_r[0];
+        hcho = data_r[3];
+        this.draw_realtime();
+    }
+
+    draw_realtime(){
+
+    }
+
+    connect(){
+        //uid
+        let uid = Date.parse(new Date());
+        // 连接服务端
+        let socket = io('http://192.168.1.3:2120');
+        // 连接后登录
+        socket.on('connect', function(){
+            socket.emit('login', uid);
+        });
+        // 后端推送来消息时
+        socket.on('new_msg', function(msg){
+            thisObj.receive(msg);
+        });
+    }
+
+    componentDidMount() {
+        thisObj = this;
+        this.connect();
+    }
+
+    componentWillUnmount() {
+        datetime = null;
+        temp = null;
+        humidity = null;
+        pm25 = null;
+        co2 = null;
+        hcho = null;
+        thisObj = null;
+        temp_realtime_chart = null;
+        humidity_realtime_chart = null;
+        pm25_realtime_chart = null;
+        co2_realtime_chart = null;
+        hcho_realtime_chart = null;
+    }
+
+    redoHandler(){
+        this.setState({
+            isText: !this.state.isText,
+        });
+        this.render();
+    }
+
+    getComponent(){
+        if(this.state.isText){
+            return <TextRealTime/>;
+        }else{
+            return <ChartRealTime/>;
+        }
+    }
+
+    render () {
+        return (
+            <div>
+                {this.getComponent()}
+                <FloatingActionButton
+                    style={floatingButtonStyle}
+                    onTouchTap={this.redoHandler}
+                >
+                    <ContentRedo/>
+                </FloatingActionButton>
             </div>
         )
     }
