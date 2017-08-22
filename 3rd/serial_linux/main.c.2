@@ -69,8 +69,10 @@ int set_Parity (int fd, int databits, int stopbits, int parity)
     {
         case 'n':
         case 'N':
-            options.c_cflag &= ~PARENB;	/* Clear parity enable */
-            options.c_iflag &= ~INPCK;	/* Enable parity checking */
+            //options.c_cflag &= ~PARENB;	/* Clear parity enable */
+            //options.c_iflag &= ~INPCK;	/* Enable parity checking */
+            options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG); 
+            options.c_oflag &= ~OPOST;
             break;
         case 'o':
         case 'O':
@@ -106,11 +108,26 @@ int set_Parity (int fd, int databits, int stopbits, int parity)
             return (FALSE);
     }
     /* Set input parity option */
-    if (parity != 'n')
+    //if (parity != 'n')
+    if ((parity != 'n')&&(parity != 'N'))
         options.c_iflag |= INPCK;
-    tcflush (fd, TCIFLUSH);
-    options.c_cc[VTIME] = 150;
-    options.c_cc[VMIN] = 0;	/* Update the options and do it NOW */
+    //tcflush (fd, TCIFLUSH);
+    options.c_cc[VTIME] = 5;
+    options.c_cc[VMIN] = 128;	/* Update the options and do it NOW */
+    options.c_cflag |= HUPCL;
+    options.c_iflag &= ~INPCK;
+    options.c_iflag |= IGNBRK;
+    options.c_iflag &= ~BRKINT;
+    options.c_iflag &= ~ISTRIP;
+    options.c_iflag &= ~IGNPAR;
+    options.c_iflag &= ~ICRNL;
+    options.c_iflag &= ~IXON;
+    options.c_lflag &= ~IEXTEN;
+    options.c_lflag &= ~ECHOK;
+    options.c_lflag &= ~ECHOCTL;
+    options.c_lflag &= ~ECHOKE;
+    options.c_oflag &= ~ONLCR;
+    tcflush(fd,TCIFLUSH); /* Update the options and do it NOW */
     if (tcsetattr (fd, TCSANOW, &options) != 0)
     {
         perror ("SetupSerial 3");
