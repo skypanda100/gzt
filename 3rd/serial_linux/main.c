@@ -213,7 +213,7 @@ void readTTY()
 
 int main ()
 {
-//    daemon(0, 0);
+    daemon(0, 0);
 
     readTTY();
     return 0;
