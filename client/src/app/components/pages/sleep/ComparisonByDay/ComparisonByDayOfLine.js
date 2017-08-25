@@ -13,7 +13,7 @@ class ComparisonByDayOfLine extends Component {
     }
 
     post(postData, dispatch) {
-        fetch('http://192.168.1.3:8765/gzt/server/sleep/comparison_by_day/comparison_by_day_of_line.php', {
+        fetch('http://' + g_hostname + '/server/sleep/comparison_by_day/comparison_by_day_of_line.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

@@ -66,7 +66,7 @@ const modalDivStyle = {
 
 var index = 0;
 var images = new Array("images/one.jpg", "images/two.jpg", "images/three.jpg");
-var imageUrl = "http://192.168.1.3:8765/gzt/screensaver/";
+var imageUrl = "http://" + g_hostname + "/screensaver/";
 
 var prevModal = null;
 var nextModal = null;
@@ -78,7 +78,7 @@ class Screensaver extends Component {
     }
 
     post(postData, dispatch) {
-        fetch('http://192.168.1.3:8765/gzt/server/other/screen_saver/screen_saver_query.php', {
+        fetch('http://' + g_hostname + '/server/other/screen_saver/screen_saver_query.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
