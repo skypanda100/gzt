@@ -4,11 +4,15 @@ import {Router, useRouterHistory} from 'react-router';
 import AppRoutes from './AppRoutes';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {createHashHistory} from 'history';
+import Promise from 'promise-polyfill';
 
 // Helpers for debugging
 window.React = React;
 window.Perf = require('react-addons-perf');
-
+// To add to window
+if (!window.Promise) {
+    window.Promise = Promise;
+}
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();

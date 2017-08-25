@@ -580,7 +580,10 @@ class SaveData extends Component {
 
         fetch('http://' + g_hostname + '/server/sleep/save_data/last_data.php', {
             method: 'POST',
-            body: {}
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: ''
         })
             .then(response => response.json())
             .then(json => {

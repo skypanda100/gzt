@@ -10,7 +10,7 @@
 #define TRUE 0
 
 char *usb_dev = "/dev/ttyUSB0";
-char *post_url = "http://192.168.1.3:8765/gzt/server/other/serial/serial.php";
+char *post_url = "http://192.168.1.4:8080/server/other/serial/serial.php";
 
 int speed_arr[] =
         { B38400, B19200, B9600, B4800, B2400, B1200, B300, B38400, B9600,

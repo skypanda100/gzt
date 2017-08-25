@@ -844,7 +844,7 @@ class RealTime extends Component {
         //uid
         let uid = Date.parse(new Date());
         // 连接服务端
-        let socket = io('http://' + g_domain + ':6003');
+        let socket = io('http://' + g_domain + ':2120');
         // 连接后登录
         socket.on('connect', function(){
             socket.emit('login', uid);
