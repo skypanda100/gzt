@@ -41,7 +41,7 @@ class History extends Component {
     }
 
     post(postData, dispatch) {
-        fetch('http://' + g_hostname + '/server/other/serial/serial_query.php', {
+        fetch('http://' + g_hostname + '/other/serial/serial_query.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

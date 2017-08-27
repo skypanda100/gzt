@@ -78,7 +78,7 @@ class Screensaver extends Component {
     }
 
     post(postData, dispatch) {
-        fetch('http://' + g_hostname + '/server/other/screen_saver/screen_saver_query.php', {
+        fetch('http://' + g_hostname + '/other/screen_saver/screen_saver_query.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

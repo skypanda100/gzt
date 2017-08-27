@@ -423,7 +423,7 @@ class SaveData extends Component {
     saveHandle = (event) => {
         if(this.validate()){
             let postData = this.makeFormData();
-            fetch('http://' + g_hostname + '/server/sleep/save_data/save_data.php', {
+            fetch('http://' + g_hostname + '/sleep/save_data/save_data.php', {
                 method: 'POST',
                 body: postData
             })
@@ -578,7 +578,7 @@ class SaveData extends Component {
             zdt_shallow_r:[],
         });
 
-        fetch('http://' + g_hostname + '/server/sleep/save_data/last_data.php', {
+        fetch('http://' + g_hostname + '/sleep/save_data/last_data.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

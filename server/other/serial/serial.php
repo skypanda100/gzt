@@ -16,7 +16,7 @@ if(isset($_POST["data"]))
 if(!is_null($data)){
     $data_r = explode(",", $data);
     if(count($data_r) == 18){
-        $db = new pgsql("192.168.1.3", "15432", "postgres", "postgres", "123456");
+        $db = new pgsql("127.0.0.1", "5432", "postgres", "postgres", "123456");
         //$db = new pgsql("192.168.233.138", "15432", "postgres", "postgres", "123456");
 
         $datetime = date('Y-m-d H:i:s');

@@ -13,7 +13,7 @@ class ComparisonByWeekOfBar extends Component {
     }
 
     post(postData, dispatch) {
-        fetch('http://' + g_hostname + '/server/sleep/comparison_by_week/comparison_by_week_of_bar.php', {
+        fetch('http://' + g_hostname + '/sleep/comparison_by_week/comparison_by_week_of_bar.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

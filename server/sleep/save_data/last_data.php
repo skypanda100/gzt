@@ -7,7 +7,7 @@
  */
 require_once "../../db/pgsql.php";
 
-$db = new pgsql("192.168.1.3", "15432", "postgres", "postgres", "123456");
+$db = new pgsql("127.0.0.1", "5432", "postgres", "postgres", "123456");
 //$db = new pgsql("192.168.233.138", "15432", "postgres", "postgres", "123456");
 
 $db->connect();
