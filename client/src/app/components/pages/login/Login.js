@@ -45,7 +45,7 @@ const styles = {
         color: darkWhite,
     },
     paperStyle: {
-        width: '500px',
+        width: '300px',
         marginTop: '100px',
         padding: 5,
         textAlign: 'center',
