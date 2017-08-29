@@ -15,11 +15,13 @@ class FullWidthSection extends Component {
     style: PropTypes.object,
     useContent: PropTypes.bool,
     width: PropTypes.number.isRequired,
+    base: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
     useContent: false,
     contentType: 'div',
+    base: -1,
   };
 
   getStyles() {
@@ -33,12 +35,12 @@ class FullWidthSection extends Component {
         margin: '0 auto',
       },
       rootWhenSmall: {
-        paddingTop: desktopGutter * 2,
-        paddingBottom: desktopGutter * 2,
+        paddingTop: desktopGutter * (this.props.base == -1 ? 2 : this.props.base),
+        paddingBottom: desktopGutter * (this.props.base == -1 ? 2 : this.props.base),
       },
       rootWhenLarge: {
-        paddingTop: desktopGutter * 3,
-        paddingBottom: desktopGutter * 3,
+        paddingTop: desktopGutter * (this.props.base == -1 ? 3 : this.props.base + 1),
+        paddingBottom: desktopGutter * (this.props.base == -1 ? 3 : this.props.base + 1),
       },
     };
   }

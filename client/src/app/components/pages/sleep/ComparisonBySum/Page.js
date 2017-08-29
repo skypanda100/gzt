@@ -1,25 +1,15 @@
 import React from 'react';
 import Title from 'react-title-component';
-import ComparisonBySumOfData from './ComparisonBySumOfData';
-import Paper from 'material-ui/Paper';
+import ComparisonBySumOfGgData from './ComparisonBySumOfGgData';
+import ComparisonBySumOfZdtData from './ComparisonBySumOfZdtData';
 import Divider from 'material-ui/Divider';
+import Feature from '../../Feature';
+import FullWidthSection from '../../../FullWidthSection';
 
 const divStyle = {
     flex:1,
     justifyContent:'center',
     alignItems:'center'
-};
-
-const paperStyle01 = {
-    height: '100%',
-    width: '100%',
-    marginLeft: '0%',
-    marginRight: '0%',
-    marginBottom: '0%',
-    padding: 5,
-    textAlign: 'left',
-    display: 'inline-block',
-    verticalAlign:'top',
 };
 
 const ComparisonBySumPage = () => (
@@ -29,12 +19,20 @@ const ComparisonBySumPage = () => (
         <br/>
         <Divider/>
         <br/>
-        <Paper
-            style={paperStyle01}
-            zDepth={0}
-        >
-            <ComparisonBySumOfData />
-        </Paper>
+        <FullWidthSection useContent={true} base={0}>
+            <Feature
+                firstChild={true}
+                w={"48%"}
+            >
+                <ComparisonBySumOfGgData />
+            </Feature>
+            <Feature
+                lastChild={true}
+                w={"48%"}
+            >
+                <ComparisonBySumOfZdtData />
+            </Feature>
+        </FullWidthSection>
     </div>
 );
 

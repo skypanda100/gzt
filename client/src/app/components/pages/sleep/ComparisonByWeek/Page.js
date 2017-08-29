@@ -1,5 +1,7 @@
 import React from 'react';
 import Title from 'react-title-component';
+import Feature from '../../Feature';
+import FullWidthSection from '../../../FullWidthSection';
 import ComparisonByWeekOfLine from './ComparisonByWeekOfLine';
 import ComparisonByWeekOfTemperature from './ComparisonByWeekOfTemperature';
 import ComparisonByWeekOfBar from './ComparisonByWeekOfBar';
@@ -13,30 +15,6 @@ const divStyle = {
     alignItems:'center'
 };
 
-const paperStyle01 = {
-    height: '100%',
-    width: '33.3%',
-    marginLeft: '0%',
-    marginRight: '0%',
-    marginBottom: '1%',
-    padding: 5,
-    textAlign: 'left',
-    display: 'inline-block',
-    verticalAlign:'top',
-};
-
-const paperStyle02 = {
-    height: '100%',
-    width: '100%',
-    marginLeft: '0%',
-    marginRight: '0%',
-    marginBottom: '1%',
-    padding: 5,
-    textAlign: 'left',
-    display: 'inline-block',
-    verticalAlign:'top',
-};
-
 const ComparisonByWeekPage = () => (
     <div style={divStyle}>
         <Title render={(previousTitle) => `Comparison By Week - ${previousTitle}`} />
@@ -44,30 +22,30 @@ const ComparisonByWeekPage = () => (
         <br/>
         <Divider/>
         <br/>
-        <Paper
-            style={paperStyle01}
-            zDepth={1}
-        >
-            <ComparisonByWeekOfTemperature />
-        </Paper>
-        <Paper
-            style={paperStyle01}
-            zDepth={1}
-        >
-            <ComparisonByWeekOfBar />
-        </Paper>
-        <Paper
-            style={paperStyle01}
-            zDepth={1}
-        >
-            <ComparisonByWeekOfPie />
-        </Paper>
-        <Paper
-            style={paperStyle02}
-            zDepth={1}
-        >
-            <ComparisonByWeekOfLine />
-        </Paper>
+        <FullWidthSection useContent={true} base={0}>
+            <Feature
+                firstChild={true}
+                w={"32%"}
+            >
+                <ComparisonByWeekOfTemperature />
+            </Feature>
+            <Feature
+                w={"32%"}
+            >
+                <ComparisonByWeekOfBar />
+            </Feature>
+            <Feature
+                w={"32%"}
+            >
+                <ComparisonByWeekOfPie />
+            </Feature>
+            <Feature
+                lastChild={true}
+                w={"97%"}
+            >
+                <ComparisonByWeekOfLine />
+            </Feature>
+        </FullWidthSection>
     </div>
 );
 

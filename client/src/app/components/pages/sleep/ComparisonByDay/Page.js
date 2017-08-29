@@ -1,40 +1,17 @@
 import React from 'react';
 import Title from 'react-title-component';
+import Feature from '../../Feature';
+import FullWidthSection from '../../../FullWidthSection';
 import ComparisonByDayOfLine from './ComparisonByDayOfLine';
 import ComparisonByDayOfTemperature from './ComparisonByDayOfTemperature';
 import ComparisonByDayOfBar from './ComparisonByDayOfBar';
 import ComparisonByDayOfPie from './ComparisonByDayOfPie';
-import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 
 const divStyle = {
     flex:1,
     justifyContent:'center',
-    alignItems:'center'
-};
-
-const paperStyle01 = {
-    height: '100%',
-    width: '33.3%',
-    marginLeft: '0%',
-    marginRight: '0%',
-    marginBottom: '1%',
-    padding: 5,
-    textAlign: 'left',
-    display: 'inline-block',
-    verticalAlign:'top',
-};
-
-const paperStyle02 = {
-    height: '100%',
-    width: '100%',
-    marginLeft: '0%',
-    marginRight: '0%',
-    marginBottom: '1%',
-    padding: 5,
-    textAlign: 'left',
-    display: 'inline-block',
-    verticalAlign:'top',
+    alignItems:'center',
 };
 
 const ComparisonByDayPage = () => (
@@ -44,30 +21,30 @@ const ComparisonByDayPage = () => (
         <br/>
         <Divider/>
         <br/>
-        <Paper
-            style={paperStyle01}
-            zDepth={1}
-        >
-            <ComparisonByDayOfTemperature />
-        </Paper>
-        <Paper
-            style={paperStyle01}
-            zDepth={1}
-        >
-            <ComparisonByDayOfBar />
-        </Paper>
-        <Paper
-            style={paperStyle01}
-            zDepth={1}
-        >
-            <ComparisonByDayOfPie />
-        </Paper>
-        <Paper
-            style={paperStyle02}
-            zDepth={1}
-        >
-            <ComparisonByDayOfLine />
-        </Paper>
+        <FullWidthSection useContent={true} base={0}>
+            <Feature
+                firstChild={true}
+                w={"32%"}
+            >
+                <ComparisonByDayOfTemperature />
+            </Feature>
+            <Feature
+                w={"32%"}
+            >
+                <ComparisonByDayOfBar />
+            </Feature>
+            <Feature
+                w={"32%"}
+            >
+                <ComparisonByDayOfPie />
+            </Feature>
+            <Feature
+                lastChild={true}
+                w={"97%"}
+            >
+                <ComparisonByDayOfLine />
+            </Feature>
+        </FullWidthSection>
     </div>
 );
 
