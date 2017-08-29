@@ -156,6 +156,7 @@ class Master extends Component {
     const router = this.context.router;
     const styles = this.getStyles();
     const title =
+      router.isActive('/login') ? 'Login' :
       router.isActive('/sleep') ? 'Sleep' :
       router.isActive('/track') ? 'Track' :
       router.isActive('/other') ? 'Other' : '';
@@ -163,7 +164,7 @@ class Master extends Component {
     let docked = false;
     let showMenuIconButton = true;
 
-    if (this.props.width === LARGE && title !== '') {
+    if (this.props.width === LARGE && title !== '' && title !== 'Login') {
       docked = true;
       navDrawerOpen = true;
       showMenuIconButton = false;
@@ -191,7 +192,7 @@ class Master extends Component {
           style={styles.appBar}
           showMenuIconButton={showMenuIconButton}
         />
-        {title !== '' ?
+        {(title !== '' && title !== 'Login')?
             (title == 'Track' ?
                     <div style={prepareStyles(styles.rootMap)}>
                         {React.cloneElement(children, {
@@ -219,7 +220,7 @@ class Master extends Component {
           open={navDrawerOpen}
         />
           {
-              (title == 'Track' ? <div/>
+              ((title == 'Track' || title == 'Login') ? <div/>
                       :
                       <FullWidthSection style={styles.footer}>
                           <p style={prepareStyles(styles.p)}>
