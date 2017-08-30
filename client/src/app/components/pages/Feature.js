@@ -13,15 +13,13 @@ class Feature extends Component {
     lastChild: PropTypes.bool,
     width: PropTypes.number.isRequired,
     w: PropTypes.string,
+    z: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
     firstChild: false,
     lastChild: false,
-  };
-
-  state = {
-    zDepth: 1,
+    z: 1,
   };
 
   getStyles() {
@@ -70,7 +68,7 @@ class Feature extends Component {
 
     return (
       <Paper
-        zDepth={this.state.zDepth}
+        zDepth={this.props.z}
         style={Object.assign(
           styles.root,
           this.props.lastChild && styles.rootWhenLastChild

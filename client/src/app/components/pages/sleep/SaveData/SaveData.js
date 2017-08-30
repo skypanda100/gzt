@@ -9,46 +9,35 @@ import MenuItem from 'material-ui/MenuItem';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import Paper from 'material-ui/Paper';
 import Snackbar from 'material-ui/Snackbar';
 import DateTimeUtil from '../../../utils/DateTimeUtil';
 import CommonUtil from '../../../utils/CommonUtil';
 import Divider from 'material-ui/Divider';
 import echarts from "echarts";
+import Feature from '../../Feature';
+import FullWidthSection from '../../../FullWidthSection';
 
 const items = [];
 items.push(<MenuItem value={0} key={0} primaryText={`GaoGe`} />);
 items.push(<MenuItem value={1} key={1} primaryText={`ZhengDongTian`} />);
 
-const paperStyle01 = {
-    height: '100%',
-    width: '55%',
-    marginLeft: '0%',
-    marginRight: '2%',
-    padding: 0,
-    textAlign: 'left',
-    display: 'inline-block',
-    verticalAlign:'top',
-};
+var sWidth = 1516 * 0.36;
+var cellSize = [55, 55];
+var pieRadius = 18;
 
-const paperStyle02 = {
-    height: '100%',
-    width: '43%',
-    marginLeft: '0%',
-    marginRight: '0%',
-    padding: 0,
-    textAlign: 'left',
-    display: 'inline-block',
-    verticalAlign:'top',
-};
-
-var cellSize = [60, 60];
-var pieRadius = 20;
 
 class SaveData extends Component {
 
     constructor () {
         super();
+        let screenWidth = document.body.clientWidth;
+        let ratio = 1;
+        if(screenWidth < sWidth){
+            ratio = screenWidth / sWidth;
+        }
+        cellSize = [parseInt(ratio * cellSize[0]), parseInt(ratio * cellSize[1])];
+        pieRadius = parseInt(ratio * pieRadius);
+        alert(cellSize)
     }
 
     state = {
@@ -247,7 +236,7 @@ class SaveData extends Component {
     }
 
     sleepHandleBlur = (event) => {
-        let sleepDate = this.sleepDate.getDate();
+        let sleepDate = this.refs.sleepDate.getDate();
         let hhmm = event.target.value;
         if(typeof(hhmm) == "undefined" || hhmm == ""){
             return;
@@ -276,7 +265,7 @@ class SaveData extends Component {
     };
 
     deepSleepHandleBlur = (event) => {
-        let sleepDate = this.sleepDate.getDate();
+        let sleepDate = this.refs.sleepDate.getDate();
         let hhmm = event.target.value;
         if(typeof(hhmm) == "undefined" || hhmm == ""){
             return;
@@ -305,7 +294,7 @@ class SaveData extends Component {
     };
 
     awakeHandleBlur = (event) => {
-        let sleepDate = this.sleepDate.getDate();
+        let sleepDate = this.refs.sleepDate.getDate();
         let hhmm = event.target.value;
         if(typeof(hhmm) == "undefined" || hhmm == ""){
             return;
@@ -439,100 +428,100 @@ class SaveData extends Component {
     }
 
     calculateTime = () => {
-        let sleepLabel = this.sleepLabel;
-        let deepSleepLabel = this.deepSleepLabel;
-        let awakeLabel = this.awakeLabel;
+        let sleepLabel = this.refs.sleepLabel;
+        let deepSleepLabel = this.refs.deepSleepLabel;
+        let awakeLabel = this.refs.awakeLabel;
         let sleepTime = 0;
         let deepSleepTime = 0;
         let awakeTime = 0;
 
-        if(this.sleepStart.getValue() != "" && this.sleepEnd.getValue() != ""){
-            let sleepStart = DateTimeUtil.String2Date(this.sleepStart.getValue());
-            let sleepEnd = DateTimeUtil.String2Date(this.sleepEnd.getValue());
+        if(this.refs.sleepStart.getValue() != "" && this.refs.sleepEnd.getValue() != ""){
+            let sleepStart = DateTimeUtil.String2Date(this.refs.sleepStart.getValue());
+            let sleepEnd = DateTimeUtil.String2Date(this.refs.sleepEnd.getValue());
             sleepTime = parseInt((sleepEnd - sleepStart) / 1000 / 60);
         }
 
-        if(this.deepSleepStart01.getValue() != "" && this.deepSleepEnd01.getValue() != "") {
-            let deepSleepStart01 = DateTimeUtil.String2Date(this.deepSleepStart01.getValue());
-            let deepSleepEnd01 = DateTimeUtil.String2Date(this.deepSleepEnd01.getValue());
+        if(this.refs.deepSleepStart01.getValue() != "" && this.refs.deepSleepEnd01.getValue() != "") {
+            let deepSleepStart01 = DateTimeUtil.String2Date(this.refs.deepSleepStart01.getValue());
+            let deepSleepEnd01 = DateTimeUtil.String2Date(this.refs.deepSleepEnd01.getValue());
             deepSleepTime += parseInt((deepSleepEnd01 - deepSleepStart01) / 1000 / 60) + 1;
         }
 
-        if(this.deepSleepStart02.getValue() != "" && this.deepSleepEnd02.getValue() != "") {
-            let deepSleepStart02 = DateTimeUtil.String2Date(this.deepSleepStart02.getValue());
-            let deepSleepEnd02 = DateTimeUtil.String2Date(this.deepSleepEnd02.getValue());
+        if(this.refs.deepSleepStart02.getValue() != "" && this.refs.deepSleepEnd02.getValue() != "") {
+            let deepSleepStart02 = DateTimeUtil.String2Date(this.refs.deepSleepStart02.getValue());
+            let deepSleepEnd02 = DateTimeUtil.String2Date(this.refs.deepSleepEnd02.getValue());
             deepSleepTime += parseInt((deepSleepEnd02 - deepSleepStart02) / 1000 / 60) + 1;
         }
 
-        if(this.deepSleepStart03.getValue() != "" && this.deepSleepEnd03.getValue() != "") {
-            let deepSleepStart03 = DateTimeUtil.String2Date(this.deepSleepStart03.getValue());
-            let deepSleepEnd03 = DateTimeUtil.String2Date(this.deepSleepEnd03.getValue());
+        if(this.refs.deepSleepStart03.getValue() != "" && this.refs.deepSleepEnd03.getValue() != "") {
+            let deepSleepStart03 = DateTimeUtil.String2Date(this.refs.deepSleepStart03.getValue());
+            let deepSleepEnd03 = DateTimeUtil.String2Date(this.refs.deepSleepEnd03.getValue());
             deepSleepTime += parseInt((deepSleepEnd03 - deepSleepStart03) / 1000 / 60) + 1;
         }
 
-        if(this.deepSleepStart04.getValue() != "" && this.deepSleepEnd04.getValue() != "") {
-            let deepSleepStart04 = DateTimeUtil.String2Date(this.deepSleepStart04.getValue());
-            let deepSleepEnd04 = DateTimeUtil.String2Date(this.deepSleepEnd04.getValue());
+        if(this.refs.deepSleepStart04.getValue() != "" && this.refs.deepSleepEnd04.getValue() != "") {
+            let deepSleepStart04 = DateTimeUtil.String2Date(this.refs.deepSleepStart04.getValue());
+            let deepSleepEnd04 = DateTimeUtil.String2Date(this.refs.deepSleepEnd04.getValue());
             deepSleepTime += parseInt((deepSleepEnd04 - deepSleepStart04) / 1000 / 60) + 1;
         }
 
-        if(this.deepSleepStart05.getValue() != "" && this.deepSleepEnd05.getValue() != "") {
-            let deepSleepStart05 = DateTimeUtil.String2Date(this.deepSleepStart05.getValue());
-            let deepSleepEnd05 = DateTimeUtil.String2Date(this.deepSleepEnd05.getValue());
+        if(this.refs.deepSleepStart05.getValue() != "" && this.refs.deepSleepEnd05.getValue() != "") {
+            let deepSleepStart05 = DateTimeUtil.String2Date(this.refs.deepSleepStart05.getValue());
+            let deepSleepEnd05 = DateTimeUtil.String2Date(this.refs.deepSleepEnd05.getValue());
             deepSleepTime += parseInt((deepSleepEnd05 - deepSleepStart05) / 1000 / 60) + 1;
         }
 
-        if(this.deepSleepStart06.getValue() != "" && this.deepSleepEnd06.getValue() != "") {
-            let deepSleepStart06 = DateTimeUtil.String2Date(this.deepSleepStart06.getValue());
-            let deepSleepEnd06 = DateTimeUtil.String2Date(this.deepSleepEnd06.getValue());
+        if(this.refs.deepSleepStart06.getValue() != "" && this.refs.deepSleepEnd06.getValue() != "") {
+            let deepSleepStart06 = DateTimeUtil.String2Date(this.refs.deepSleepStart06.getValue());
+            let deepSleepEnd06 = DateTimeUtil.String2Date(this.refs.deepSleepEnd06.getValue());
             deepSleepTime += parseInt((deepSleepEnd06 - deepSleepStart06) / 1000 / 60) + 1;
         }
 
-        if(this.deepSleepStart07.getValue() != "" && this.deepSleepEnd07.getValue() != "") {
-            let deepSleepStart07 = DateTimeUtil.String2Date(this.deepSleepStart07.getValue());
-            let deepSleepEnd07 = DateTimeUtil.String2Date(this.deepSleepEnd07.getValue());
+        if(this.refs.deepSleepStart07.getValue() != "" && this.refs.deepSleepEnd07.getValue() != "") {
+            let deepSleepStart07 = DateTimeUtil.String2Date(this.refs.deepSleepStart07.getValue());
+            let deepSleepEnd07 = DateTimeUtil.String2Date(this.refs.deepSleepEnd07.getValue());
             deepSleepTime += parseInt((deepSleepEnd07 - deepSleepStart07) / 1000 / 60) + 1;
         }
 
-        if(this.deepSleepStart08.getValue() != "" && this.deepSleepEnd08.getValue() != "") {
-            let deepSleepStart08 = DateTimeUtil.String2Date(this.deepSleepStart08.getValue());
-            let deepSleepEnd08 = DateTimeUtil.String2Date(this.deepSleepEnd08.getValue());
+        if(this.refs.deepSleepStart08.getValue() != "" && this.refs.deepSleepEnd08.getValue() != "") {
+            let deepSleepStart08 = DateTimeUtil.String2Date(this.refs.deepSleepStart08.getValue());
+            let deepSleepEnd08 = DateTimeUtil.String2Date(this.refs.deepSleepEnd08.getValue());
             deepSleepTime += parseInt((deepSleepEnd08 - deepSleepStart08) / 1000 / 60) + 1;
         }
 
-        if(this.deepSleepStart09.getValue() != "" && this.deepSleepEnd09.getValue() != "") {
-            let deepSleepStart09 = DateTimeUtil.String2Date(this.deepSleepStart09.getValue());
-            let deepSleepEnd09 = DateTimeUtil.String2Date(this.deepSleepEnd09.getValue());
+        if(this.refs.deepSleepStart09.getValue() != "" && this.refs.deepSleepEnd09.getValue() != "") {
+            let deepSleepStart09 = DateTimeUtil.String2Date(this.refs.deepSleepStart09.getValue());
+            let deepSleepEnd09 = DateTimeUtil.String2Date(this.refs.deepSleepEnd09.getValue());
             deepSleepTime += parseInt((deepSleepEnd09 - deepSleepStart09) / 1000 / 60) + 1;
         }
 
-        if(this.deepSleepStart10.getValue() != "" && this.deepSleepEnd10.getValue() != "") {
-            let deepSleepStart10 = DateTimeUtil.String2Date(this.deepSleepStart10.getValue());
-            let deepSleepEnd10 = DateTimeUtil.String2Date(this.deepSleepEnd10.getValue());
+        if(this.refs.deepSleepStart10.getValue() != "" && this.refs.deepSleepEnd10.getValue() != "") {
+            let deepSleepStart10 = DateTimeUtil.String2Date(this.refs.deepSleepStart10.getValue());
+            let deepSleepEnd10 = DateTimeUtil.String2Date(this.refs.deepSleepEnd10.getValue());
             deepSleepTime += parseInt((deepSleepEnd10 - deepSleepStart10) / 1000 / 60) + 1;
         }
 
-        if(this.awakeStart01.getValue() != "" && this.awakeEnd01.getValue() != "") {
-            let awakeStart01 = DateTimeUtil.String2Date(this.awakeStart01.getValue());
-            let awakeEnd01 = DateTimeUtil.String2Date(this.awakeEnd01.getValue());
+        if(this.refs.awakeStart01.getValue() != "" && this.refs.awakeEnd01.getValue() != "") {
+            let awakeStart01 = DateTimeUtil.String2Date(this.refs.awakeStart01.getValue());
+            let awakeEnd01 = DateTimeUtil.String2Date(this.refs.awakeEnd01.getValue());
             awakeTime += parseInt((awakeEnd01 - awakeStart01) / 1000 / 60) + 1;
         }
 
-        if(this.awakeStart02.getValue() != "" && this.awakeEnd02.getValue() != "") {
-            let awakeStart02 = DateTimeUtil.String2Date(this.awakeStart02.getValue());
-            let awakeEnd02 = DateTimeUtil.String2Date(this.awakeEnd02.getValue());
+        if(this.refs.awakeStart02.getValue() != "" && this.refs.awakeEnd02.getValue() != "") {
+            let awakeStart02 = DateTimeUtil.String2Date(this.refs.awakeStart02.getValue());
+            let awakeEnd02 = DateTimeUtil.String2Date(this.refs.awakeEnd02.getValue());
             awakeTime += parseInt((awakeEnd02 - awakeStart02) / 1000 / 60) + 1;
         }
 
-        if(this.awakeStart03.getValue() != "" && this.awakeEnd03.getValue() != "") {
-            let awakeStart03 = DateTimeUtil.String2Date(this.awakeStart03.getValue());
-            let awakeEnd03 = DateTimeUtil.String2Date(this.awakeEnd03.getValue());
+        if(this.refs.awakeStart03.getValue() != "" && this.refs.awakeEnd03.getValue() != "") {
+            let awakeStart03 = DateTimeUtil.String2Date(this.refs.awakeStart03.getValue());
+            let awakeEnd03 = DateTimeUtil.String2Date(this.refs.awakeEnd03.getValue());
             awakeTime += parseInt((awakeEnd03 - awakeStart03) / 1000 / 60) + 1;
         }
 
-        if(this.awakeStart04.getValue() != "" && this.awakeEnd04.getValue() != "") {
-            let awakeStart04 = DateTimeUtil.String2Date(this.awakeStart04.getValue());
-            let awakeEnd04 = DateTimeUtil.String2Date(this.awakeEnd04.getValue());
+        if(this.refs.awakeStart04.getValue() != "" && this.refs.awakeEnd04.getValue() != "") {
+            let awakeStart04 = DateTimeUtil.String2Date(this.refs.awakeStart04.getValue());
+            let awakeEnd04 = DateTimeUtil.String2Date(this.refs.awakeEnd04.getValue());
             awakeTime += parseInt((awakeEnd04 - awakeStart04) / 1000 / 60) + 1;
         }
 
@@ -591,7 +580,7 @@ class SaveData extends Component {
                 let date_r = [];
                 for(let i = 0;i < json.date_day.length;i++){
                     date_r.push([
-                       json.date_day[i],
+                        json.date_day[i],
                         Math.floor(Math.random() * 10000)
                     ]);
                 }
@@ -633,9 +622,9 @@ class SaveData extends Component {
         return echarts.util.map(date_r, function (item, index) {
             let center = chart.convertToPixel('calendar', item);
             let data_r = [
-                    {name: 'deep', value: deep_r[index].toFixed(1)},
-                    {name: 'shallow', value: shallow_r[index].toFixed(1)}
-                ];
+                {name: 'deep', value: deep_r[index].toFixed(1)},
+                {name: 'shallow', value: shallow_r[index].toFixed(1)}
+            ];
             return {
                 id: index + 'pie',
                 type: 'pie',
@@ -711,7 +700,7 @@ class SaveData extends Component {
         chart.setOption({
             series: this.getPieSeries(chart)
         });
-}
+    }
 
     componentDidMount() {
         this.lastData();
@@ -719,376 +708,414 @@ class SaveData extends Component {
 
     render () {
         return (
-        <div style={{textAlign:'left'}}>
-            <Paper style={paperStyle01} zDepth={0}>
-                <div >
-                    <SelectField
-                        id="person"
-                        ref={(input) => { this.person = input; }}
-                        value={this.state.personValue}
-                        onChange={this.slcHandleChange}
-                        floatingLabelText="Person"
-                        floatingLabelFixed={true}
-                    >
-                        {items}
-                    </SelectField>
-                    <DatePicker
-                        id="sleepDate"
-                        ref={(input) => { this.sleepDate = input; }}
-                        container="inline"
-                        mode="landscape"
-                        floatingLabelText="SleepDate"
-                        floatingLabelFixed={true}
-                        hintText="yyyy-MM-dd"
-                        autoOk={true}
-                        onChange={this.pickerHandleChange}
-                        value={this.state.sleepDate}
-                    />
-                    <div>
-                        <TextField
-                            id="sleepStart"
-                            ref={(input) => { this.sleepStart = input; }}
-                            floatingLabelText="Sleep Start"
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.sleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.sleepStart}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="sleepEnd"
-                            ref={(input) => { this.sleepEnd = input; }}
-                            floatingLabelText="Sleep End"
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.sleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.sleepEnd}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="deepSleepStart01"
-                            ref={(input) => { this.deepSleepStart01 = input; }}
-                            floatingLabelText="Deep Sleep Start"
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepStart01}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="deepSleepEnd01"
-                            ref={(input) => { this.deepSleepEnd01 = input; }}
-                            floatingLabelText="Deep Sleep End"
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepEnd01}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="deepSleepStart02"
-                            ref={(input) => { this.deepSleepStart02 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepStart02}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="deepSleepEnd02"
-                            ref={(input) => { this.deepSleepEnd02 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepEnd02}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="deepSleepStart03"
-                            ref={(input) => { this.deepSleepStart03 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepStart03}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="deepSleepEnd03"
-                            ref={(input) => { this.deepSleepEnd03 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepEnd03}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="deepSleepStart04"
-                            ref={(input) => { this.deepSleepStart04 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepStart04}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="deepSleepEnd04"
-                            ref={(input) => { this.deepSleepEnd04 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepEnd04}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="deepSleepStart05"
-                            ref={(input) => { this.deepSleepStart05 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepStart05}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="deepSleepEnd05"
-                            ref={(input) => { this.deepSleepEnd05 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepEnd05}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="deepSleepStart06"
-                            ref={(input) => { this.deepSleepStart06 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepStart06}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="deepSleepEnd06"
-                            ref={(input) => { this.deepSleepEnd06 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepEnd06}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="deepSleepStart07"
-                            ref={(input) => { this.deepSleepStart07 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepStart07}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="deepSleepEnd07"
-                            ref={(input) => { this.deepSleepEnd07 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepEnd07}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="deepSleepStart08"
-                            ref={(input) => { this.deepSleepStart08 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepStart08}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="deepSleepEnd08"
-                            ref={(input) => { this.deepSleepEnd08 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepEnd08}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="deepSleepStart09"
-                            ref={(input) => { this.deepSleepStart09 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepStart09}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="deepSleepEnd09"
-                            ref={(input) => { this.deepSleepEnd09 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepEnd09}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="deepSleepStart10"
-                            ref={(input) => { this.deepSleepStart10 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepStart10}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="deepSleepEnd10"
-                            ref={(input) => { this.deepSleepEnd10 = input; }}
-                            hintText="hhmm"
-                            onBlur={this.deepSleepHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.deepSleepEnd10}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="awakeStart01"
-                            ref={(input) => { this.awakeStart01 = input; }}
-                            floatingLabelText="Awake Start"
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.awakeHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.awakeStart01}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="awakeEnd01"
-                            ref={(input) => { this.awakeEnd01 = input; }}
-                            floatingLabelText="Awake End"
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.awakeHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.awakeEnd01}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="awakeStart02"
-                            ref={(input) => { this.awakeStart02 = input; }}
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.awakeHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.awakeStart02}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="awakeEnd02"
-                            ref={(input) => { this.awakeEnd02 = input; }}
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.awakeHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.awakeEnd02}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="awakeStart03"
-                            ref={(input) => { this.awakeStart03 = input; }}
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.awakeHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.awakeStart03}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="awakeEnd03"
-                            ref={(input) => { this.awakeEnd03 = input; }}
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.awakeHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.awakeEnd03}
-                        />
-                    </div>
-                    <div>
-                        <TextField
-                            id="awakeStart04"
-                            ref={(input) => { this.awakeStart04 = input; }}
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.awakeHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.awakeStart04}
-                        />
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <TextField
-                            id="awakeEnd04"
-                            ref={(input) => { this.awakeEnd04 = input; }}
-                            floatingLabelFixed={true}
-                            hintText="hhmm"
-                            onBlur={this.awakeHandleBlur}
-                            onChange={this.tfHandleChange}
-                            value={this.state.awakeEnd04}
-                        />
-                    </div>
-                    <div>
-                        <RaisedButton
-                            label="Clear"
-                            primary={true}
-                            style={{width:'46%',margin:'2%'}}
-                            onTouchTap={this.clearHandle}
-                        />
-                        <RaisedButton
-                            label="Save"
-                            secondary={true}
-                            style={{width:'46%',margin:'2%'}}
-                            onTouchTap={this.saveHandle}
-                        />
-                    </div>
-                </div>
-            </Paper>
-            <Paper style={paperStyle02} zDepth={0}>
-                <div id='calendar' style={{width:'100%',height:'400px'}}>
+            <FullWidthSection useContent={true} base={0}>
+                <Feature
+                    firstChild={true}
+                    w={"36%"}
+                    z={0}
+                >
+                    <div id='calendar' style={{width:'98%',height:'400px'}}>
 
-                </div>
-                <div>
-                    <h3>Sleep Time</h3>
-                    <p style={{fontSize:25}} ref={(input) => { this.sleepLabel = input; }}>0 hours 0 minutes</p>
-                    <Divider inset={false} />
-                    <br/><br/>
-                    <h3>Deep Sleep Time</h3>
-                    <p style={{fontSize:25}} ref={(input) => { this.deepSleepLabel = input; }}>0 hours 0 minutes</p>
-                    <Divider inset={false} />
-                    <br/><br/>
-                    <h3>Awake Time</h3>
-                    <p style={{fontSize:25}} ref={(input) => { this.awakeLabel = input; }}>0 hours 0 minutes</p>
-                    <Divider inset={false} />
-                </div>
-            </Paper>
-            <Snackbar
-                ref={(input) => { this.message = input; }}
-                open={this.state.messageOpen}
-                message={this.state.message}
-                autoHideDuration={3000}
-                onRequestClose={this.handleRequestClose}
-            />
-        </div>
+                    </div>
+                    <div style={{width:'98%'}}>
+                        <h3>Sleep Time</h3>
+                        <p style={{fontSize:25}} ref='sleepLabel'>0 hours 0 minutes</p>
+                        <Divider inset={false} />
+                        <br/><br/>
+                        <h3>Deep Sleep Time</h3>
+                        <p style={{fontSize:25}} ref='deepSleepLabel'>0 hours 0 minutes</p>
+                        <Divider inset={false} />
+                        <br/><br/>
+                        <h3>Awake Time</h3>
+                        <p style={{fontSize:25}} ref='awakeLabel'>0 hours 0 minutes</p>
+                        <Divider inset={false} />
+                    </div>
+                </Feature>
+                <Feature
+                    lastChild={true}
+                    w={"60%"}
+                    z={0}
+                >
+                    <div >
+                        <SelectField
+                            id="person"
+                            ref='person'
+                            value={this.state.personValue}
+                            onChange={this.slcHandleChange}
+                            floatingLabelText="Person"
+                            floatingLabelFixed={true}
+                        >
+                            {items}
+                        </SelectField>
+                        <DatePicker
+                            id="sleepDate"
+                            ref='sleepDate'
+                            container="inline"
+                            mode="landscape"
+                            floatingLabelText="SleepDate"
+                            floatingLabelFixed={true}
+                            hintText="yyyy-MM-dd"
+                            autoOk={true}
+                            onChange={this.pickerHandleChange}
+                            value={this.state.sleepDate}
+                        />
+                        <div>
+                            <TextField
+                                id="sleepStart"
+                                ref='sleepStart'
+                                floatingLabelText="Sleep Start"
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.sleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.sleepStart}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="sleepEnd"
+                                ref='sleepEnd'
+                                floatingLabelText="Sleep End"
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.sleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.sleepEnd}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="deepSleepStart01"
+                                ref='deepSleepStart01'
+                                floatingLabelText="Deep Sleep Start"
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepStart01}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="deepSleepEnd01"
+                                ref='deepSleepEnd01'
+                                floatingLabelText="Deep Sleep End"
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepEnd01}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="deepSleepStart02"
+                                ref='deepSleepStart02'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepStart02}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="deepSleepEnd02"
+                                ref='deepSleepEnd02'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepEnd02}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="deepSleepStart03"
+                                ref='deepSleepStart03'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepStart03}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="deepSleepEnd03"
+                                ref='deepSleepEnd03'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepEnd03}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="deepSleepStart04"
+                                ref='deepSleepStart04'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepStart04}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="deepSleepEnd04"
+                                ref='deepSleepEnd04'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepEnd04}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="deepSleepStart05"
+                                ref='deepSleepStart05'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepStart05}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="deepSleepEnd05"
+                                ref='deepSleepEnd05'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepEnd05}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="deepSleepStart06"
+                                ref='deepSleepStart06'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepStart06}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="deepSleepEnd06"
+                                ref='deepSleepEnd06'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepEnd06}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="deepSleepStart07"
+                                ref='deepSleepStart07'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepStart07}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="deepSleepEnd07"
+                                ref='deepSleepEnd07'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepEnd07}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="deepSleepStart08"
+                                ref='deepSleepStart08'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepStart08}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="deepSleepEnd08"
+                                ref='deepSleepEnd08'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepEnd08}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="deepSleepStart09"
+                                ref='deepSleepStart09'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepStart09}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="deepSleepEnd09"
+                                ref='deepSleepEnd09'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepEnd09}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="deepSleepStart10"
+                                ref='deepSleepStart10'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepStart10}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="deepSleepEnd10"
+                                ref='deepSleepEnd10'
+                                hintText="hhmm"
+                                onBlur={this.deepSleepHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.deepSleepEnd10}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="awakeStart01"
+                                ref='awakeStart01'
+                                floatingLabelText="Awake Start"
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.awakeHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.awakeStart01}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="awakeEnd01"
+                                ref='awakeEnd01'
+                                floatingLabelText="Awake End"
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.awakeHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.awakeEnd01}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="awakeStart02"
+                                ref='awakeStart02'
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.awakeHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.awakeStart02}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="awakeEnd02"
+                                ref='awakeEnd02'
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.awakeHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.awakeEnd02}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="awakeStart03"
+                                ref='awakeStart03'
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.awakeHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.awakeStart03}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="awakeEnd03"
+                                ref='awakeEnd03'
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.awakeHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.awakeEnd03}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <TextField
+                                id="awakeStart04"
+                                ref='awakeStart04'
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.awakeHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.awakeStart04}
+                                style={{width:'49%'}}
+                            />
+                            &nbsp;
+                            <TextField
+                                id="awakeEnd04"
+                                ref='awakeEnd04'
+                                floatingLabelFixed={true}
+                                hintText="hhmm"
+                                onBlur={this.awakeHandleBlur}
+                                onChange={this.tfHandleChange}
+                                value={this.state.awakeEnd04}
+                                style={{width:'49%'}}
+                            />
+                        </div>
+                        <div>
+                            <RaisedButton
+                                label="Clear"
+                                primary={true}
+                                style={{width:'45%',margin:'2%'}}
+                                onTouchTap={this.clearHandle}
+                            />
+                            <RaisedButton
+                                label="Save"
+                                secondary={true}
+                                style={{width:'45%',margin:'2%'}}
+                                onTouchTap={this.saveHandle}
+                            />
+                        </div>
+                    </div>
+                </Feature>
+                <Snackbar
+                    ref='message'
+                    open={this.state.messageOpen}
+                    message={this.state.message}
+                    autoHideDuration={3000}
+                    onRequestClose={this.handleRequestClose}
+                />
+            </FullWidthSection>
         )
     }
 }

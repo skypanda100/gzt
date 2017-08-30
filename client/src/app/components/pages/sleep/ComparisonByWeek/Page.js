@@ -6,7 +6,6 @@ import ComparisonByWeekOfLine from './ComparisonByWeekOfLine';
 import ComparisonByWeekOfTemperature from './ComparisonByWeekOfTemperature';
 import ComparisonByWeekOfBar from './ComparisonByWeekOfBar';
 import ComparisonByWeekOfPie from './ComparisonByWeekOfPie';
-import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
 
 const divStyle = {
