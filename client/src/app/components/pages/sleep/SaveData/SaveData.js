@@ -24,7 +24,7 @@ items.push(<MenuItem value={1} key={1} primaryText={`ZhengDongTian`} />);
 var sWidth = 1516 * 0.36;
 var cellSize = [55, 55];
 var pieRadius = 18;
-
+var calHeight = 400;
 
 class SaveData extends Component {
 
@@ -37,7 +37,7 @@ class SaveData extends Component {
         }
         cellSize = [parseInt(ratio * cellSize[0]), parseInt(ratio * cellSize[1])];
         pieRadius = parseInt(ratio * pieRadius);
-        alert(cellSize)
+        calHeight = calHeight * ratio;
     }
 
     state = {
@@ -706,6 +706,13 @@ class SaveData extends Component {
         this.lastData();
     }
 
+    componentWillUnmount(){
+        sWidth = 1516 * 0.36;
+        cellSize = [55, 55];
+        pieRadius = 18;
+        calHeight = 400;
+    }
+
     render () {
         return (
             <FullWidthSection useContent={true} base={0}>
@@ -714,7 +721,7 @@ class SaveData extends Component {
                     w={"36%"}
                     z={0}
                 >
-                    <div id='calendar' style={{width:'98%',height:'400px'}}>
+                    <div id='calendar' style={{width:'98%',height:`${calHeight}`}}>
 
                     </div>
                     <div style={{width:'98%'}}>
@@ -750,8 +757,7 @@ class SaveData extends Component {
                         <DatePicker
                             id="sleepDate"
                             ref='sleepDate'
-                            container="inline"
-                            mode="landscape"
+                            mode=""
                             floatingLabelText="SleepDate"
                             floatingLabelFixed={true}
                             hintText="yyyy-MM-dd"

@@ -12,9 +12,7 @@ const divStyle = {
 
 const paperStyle = {
     height: '100%',
-    width: '98%',
-    marginLeft: '1%',
-    marginRight: '1%',
+    width: '100%',
     padding: 0,
     textAlign: 'left',
     display: 'inline-block',
