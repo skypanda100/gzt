@@ -12,7 +12,7 @@ import Cookies from 'js-cookie';
 const styles = {
     h1: {
         color: black,
-        fontSize: 30,
+        fontSize: 25,
         marginTop: '50px',
     },
     tagline: {
@@ -46,7 +46,7 @@ const styles = {
     },
     paperStyle: {
         width: '300px',
-        marginTop: '100px',
+        marginTop: '60px',
         padding: 5,
         textAlign: 'center',
         display: 'inline-block',
@@ -57,8 +57,8 @@ const styles = {
 class Login extends Component {
 
     state = {
-      usr:"",
-      pwd:"",
+        usr:"",
+        pwd:"",
     };
 
     loginHandle = (event) => {
@@ -84,47 +84,47 @@ class Login extends Component {
 
     render() {
 
-      return (
-        <div style={styles.divStyle}>
-          <Paper
-              style={styles.paperStyle}
-              zDepth={1}
-          >
-            <div style={styles.tagline}>
-              <div style={styles.h1}>GG&ZDT&TT</div>
+        return (
+            <div style={styles.divStyle}>
+                <Paper
+                    style={styles.paperStyle}
+                    zDepth={1}
+                >
+                    <div style={styles.tagline}>
+                        <div style={styles.h1}>Welcome to GZT</div>
+                    </div>
+                    <br/><br/>
+                    <TextField
+                        id="usr"
+                        floatingLabelText="user"
+                        style={{width:'80%'}}
+                        value={this.state.usr}
+                        onChange={this.textHandleChange}
+                    />
+                    <br/>
+                    <TextField
+                        id="pwd"
+                        floatingLabelText="password"
+                        style={{width:'80%'}}
+                        value={this.state.pwd}
+                        onChange={this.textHandleChange}
+                        type="password"
+                    />
+                    <br/>
+                    <br/>
+                    <div>
+                        <RaisedButton
+                            label="Login"
+                            style={{width:'80%'}}
+                            onTouchTap={this.loginHandle}
+                            primary={true}
+                        />
+                    </div>
+                    <br/>
+                    <br/>
+                </Paper>
             </div>
-            <br/><br/>
-            <TextField
-                id="usr"
-                floatingLabelText="user"
-                style={{width:'80%'}}
-                value={this.state.usr}
-                onChange={this.textHandleChange}
-            />
-            <br/>
-            <TextField
-                id="pwd"
-                floatingLabelText="password"
-                style={{width:'80%'}}
-                value={this.state.pwd}
-                onChange={this.textHandleChange}
-                type="password"
-            />
-            <br/>
-            <br/>
-            <div>
-              <RaisedButton
-                  label="Login"
-                  style={{width:'80%'}}
-                  onTouchTap={this.loginHandle}
-                  primary={true}
-              />
-            </div>
-            <br/>
-            <br/>
-          </Paper>
-        </div>
-      );
+        );
     }
 }
 
