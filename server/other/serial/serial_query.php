@@ -22,9 +22,12 @@ if(isset($_POST["end_date"]))
 
 $sql = "";
 if(is_null($start_date) && is_null($end_date)){
-    $start_date = date('Y-m-d H:i:s',strtotime('-3 hour'));
+    $start_date = date('Y-m-d H:i:s',strtotime('-24 hour'));
     $end_date = date('Y-m-d H:i:s');
-    $sql = "select * from serial where datetime >= '$start_date'and datetime <= '$end_date'order by datetime asc";
+    $sql = "select"
+        . " datetime,co2,china_aqi,america_aqi,hcho,temp,humidity,unknown1,unknown2,unknown3,pm2_5,unknown4,unknown5,matter0_3,matter0_5,matter1_0,matter2_5,matter5_0,matter10_0"
+        . " from (select rank() over(order by datetime) as rank_sort,* from serial where datetime >= '$start_date' and datetime <= '$end_date')"
+        . " as a where a.rank_sort%50 = 0";
 }else if(!is_null($start_date) && is_null($end_date)){
     $sql = "select * from serial where datetime >= '$start_date'order by datetime asc";
 }else if(is_null($start_date) && !is_null($end_date)){

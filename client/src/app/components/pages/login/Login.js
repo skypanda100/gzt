@@ -63,8 +63,8 @@ class Login extends Component {
 
     loginHandle = (event) => {
         if(this.state.usr == 'ggzdttt' && this.state.pwd == 'ggTT1206'){
-            Cookies.set('usr', this.state.usr);
-            Cookies.set('pwd', this.state.pwd);
+            Cookies.set('usr', this.state.usr, { expires: 7 });
+            Cookies.set('pwd', this.state.pwd, { expires: 7 });
             hashHistory.push('/');
         }
     }
