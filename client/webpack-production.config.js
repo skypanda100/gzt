@@ -33,7 +33,6 @@ const config = {
         {from: 'src/www/css', to: 'css'},
         {from: 'src/www/images', to: 'images'},
         {from: 'src/www/index.html'},
-        {from: 'src/www/versions.json'},
     ]),
   ],
   module: {

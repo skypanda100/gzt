@@ -30,8 +30,15 @@ class SaveData extends Component {
 
     constructor () {
         super();
-        let screenWidth = document.body.clientWidth * 0.36;
-        let ratio = screenWidth / sWidth;
+        let screenWidth = document.body.clientWidth;
+        let ratio = 1;
+        if(screenWidth < sWidth){
+            ratio = screenWidth / sWidth;
+        }else{
+            screenWidth = screenWidth * 0.36;
+            ratio = screenWidth / sWidth;
+        }
+
         cellSize = [parseInt(ratio * cellSize[0]), parseInt(ratio * cellSize[1])];
         pieRadius = parseInt(ratio * pieRadius);
         calHeight = calHeight * ratio;
