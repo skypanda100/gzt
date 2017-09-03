@@ -26,7 +26,7 @@ const paperStyle01 = {
 };
 
 const paperStyle02 = {
-    height: '80%',
+    height: '500px',
     width: '350px',
     padding: 0,
     textAlign: 'center',

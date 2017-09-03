@@ -24,17 +24,14 @@ items.push(<MenuItem value={1} key={1} primaryText={`ZhengDongTian`} />);
 var sWidth = 1516 * 0.36;
 var cellSize = [55, 55];
 var pieRadius = 18;
-var calHeight = 400;
+var calHeight = 450;
 
 class SaveData extends Component {
 
     constructor () {
         super();
-        let screenWidth = document.body.clientWidth;
-        let ratio = 1;
-        if(screenWidth < sWidth){
-            ratio = screenWidth / sWidth;
-        }
+        let screenWidth = document.body.clientWidth * 0.36;
+        let ratio = screenWidth / sWidth;
         cellSize = [parseInt(ratio * cellSize[0]), parseInt(ratio * cellSize[1])];
         pieRadius = parseInt(ratio * pieRadius);
         calHeight = calHeight * ratio;

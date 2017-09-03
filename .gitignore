@@ -2,3 +2,10 @@
 /client/build
 /client/node_modules
 /client/package-lock.json
+/screensaver
+/3rd/serial_linux/CMakeFiles
+/3rd/serial_linux/cmake_install.cmake
+/3rd/serial_linux/CMakeCache.txt
+/3rd/serial_linux/serial
+/3rd/serial_linux/Makefile
+/3rd/serial_win/build-SerialChart-Desktop_Qt_5_5_1_MinGW_32bit-Release

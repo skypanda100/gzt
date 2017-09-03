@@ -74,7 +74,7 @@ class Master extends Component {
         margin: spacing.desktopGutter,
       },
       contentWhenMedium: {
-        margin: `${spacing.desktopGutter * 2}px ${spacing.desktopGutter * 3}px`,
+        // margin: `${spacing.desktopGutter * 2}px ${spacing.desktopGutter * 3}px`,
       },
       footer: {
         backgroundColor: grey900,
